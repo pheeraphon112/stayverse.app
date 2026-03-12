@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>StayVerse — Rent-to-Own</title>
+<title>StayVerse — Rent Today. Own Tomorrow.</title>
 <style>
-:root{--navy:#1B3A6B;--navy-l:#2a5298;--teal:#0E7C7B;--teal-l:#1a9e9d;--teal-p:#e0f5f5;--gold:#C9931A;--gold-p:#fef9e7;--red:#e74c3c;--green:#27ae60;--green-p:#eafaf1;--grey:#f4f6f9;--gm:#dde1e9;--gd:#8492a6;--w:#fff;--tx:#1e2d3d;--txl:#5a6a7a;--sh:0 2px 16px rgba(27,58,107,.10);--shl:0 8px 32px rgba(27,58,107,.16);--r:12px;--rs:8px;}
+:root{--navy:#1B3A6B;--navy-l:#2a5298;--navy-p:#edf1f8;--teal:#0E7C7B;--teal-l:#1a9e9d;--teal-p:#e0f5f5;--gold:#C9931A;--gold-p:#fef9e7;--red:#e74c3c;--red-p:#fde8e6;--green:#27ae60;--green-p:#eafaf1;--grey:#f4f6f9;--gm:#dde1e9;--gd:#8492a6;--muted:#8492a6;--w:#fff;--tx:#1e2d3d;--txl:#5a6a7a;--sh:0 2px 16px rgba(27,58,107,.10);--shl:0 8px 32px rgba(27,58,107,.16);--r:12px;--rs:8px;}
 *{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans Thai','Noto Sans SC','Noto Sans',sans-serif;background:var(--grey);color:var(--tx);font-size:15px;}
 .page{display:none;min-height:100vh;}.page.active{display:block;animation:fi .2s ease;}
@@ -33,20 +33,23 @@ nav{background:#fff;box-shadow:var(--sh);position:sticky;top:0;z-index:200;}
 .bt{background:var(--teal);color:#fff;}.bt:hover{background:var(--teal-l);}
 .bn{background:var(--navy);color:#fff;}.bn:hover{background:var(--navy-l);}
 .bg{background:var(--gold);color:#fff;}
+.br{background:var(--red);color:#fff;}.br:hover{background:#c0392b;}
 .bo{background:#fff;color:var(--navy);border:2px solid var(--navy);}.bo:hover{background:var(--navy);color:#fff;}
 .bow{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.55);}.bow:hover{background:rgba(255,255,255,.15);}
+.bgreen{background:var(--green);color:#fff;}.bgreen:hover{background:#1f8e4c;}
 .blg{padding:13px 28px;font-size:15px;border-radius:10px;}
 .bsm{padding:7px 14px;font-size:13px;}
 /* TAG */
 .tag{display:inline-block;padding:3px 9px;border-radius:20px;font-size:12px;font-weight:600;}
 .tt{background:var(--teal-p);color:var(--teal);}.tg{background:var(--gold-p);color:var(--gold);}
 .tn{background:#e8edf5;color:var(--navy);}.tgr{background:var(--green-p);color:var(--green);}
-.tr{background:#fde8e6;color:var(--red);}
+.tr{background:var(--red-p);color:var(--red);}
+.tfeat{background:linear-gradient(90deg,#7c4f00,#C9931A);color:#fff;}
 /* PROPERTY CARD */
 .pc{background:#fff;border-radius:var(--r);box-shadow:var(--sh);overflow:hidden;transition:.18s;cursor:pointer;}
 .pc:hover{box-shadow:var(--shl);transform:translateY(-2px);}
 .pt{height:200px;display:flex;align-items:center;justify-content:center;font-size:52px;position:relative;}
-.pt-badge{position:absolute;top:12px;left:12px;display:flex;gap:6px;}
+.pt-badge{position:absolute;top:12px;left:12px;display:flex;gap:6px;flex-wrap:wrap;}
 .pt-save{position:absolute;top:12px;right:12px;width:32px;height:32px;background:rgba(255,255,255,.9);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;cursor:pointer;}
 .pb{padding:16px 18px 0;}
 .pn{font-size:16px;font-weight:700;color:var(--navy);margin-bottom:3px;}
@@ -59,14 +62,32 @@ nav{background:#fff;box-shadow:var(--sh);position:sticky;top:0;z-index:200;}
 .pbf{height:100%;border-radius:3px;}
 .pleg{font-size:12px;color:var(--txl);margin-bottom:14px;}
 .pf{display:flex;gap:8px;padding:12px 18px;border-top:1px solid var(--gm);}
+/* FEATURED BADGE on card */
+.feat-badge{position:absolute;top:0;left:0;right:0;background:linear-gradient(90deg,rgba(124,79,0,.9),rgba(201,147,26,.9));padding:5px 12px;font-size:11px;font-weight:700;color:#fff;display:flex;align-items:center;gap:5px;}
 /* SEARCH HERO */
 .sh{background:linear-gradient(160deg,#0d2444 0%,#1B3A6B 55%,#0d5e5d 100%);padding:48px 0 36px;color:#fff;}
 .sh h1{font-size:38px;font-weight:900;line-height:1.2;margin-bottom:8px;}
 .sh p{font-size:16px;opacity:.78;margin-bottom:28px;}
+/* SEARCH BOX */
 .sbox{background:#fff;border-radius:12px;padding:14px 16px;display:flex;gap:10px;align-items:center;box-shadow:0 4px 24px rgba(0,0,0,.18);}
 .sbox input{flex:1;border:none;outline:none;font-size:15px;color:var(--tx);font-family:inherit;}
-.sdiv{width:1px;height:28px;background:var(--gm);}
+.sdiv{width:1px;height:28px;background:var(--gm);flex-shrink:0;}
 .sbox select{border:none;outline:none;font-size:14px;color:var(--txl);background:none;font-family:inherit;cursor:pointer;}
+/* SEARCH TABS BELOW BOX */
+.stabs{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;}
+.stab{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);border-radius:20px;padding:5px 14px;font-size:12px;font-weight:600;color:rgba(255,255,255,.85);cursor:pointer;transition:.12s;}
+.stab:hover,.stab.on{background:rgba(255,255,255,.25);border-color:rgba(255,255,255,.6);color:#fff;}
+/* MAP VIEW TOGGLE */
+.map-toggle-bar{display:flex;align-items:center;gap:10px;margin-bottom:20px;}
+.map-toggle{background:#fff;border:1.5px solid var(--gm);border-radius:8px;padding:7px 14px;font-size:13px;font-weight:600;color:var(--txl);cursor:pointer;display:flex;align-items:center;gap:6px;transition:.12s;}
+.map-toggle:hover,.map-toggle.on{border-color:var(--teal);background:var(--teal-p);color:var(--teal);}
+/* MOCK MAP */
+.mock-map{background:linear-gradient(135deg,#d4e8d4,#c8e0e8);border-radius:var(--r);height:340px;position:relative;overflow:hidden;margin-bottom:22px;display:none;}
+.mock-map.show{display:block;}
+.map-pin{position:absolute;background:var(--navy);color:#fff;border-radius:20px;padding:4px 10px;font-size:11px;font-weight:700;white-space:nowrap;transform:translateX(-50%);cursor:pointer;}
+.map-pin::after{content:'';position:absolute;bottom:-6px;left:50%;transform:translateX(-50%);border:6px solid transparent;border-top-color:var(--navy);}
+.map-pin.teal{background:var(--teal);}
+.map-pin.teal::after{border-top-color:var(--teal);}
 /* SECTION TITLE */
 .st{margin-bottom:36px;}
 .st h2{font-size:26px;font-weight:800;color:var(--navy);margin-bottom:6px;}
@@ -75,6 +96,9 @@ nav{background:#fff;box-shadow:var(--sh);position:sticky;top:0;z-index:200;}
 .fbar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px;}
 .fp{border:1.5px solid var(--gm);background:#fff;border-radius:20px;padding:6px 14px;font-size:13px;font-weight:500;color:var(--txl);cursor:pointer;transition:.12s;}
 .fp:hover,.fp.on{border-color:var(--teal);color:var(--teal);background:var(--teal-p);}
+/* LIFESTYLE FILTER */
+.lf{border:1.5px solid var(--gm);background:#fff;border-radius:20px;padding:5px 12px;font-size:12px;font-weight:600;color:var(--txl);cursor:pointer;transition:.12s;display:flex;align-items:center;gap:5px;}
+.lf:hover,.lf.on{border-color:var(--navy);color:var(--navy);background:#e8edf5;}
 /* METRIC CARD */
 .mc{background:#fff;border-radius:var(--r);padding:18px 22px;box-shadow:var(--sh);}
 .mv{font-size:26px;font-weight:800;color:var(--navy);}
@@ -89,18 +113,77 @@ nav{background:#fff;box-shadow:var(--sh);position:sticky;top:0;z-index:200;}
 .fg label{display:block;font-size:13px;font-weight:600;color:var(--tx);margin-bottom:5px;}
 .fg input,.fg select,.fg textarea{width:100%;padding:10px 13px;border:1.5px solid var(--gm);border-radius:var(--rs);font-size:14px;font-family:inherit;outline:none;transition:.12s;}
 .fg input:focus,.fg select:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(14,124,123,.1);}
+/* RANGE SLIDER */
+input[type=range]{-webkit-appearance:none;height:6px;background:var(--gm);border-radius:3px;border:none;width:100%;cursor:pointer;}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:var(--teal);cursor:pointer;border:2px solid #fff;box-shadow:0 1px 6px rgba(0,0,0,.2);}
 /* RING */
 .ring{position:relative;width:110px;height:110px;margin:0 auto;}
 .ring svg{transform:rotate(-90deg);}
 .rinn{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;}
 .rpct{font-size:20px;font-weight:800;color:var(--navy);}
 .rlbl{font-size:10px;color:var(--txl);}
-/* STEP */
+/* STEP CARD */
 .stepcard{text-align:center;padding:28px 20px;background:#fff;border-radius:var(--r);box-shadow:var(--sh);}
 .sico{width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:26px;margin:0 auto 14px;}
 .snum{font-size:10px;font-weight:700;color:var(--teal);letter-spacing:1.5px;margin-bottom:6px;}
 .stepcard h3{font-size:16px;font-weight:700;color:var(--navy);margin-bottom:7px;}
 .stepcard p{font-size:13px;color:var(--txl);line-height:1.6;}
+/* ARTICLE CARD */
+.artcard{background:#fff;border-radius:var(--r);box-shadow:var(--sh);overflow:hidden;cursor:pointer;transition:.18s;}
+.artcard:hover{box-shadow:var(--shl);transform:translateY(-2px);}
+.artimg{height:160px;background:var(--grey);position:relative;overflow:hidden;}
+.artcat{position:absolute;top:10px;left:10px;}
+.artbody{padding:14px 16px;}
+.artbody h4{font-size:14px;font-weight:700;color:var(--navy);line-height:1.4;margin-bottom:6px;}
+.artmeta{font-size:11px;color:var(--gd);}
+/* TESTIMONIAL */
+.testicard{background:#fff;border-radius:var(--r);box-shadow:var(--sh);padding:20px 22px;}
+.tquote{font-size:14px;color:var(--tx);line-height:1.7;margin-bottom:14px;font-style:italic;}
+.tauthor{display:flex;align-items:center;gap:10px;}
+.tava{width:38px;height:38px;border-radius:50%;background:var(--navy);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:#fff;flex-shrink:0;}
+.tname{font-weight:700;font-size:14px;color:var(--navy);}
+.tsub{font-size:12px;color:var(--gd);}
+/* PACKAGE CARD */
+.pkgcard{background:#fff;border-radius:var(--r);box-shadow:var(--sh);padding:24px;position:relative;overflow:hidden;}
+.pkgcard.popular::before{content:"Most Popular";position:absolute;top:14px;right:-24px;background:var(--gold);color:#fff;font-size:10px;font-weight:700;padding:4px 32px;transform:rotate(45deg);letter-spacing:.5px;}
+.pkgname{font-size:11px;font-weight:700;letter-spacing:1.5px;color:var(--teal);margin-bottom:6px;}
+.pkgprice{font-size:32px;font-weight:900;color:var(--navy);line-height:1;}
+.pkgper{font-size:13px;color:var(--gd);margin-bottom:14px;}
+.pkgfeat{display:flex;flex-direction:column;gap:8px;margin-bottom:18px;font-size:13px;}
+.pkgfeat li{display:flex;align-items:center;gap:8px;list-style:none;color:var(--tx);}
+.pkgfeat li::before{content:"✓";color:var(--green);font-weight:700;flex-shrink:0;}
+/* FOOTER */
+footer{background:var(--navy);color:#fff;padding:48px 0 24px;}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px;}
+.footer-brand .logo{font-size:22px;color:#fff;display:block;margin-bottom:10px;}
+.footer-brand .logo span{color:var(--teal);}
+.footer-col h5{font-size:12px;font-weight:700;letter-spacing:1.5px;color:rgba(255,255,255,.5);margin-bottom:14px;}
+.footer-col a{display:block;font-size:13px;color:rgba(255,255,255,.7);margin-bottom:8px;cursor:pointer;text-decoration:none;transition:.12s;}
+.footer-col a:hover{color:#fff;}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:24px;border-top:1px solid rgba(255,255,255,.12);font-size:12px;color:rgba(255,255,255,.45);flex-wrap:wrap;gap:8px;}
+/* MEDIA LOGO */
+.media-logos{display:flex;gap:16px;flex-wrap:wrap;align-items:center;margin-top:16px;}
+.media-logo{background:rgba(255,255,255,.1);border-radius:8px;padding:6px 14px;font-size:11px;font-weight:700;color:rgba(255,255,255,.7);}
+/* RTO DETAIL PAGE */
+.detail-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:32px;align-items:start;}
+.calc-box{background:#fff;border-radius:var(--r);box-shadow:var(--shl);padding:26px;position:sticky;top:80px;}
+.calc-title{font-size:13px;font-weight:700;letter-spacing:.5px;color:var(--teal);margin-bottom:4px;}
+.calc-hero{font-size:22px;font-weight:900;color:var(--navy);margin-bottom:20px;}
+.calc-row{margin-bottom:18px;}
+.calc-row label{font-size:12px;font-weight:700;color:var(--gd);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:6px;}
+.calc-val{font-size:15px;font-weight:700;color:var(--navy);}
+.dur-btns{display:flex;gap:8px;margin-top:6px;}
+.dur-btn{flex:1;padding:8px;border-radius:var(--rs);font-size:14px;font-weight:700;cursor:pointer;border:2px solid var(--gm);background:#fff;color:var(--txl);transition:.12s;text-align:center;}
+.dur-btn.on{border-color:var(--teal);background:var(--teal-p);color:var(--teal);}
+.result-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:18px 0;}
+.result-cell{background:var(--grey);border-radius:var(--rs);padding:12px 14px;}
+.result-cell.accent{background:var(--teal-p);}
+.result-label{font-size:11px;color:var(--gd);margin-bottom:3px;}
+.result-value{font-size:17px;font-weight:800;color:var(--navy);}
+.result-value.teal{color:var(--teal);}
+.savings-bar{background:linear-gradient(135deg,#1B3A6B,#0E7C7B);border-radius:var(--rs);padding:14px 16px;color:#fff;margin:14px 0;}
+.savings-main{font-size:22px;font-weight:900;}
+.savings-sub{font-size:12px;opacity:.8;margin-top:3px;}
 /* CAP */
 .cr{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--gm);}
 .cr:last-child{border:none;}
@@ -109,7 +192,33 @@ nav{background:#fff;box-shadow:var(--sh);position:sticky;top:0;z-index:200;}
 .cbw{flex:1;height:7px;background:var(--gm);border-radius:4px;overflow:hidden;}
 .cb{height:100%;border-radius:4px;}
 .cpct{font-size:18px;font-weight:800;color:var(--navy);width:48px;text-align:right;}
-@media(max-width:768px){.g2,.g3,.g4{grid-template-columns:1fr;}.hide-m{display:none!important;}.sh h1{font-size:26px;}}
+/* LOGIN CARD */
+.login-card{max-width:420px;margin:0 auto;background:#fff;border-radius:var(--r);box-shadow:var(--shl);padding:32px;}
+/* AFFILIATE */
+.aff-step{background:#fff;border-radius:var(--r);box-shadow:var(--sh);padding:22px;text-align:center;}
+.aff-ico{font-size:36px;margin-bottom:10px;}
+.aff-step h4{font-size:15px;font-weight:700;color:var(--navy);margin-bottom:6px;}
+.aff-step p{font-size:13px;color:var(--txl);line-height:1.6;}
+/* BTN variants */
+.btn-green{background:var(--green)!important;color:#fff!important;border-color:var(--green)!important;}
+.btn-green:hover{background:#219a52!important;}
+.btn-red{background:var(--red)!important;color:#fff!important;border-color:var(--red)!important;}
+.btn-red:hover{background:#c0392b!important;}
+.btn-gold{background:var(--gold)!important;color:#fff!important;border-color:var(--gold)!important;}
+.btn-gold:hover{background:#b8841a!important;}
+/* dur-btn active alias */
+.dur-btn.active{border-color:var(--teal);background:var(--teal-p);color:var(--teal);}
+/* rc-label / rc-val for result cells */
+.rc-label{font-size:11px;color:var(--muted);margin-bottom:3px;}
+.rc-val{font-size:17px;font-weight:800;color:var(--navy);}
+/* pkg-grid responsive */
+.pkg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+/* pkgcard */
+.pkgcard{background:#fff;border:2px solid var(--gm);border-radius:var(--r);padding:28px;position:relative;}
+/* thumb-sections responsive */
+.thumb-sections{grid-template-columns:repeat(3,1fr);}
+@media(max-width:900px){.detail-grid{grid-template-columns:1fr;}.calc-box{position:static;}.pkg-grid{grid-template-columns:1fr;}.thumb-sections{grid-template-columns:1fr;}}
+@media(max-width:768px){.g2,.g3,.g4{grid-template-columns:1fr;}.hide-m{display:none!important;}.sh h1{font-size:26px;}.footer-grid{grid-template-columns:1fr 1fr;}.pkg-grid{grid-template-columns:1fr;}}
 </style>
 </head>
 <body>
@@ -119,10 +228,11 @@ nav{background:#fff;box-shadow:var(--sh);position:sticky;top:0;z-index:200;}
   <div class="ni">
     <div class="logo" onclick="goTo('home')">Stay<span>Verse</span></div>
     <div class="nl">
-      <button class="nb hide-m" onclick="goTo('home')" data-i18n="nav_buy">Buy</button>
-      <button class="nb hide-m" onclick="goTo('home')" data-i18n="nav_rent">Rent</button>
-      <button class="nb" onclick="goTo('tenant')" data-i18n="nav_my">My Home</button>
-      <button class="nb cta" onclick="goTo('dev')" data-i18n="nav_dev">List Property ▸</button>
+      <button class="nb hide-m on" onclick="goTo('home')" id="nav-rto">Rent to Own</button>
+      <button class="nb hide-m" onclick="goTo('rent')" id="nav-rent">Just Rent</button>
+      <button class="nb hide-m" onclick="goTo('investor')" id="nav-inv">Investor's Choice</button>
+      <button class="nb" onclick="goTo('myhome')" id="nav-my">My Home</button>
+      <button class="nb cta" onclick="goTo('listprop')" id="nav-list">List Property ▸</button>
     </div>
     <div class="lb-bar">
       <button class="lb on" onclick="setLang('en')">EN</button>
@@ -133,44 +243,69 @@ nav{background:#fff;box-shadow:var(--sh);position:sticky;top:0;z-index:200;}
   </div>
 </nav>
 
+
 <!-- ====== HOME ====== -->
 <div class="page active" id="pg-home">
+
   <!-- Search Hero -->
   <div class="sh">
     <div class="wrap">
-      <div class="tag tt" style="margin-bottom:16px;" data-i18n="hero_tag">🏠 Rent-to-Own Marketplace</div>
-      <h1 data-i18n="hero_h1">Find your home.<br>Start owning it today.</h1>
-      <p data-i18n="hero_sub">Browse verified properties — pay monthly, build equity, own outright.</p>
+      <div class="tag tt" style="margin-bottom:16px;">🏠 Thailand's First Rent-to-Own Marketplace</div>
+      <h1 data-i18n="hero_title">Find your home.<br>Start owning it today.</h1>
+      <p data-i18n="hero_sub">Pay monthly, build equity, own outright — no large down payment needed.</p>
       <div class="sbox">
         <span style="font-size:18px;">🔍</span>
-        <input type="text" data-i18n-placeholder="search_ph" placeholder="Search by city, project, or area...">
+        <input type="text" placeholder="Search by city, project, developer, or area..." id="main-search" data-i18n-ph="search_ph">
         <div class="sdiv"></div>
         <select>
-          <option data-i18n="f_all">All Cities</option>
+          <option>All Cities</option>
           <option>Bangkok</option><option>Phuket</option>
-          <option>Chiang Mai</option><option>Pattaya</option>
+          <option>Chiang Mai</option><option>Pattaya</option><option>Hua Hin</option>
         </select>
         <div class="sdiv"></div>
         <select>
-          <option data-i18n="f_any">Any Budget</option>
-          <option data-i18n="f_10">Under ฿10K/mo</option>
-          <option data-i18n="f_20">฿10K–20K/mo</option>
-          <option data-i18n="f_30">฿20K–30K/mo</option>
-          <option data-i18n="f_30p">฿30K+/mo</option>
+          <option>Any Budget</option>
+          <option>Under ฿15K/mo</option>
+          <option>฿15K–30K/mo</option>
+          <option>฿30K–60K/mo</option>
+          <option>฿60K+/mo</option>
         </select>
-        <button class="btn bt" data-i18n="search_btn">Search</button>
+        <button class="btn bt">Search</button>
+      </div>
+      <!-- Search Shortcut Tabs -->
+      <div class="stabs">
+        <span class="stab on">🏠 Rent to Own</span>
+        <span class="stab" onclick="goTo('rent')">🔑 Just Rent</span>
+        <span class="stab">🗺️ Map Search</span>
+        <span class="stab">🏗️ By Developer</span>
+        <span class="stab">📍 Near Me</span>
+        <span class="stab" onclick="toggleLifestyle()">✨ Lifestyle Match</span>
+      </div>
+      <!-- Lifestyle Filters (hidden by default) -->
+      <div id="lifestyle-filters" style="display:none;margin-top:12px;display:none;">
+        <div style="font-size:11px;color:rgba(255,255,255,.6);font-weight:700;letter-spacing:1px;margin-bottom:8px;">LIFESTYLE FILTERS</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <span class="lf" style="background:rgba(255,255,255,.15);color:#fff;border-color:rgba(255,255,255,.3);">🎓 Campus Condo</span>
+          <span class="lf" style="background:rgba(255,255,255,.15);color:#fff;border-color:rgba(255,255,255,.3);">🐾 Pet Parents</span>
+          <span class="lf" style="background:rgba(255,255,255,.15);color:#fff;border-color:rgba(255,255,255,.3);">🏫 International School</span>
+          <span class="lf" style="background:rgba(255,255,255,.15);color:#fff;border-color:rgba(255,255,255,.3);">🌳 Near Public Parks</span>
+          <span class="lf" style="background:rgba(255,255,255,.15);color:#fff;border-color:rgba(255,255,255,.3);">🏋️ Active Lifestyle</span>
+          <span class="lf" style="background:rgba(255,255,255,.15);color:#fff;border-color:rgba(255,255,255,.3);">🧘 Longevity</span>
+          <span class="lf" style="background:rgba(255,255,255,.15);color:#fff;border-color:rgba(255,255,255,.3);">♿ Elderly Friendly</span>
+          <span class="lf" style="background:rgba(255,255,255,.15);color:#fff;border-color:rgba(255,255,255,.3);">💻 Work from Home Ready</span>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- Quick Stats -->
-  <div style="background:var(--navy);padding:16px 0;">
+  <!-- Stats Bar -->
+  <div style="background:var(--navy);padding:14px 0;">
     <div class="wrap">
       <div style="display:flex;gap:32px;justify-content:center;flex-wrap:wrap;">
-        <div style="text-align:center;color:#fff;"><span style="font-size:18px;font-weight:800;">136</span><span style="font-size:12px;opacity:.65;margin-left:6px;" data-i18n="qs_prop">Units · Foreign Quota</span></div>
-        <div style="text-align:center;color:#fff;"><span style="font-size:18px;font-weight:800;">Pattaya</span><span style="font-size:12px;opacity:.65;margin-left:6px;" data-i18n="qs_city">Na Jomtien · EEC Zone</span></div>
-        <div style="text-align:center;color:#fff;"><span style="font-size:18px;font-weight:800;">Beachfront</span><span style="font-size:12px;opacity:.65;margin-left:6px;" data-i18n="qs_dev">Private Beach Access</span></div>
-        <div style="text-align:center;color:#fff;"><span style="font-size:18px;font-weight:800;">4</span><span style="font-size:12px;opacity:.65;margin-left:6px;" data-i18n="qs_lang">Languages</span></div>
+        <div style="text-align:center;color:#fff;"><span style="font-size:18px;font-weight:800;">136+</span><span style="font-size:12px;opacity:.65;margin-left:6px;">Verified Units</span></div>
+        <div style="text-align:center;color:#fff;"><span style="font-size:18px;font-weight:800;">4</span><span style="font-size:12px;opacity:.65;margin-left:6px;">Cities · BKK, Pattaya, Phuket, CNX</span></div>
+        <div style="text-align:center;color:#fff;"><span style="font-size:18px;font-weight:800;">0%</span><span style="font-size:12px;opacity:.65;margin-left:6px;">Interest · First 6 Months</span></div>
+        <div style="text-align:center;color:#fff;"><span style="font-size:18px;font-weight:800;">4</span><span style="font-size:12px;opacity:.65;margin-left:6px;">Languages</span></div>
       </div>
     </div>
   </div>
@@ -178,39 +313,64 @@ nav{background:#fff;box-shadow:var(--sh);position:sticky;top:0;z-index:200;}
   <!-- Featured Listings -->
   <div class="sec">
     <div class="wrap">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
-        <div class="st" style="margin:0;"><h2 data-i18n="feat_h">Grand Florida Beachfront Pattaya</h2><p data-i18n="feat_sub">136 units · Foreign Quota · Na Jomtien · EEC Zone</p></div>
-        <button class="btn bo bsm" data-i18n="feat_all">View all →</button>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+        <div><div class="tag tt" style="margin-bottom:8px;">✦ FEATURED PARTNER · Pilot Project</div><h2 style="font-size:22px;font-weight:800;color:var(--navy);" data-i18n="feat_title">Grand Florida Beachfront Pattaya</h2><p style="color:var(--txl);font-size:13px;">136 units · Foreign Quota · Na Jomtien · EEC Zone</p></div>
+        <div style="text-align:right;flex-shrink:0;">
+          <div style="font-size:11px;color:var(--gd);margin-bottom:4px;">FEATURED PLACEMENT</div>
+          <div style="font-size:11px;color:var(--gd);">Homepage Spotlight · SEM Boosted</div>
+        </div>
       </div>
-      <!-- Filter Pills -->
-      <div class="fbar">
-        <button class="fp on">All Units</button>
-        <button class="fp">🌊 Sea View</button>
-        <button class="fp">🌿 Garden View</button>
-        <button class="fp">🏊 Pool View</button>
-        <button class="fp">✨ Golden View</button>
-        <button class="fp">🏡 Pool Villa</button>
-        <button class="fp">🏙️ Duplex</button>
-        <button class="fp">฿3–5M</button>
-        <button class="fp">฿5–8M</button>
-        <button class="fp">฿8M+</button>
+
+      <!-- Map + List Toggle -->
+      <div class="map-toggle-bar">
+        <button class="map-toggle" onclick="toggleMap()" id="map-toggle-btn">🗺️ Map View</button>
+        <div class="fbar" style="margin:0;flex:1;">
+          <button class="fp on">All Units</button>
+          <button class="fp">🌊 Sea View</button>
+          <button class="fp">🌿 Garden View</button>
+          <button class="fp">🏊 Pool View</button>
+          <button class="fp">✨ Golden View</button>
+          <button class="fp">🏡 Pool Villa</button>
+          <button class="fp">🏙️ Duplex</button>
+          <button class="fp">฿3–5M</button><button class="fp">฿5–8M</button><button class="fp">฿8M+</button>
+        </div>
       </div>
+
+      <!-- Mock Map -->
+      <div class="mock-map" id="mock-map">
+        <div style="position:absolute;inset:0;background:linear-gradient(135deg,#c8dfc8 0%,#b8d4e0 40%,#a0c4d8 100%);"></div>
+        <!-- Grid lines suggestion of streets -->
+        <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:.25" xmlns="http://www.w3.org/2000/svg">
+          <line x1="0" y1="30%" x2="100%" y2="30%" stroke="#555" stroke-width="1"/>
+          <line x1="0" y1="60%" x2="100%" y2="60%" stroke="#555" stroke-width="1"/>
+          <line x1="25%" y1="0" x2="25%" y2="100%" stroke="#555" stroke-width="1"/>
+          <line x1="60%" y1="0" x2="60%" y2="100%" stroke="#555" stroke-width="1"/>
+        </svg>
+        <div style="position:absolute;bottom:10%;right:10%;width:180px;height:90px;background:rgba(14,124,123,.2);border:2px solid rgba(14,124,123,.5);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#0E7C7B;">🌊 Beach Area</div>
+        <div class="map-pin" style="top:35%;left:42%;" onclick="goTo('detail')">Grand Florida ฿23.8K↑</div>
+        <div class="map-pin teal" style="top:52%;left:28%;">Pattaya Beach Condo</div>
+        <div class="map-pin" style="top:20%;left:58%;">Na Jomtien Heights</div>
+        <div style="position:absolute;bottom:10px;right:10px;background:rgba(255,255,255,.9);border-radius:8px;padding:8px 12px;font-size:11px;font-weight:700;color:var(--navy);">📍 Na Jomtien · EEC Zone</div>
+        <div style="position:absolute;bottom:10px;left:10px;background:rgba(255,255,255,.9);border-radius:6px;padding:6px 10px;font-size:11px;color:var(--txl);">3 listings in view · Tap pin for details</div>
+      </div>
+
       <!-- Project Banner -->
       <div style="background:linear-gradient(135deg,#0d2444,#1B3A6B);border-radius:var(--r);padding:18px 22px;margin-bottom:22px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
         <div>
-          <div style="font-size:11px;color:rgba(255,255,255,.6);font-weight:700;letter-spacing:1px;margin-bottom:4px;">PILOT PROJECT — FOREIGN QUOTA</div>
+          <div style="font-size:11px;color:rgba(255,255,255,.6);font-weight:700;letter-spacing:1px;margin-bottom:4px;">PILOT PROJECT — FOREIGN QUOTA · NA JOMTIEN EEC ZONE</div>
           <div style="font-size:18px;font-weight:800;color:#fff;">🏖️ Grand Florida Beachfront Condo Resort</div>
           <div style="font-size:13px;color:rgba(255,255,255,.7);margin-top:3px;">Na Jomtien, Sattahip, Chonburi · 136 units · ฿3.3M–฿13.1M</div>
         </div>
         <div style="display:flex;gap:8px;flex-wrap:wrap;">
           <span style="background:rgba(14,124,123,.4);color:#7eecea;border-radius:20px;padding:4px 12px;font-size:12px;font-weight:700;">EEC Zone</span>
-          <span style="background:rgba(201,147,26,.35);color:#f5d06a;border-radius:20px;padding:4px 12px;font-size:12px;font-weight:700;">Water Park + Beach</span>
+          <span style="background:rgba(201,147,26,.35);color:#f5d06a;border-radius:20px;padding:4px 12px;font-size:12px;font-weight:700;">Water Park</span>
           <span style="background:rgba(39,174,96,.3);color:#6fe0a2;border-radius:20px;padding:4px 12px;font-size:12px;font-weight:700;">Foreign Quota</span>
         </div>
       </div>
-      <!-- GRAND FLORIDA VIDEO BANNER — Developer Showreel -->
+
+      <!-- Video Banner -->
       <div style="border-radius:var(--r);overflow:hidden;margin-bottom:22px;position:relative;background:#000;">
-        <video autoplay muted loop playsinline style="width:100%;display:block;max-height:420px;object-fit:cover;">
+        <video autoplay muted loop playsinline style="width:100%;display:block;max-height:380px;object-fit:cover;">
           <source src="images/grand-florida-showreel.mp4" type="video/mp4">
         </video>
         <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.55) 0%,transparent 50%);pointer-events:none;"></div>
@@ -226,8 +386,28 @@ nav{background:#fff;box-shadow:var(--sh);position:sticky;top:0;z-index:200;}
           </div>
         </div>
       </div>
+
+      <!-- Property Cards Grid -->
       <div class="g3">
-        <!-- Card 1: Sea View Extra A201 -->
+        <!-- Featured Card: Duplex -->
+        <div class="pc" onclick="goTo('detail')">
+          <div class="pt" style="background:url('images/card-duplex.jpg') center/cover;position:relative;">
+            <div class="feat-badge">✦ Featured Placement</div>
+            <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(13,36,68,.5),transparent);border-radius:inherit;"></div>
+            <div class="pt-badge" style="top:32px;"><span class="tag tt" style="font-size:11px;">Sea View</span><span style="background:#C9931A;color:#fff;border-radius:20px;padding:3px 9px;font-size:12px;font-weight:700;">Duplex</span></div>
+            <div class="pt-save">♡</div>
+            <div style="position:absolute;bottom:10px;right:12px;background:rgba(255,255,255,.15);border-radius:6px;padding:2px 8px;font-size:11px;color:#fff;font-weight:700;">Bldg A · Fl.6–7</div>
+          </div>
+          <div class="pb">
+            <div class="pn">Grand Florida — A603-604 Duplex</div>
+            <div class="pl">📍 Na Jomtien · Sea View · Duplex · 72.72 sqm</div>
+            <div class="prow"><div class="pprice">฿72,800<span>/mo</span></div><div class="peq">+6.7% equity/yr</div></div>
+            <div class="pbar"><div class="pbf" style="width:0%;background:var(--navy);"></div></div>
+            <div class="pleg">Own in ~15 years · Duplex Penthouse · 2-Floor · ฿13,100,000</div>
+          </div>
+          <div class="pf"><button class="btn bt bsm" onclick="event.stopPropagation();goTo('detail')">View Details</button><button class="btn bo bsm" onclick="event.stopPropagation();">Calculate</button></div>
+        </div>
+        <!-- Sea View Extra A201 -->
         <div class="pc" onclick="goTo('detail')">
           <div class="pt" style="background:url('images/card-seaview-extra.jpg') center/cover;position:relative;">
             <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(13,59,110,.5),transparent);border-radius:inherit;"></div>
@@ -238,19 +418,13 @@ nav{background:#fff;box-shadow:var(--sh);position:sticky;top:0;z-index:200;}
           <div class="pb">
             <div class="pn">Grand Florida — Unit A201</div>
             <div class="pl">📍 Na Jomtien · Sea View Extra · 47.27 sqm</div>
-            <div class="prow">
-              <div class="pprice">฿35,700<span>/mo</span></div>
-              <div class="peq">+6.7% equity/yr</div>
-            </div>
+            <div class="prow"><div class="pprice">฿35,700<span>/mo</span></div><div class="peq">+6.7% equity/yr</div></div>
             <div class="pbar"><div class="pbf" style="width:0%;background:var(--teal);"></div></div>
             <div class="pleg">Own in ~15 years · 1BR Extra · Beachfront Sea View · ฿6,429,000</div>
           </div>
-          <div class="pf">
-            <button class="btn bt bsm" onclick="goTo('detail')">View Details</button>
-            <button class="btn bo bsm">Calculate</button>
-          </div>
+          <div class="pf"><button class="btn bt bsm" onclick="event.stopPropagation();goTo('detail')">View Details</button><button class="btn bo bsm" onclick="event.stopPropagation();">Calculate</button></div>
         </div>
-        <!-- Card 2: Sea View Standard B202 -->
+        <!-- Sea View B202 -->
         <div class="pc" onclick="goTo('detail')">
           <div class="pt" style="background:url('images/card-seaview.jpg') center/cover;position:relative;">
             <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(10,74,130,.5),transparent);border-radius:inherit;"></div>
@@ -261,19 +435,13 @@ nav{background:#fff;box-shadow:var(--sh);position:sticky;top:0;z-index:200;}
           <div class="pb">
             <div class="pn">Grand Florida — Unit B202</div>
             <div class="pl">📍 Na Jomtien · Sea View · 36.44 sqm</div>
-            <div class="prow">
-              <div class="pprice">฿28,500<span>/mo</span></div>
-              <div class="peq">+6.7% equity/yr</div>
-            </div>
+            <div class="prow"><div class="pprice">฿28,500<span>/mo</span></div><div class="peq">+6.7% equity/yr</div></div>
             <div class="pbar"><div class="pbf" style="width:0%;background:var(--teal);"></div></div>
             <div class="pleg">Own in ~15 years · 1 Bedroom · Full Sea View · ฿5,129,000</div>
           </div>
-          <div class="pf">
-            <button class="btn bt bsm" onclick="goTo('detail')">View Details</button>
-            <button class="btn bo bsm">Calculate</button>
-          </div>
+          <div class="pf"><button class="btn bt bsm" onclick="event.stopPropagation();goTo('detail')">View Details</button><button class="btn bo bsm" onclick="event.stopPropagation();">Calculate</button></div>
         </div>
-        <!-- Card 3: Pool View F712 -->
+        <!-- Pool View F712 -->
         <div class="pc" onclick="goTo('detail')">
           <div class="pt" style="background:url('images/card-poolview.jpg') center/cover;position:relative;">
             <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(6,74,71,.5),transparent);border-radius:inherit;"></div>
@@ -284,19 +452,13 @@ nav{background:#fff;box-shadow:var(--sh);position:sticky;top:0;z-index:200;}
           <div class="pb">
             <div class="pn">Grand Florida — Unit F712</div>
             <div class="pl">📍 Na Jomtien · Pool View · 36.48 sqm</div>
-            <div class="prow">
-              <div class="pprice">฿23,800<span>/mo</span></div>
-              <div class="peq">+6.7% equity/yr</div>
-            </div>
+            <div class="prow"><div class="pprice">฿23,800<span>/mo</span></div><div class="peq">+6.7% equity/yr</div></div>
             <div class="pbar"><div class="pbf" style="width:0%;background:var(--teal);"></div></div>
             <div class="pleg">Own in ~15 years · 1 Bedroom · Pool View · ฿4,290,000</div>
           </div>
-          <div class="pf">
-            <button class="btn bt bsm" onclick="goTo('detail')">View Details</button>
-            <button class="btn bo bsm">Calculate</button>
-          </div>
+          <div class="pf"><button class="btn bt bsm" onclick="event.stopPropagation();goTo('detail')">View Details</button><button class="btn bo bsm" onclick="event.stopPropagation();">Calculate</button></div>
         </div>
-        <!-- Card 4: Garden View H201 -->
+        <!-- Garden View H201 -->
         <div class="pc" onclick="goTo('detail')">
           <div class="pt" style="background:url('images/card-gardenview.jpg') center/cover;position:relative;">
             <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(26,74,30,.45),transparent);border-radius:inherit;"></div>
@@ -306,20 +468,14 @@ nav{background:#fff;box-shadow:var(--sh);position:sticky;top:0;z-index:200;}
           </div>
           <div class="pb">
             <div class="pn">Grand Florida — Unit H201</div>
-            <div class="pl">📍 Na Jomtien · Garden View · 38.07 sqm</div>
-            <div class="prow">
-              <div class="pprice">฿25,500<span>/mo</span></div>
-              <div class="peq">+6.7% equity/yr</div>
-            </div>
+            <div class="pl">📍 Na Jomtien · Garden View · 38.07 sqm · Best Entry</div>
+            <div class="prow"><div class="pprice">฿25,500<span>/mo</span></div><div class="peq">+6.7% equity/yr</div></div>
             <div class="pbar"><div class="pbf" style="width:0%;background:var(--green);"></div></div>
-            <div class="pleg">Own in ~15 years · 1 Bedroom · Garden View · ฿4,599,000 · Best Entry</div>
+            <div class="pleg">Own in ~15 years · 1 Bedroom · Garden View · ฿4,599,000</div>
           </div>
-          <div class="pf">
-            <button class="btn bt bsm" onclick="goTo('detail')">View Details</button>
-            <button class="btn bo bsm">Calculate</button>
-          </div>
+          <div class="pf"><button class="btn bt bsm" onclick="event.stopPropagation();goTo('detail')">View Details</button><button class="btn bo bsm" onclick="event.stopPropagation();">Calculate</button></div>
         </div>
-        <!-- Card 5: Golden View G315 -->
+        <!-- Golden View G315 -->
         <div class="pc" onclick="goTo('detail')">
           <div class="pt" style="background:url('images/card-goldenview.jpg') center/cover;position:relative;">
             <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(90,58,0,.45),transparent);border-radius:inherit;"></div>
@@ -330,363 +486,1333 @@ nav{background:#fff;box-shadow:var(--sh);position:sticky;top:0;z-index:200;}
           <div class="pb">
             <div class="pn">Grand Florida — Unit G315</div>
             <div class="pl">📍 Na Jomtien · Golden View Corner · 39.52 sqm</div>
-            <div class="prow">
-              <div class="pprice">฿26,800<span>/mo</span></div>
-              <div class="peq">+6.7% equity/yr</div>
-            </div>
+            <div class="prow"><div class="pprice">฿26,800<span>/mo</span></div><div class="peq">+6.7% equity/yr</div></div>
             <div class="pbar"><div class="pbf" style="width:0%;background:var(--gold);"></div></div>
             <div class="pleg">Own in ~15 years · 1 Bedroom · Corner Unit · ฿4,829,000</div>
           </div>
-          <div class="pf">
-            <button class="btn bt bsm" onclick="goTo('detail')">View Details</button>
-            <button class="btn bo bsm">Calculate</button>
-          </div>
+          <div class="pf"><button class="btn bt bsm" onclick="event.stopPropagation();goTo('detail')">View Details</button><button class="btn bo bsm" onclick="event.stopPropagation();">Calculate</button></div>
         </div>
-        <!-- Card 6: Duplex Penthouse A603-604 -->
-        <div class="pc" onclick="goTo('detail')">
-          <div class="pt" style="background:url('images/card-duplex.jpg') center/cover;position:relative;">
-            <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(13,36,68,.5),transparent);border-radius:inherit;"></div>
-            <div class="pt-badge"><span class="tag tt" style="font-size:11px;">Sea View</span><span style="background:#C9931A;color:#fff;border-radius:20px;padding:3px 9px;font-size:12px;font-weight:700;">Duplex</span></div>
-            <div class="pt-save">♡</div>
-            <div style="position:absolute;bottom:10px;right:12px;background:rgba(255,255,255,.15);border-radius:6px;padding:2px 8px;font-size:11px;color:#fff;font-weight:700;">Bldg A · Fl.6–7</div>
-          </div>
-          <div class="pb">
-            <div class="pn">Grand Florida — A603-604 Duplex</div>
-            <div class="pl">📍 Na Jomtien · Sea View · Duplex · 72.72 sqm</div>
-            <div class="prow">
-              <div class="pprice">฿72,800<span>/mo</span></div>
-              <div class="peq">+6.7% equity/yr</div>
-            </div>
-            <div class="pbar"><div class="pbf" style="width:0%;background:var(--navy);"></div></div>
-            <div class="pleg">Own in ~15 years · Duplex Penthouse · 2-Floor · ฿13,100,000</div>
-          </div>
-          <div class="pf">
-            <button class="btn bt bsm" onclick="goTo('detail')">View Details</button>
-            <button class="btn bo bsm">Calculate</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+      </div><!-- /g3 cards -->
 
-  <!-- Grand Florida Unit Types -->
-  <div class="sec" style="background:linear-gradient(180deg,#f4f6f9,#fff);">
-    <div class="wrap">
-      <div style="text-align:center;margin-bottom:28px;">
-        <div class="tag tt" style="margin-bottom:10px;">GRAND FLORIDA · 136 UNITS</div>
-        <h2 style="font-size:24px;font-weight:800;color:var(--navy);">Room Types & Pricing</h2>
-        <p style="color:var(--txl);margin-top:6px;">Na Jomtien Beachfront · Sattahip Chonburi · EEC Zone</p>
-      </div>
-      <div class="g4">
-        <div style="background:#fff;border-radius:var(--r);box-shadow:var(--sh);padding:20px;text-align:center;border-top:4px solid var(--teal);">
-          <div style="font-size:32px;margin-bottom:8px;">🏠</div>
-          <div style="font-size:12px;font-weight:700;color:var(--teal);letter-spacing:1px;margin-bottom:4px;">STANDARD</div>
-          <div style="font-size:15px;font-weight:700;color:var(--navy);">35–47 sqm</div>
-          <div style="font-size:13px;color:var(--txl);margin:4px 0 10px;">1 Bedroom · Sea/Garden/Pool View</div>
-          <div style="font-size:20px;font-weight:800;color:var(--navy);">฿4.3M–฿7.0M</div>
-          <div style="font-size:12px;color:var(--txl);">from ฿23,800/mo</div>
-        </div>
-        <div style="background:#fff;border-radius:var(--r);box-shadow:var(--sh);padding:20px;text-align:center;border-top:4px solid var(--navy);">
-          <div style="font-size:32px;margin-bottom:8px;">🏊</div>
-          <div style="font-size:12px;font-weight:700;color:var(--navy);letter-spacing:1px;margin-bottom:4px;">POOL ACCESS</div>
-          <div style="font-size:15px;font-weight:700;color:var(--navy);">42–46 sqm</div>
-          <div style="font-size:13px;color:var(--txl);margin:4px 0 10px;">1 Bedroom · Direct Pool Access</div>
-          <div style="font-size:20px;font-weight:800;color:var(--navy);">฿5.1M–฿5.7M</div>
-          <div style="font-size:12px;color:var(--txl);">from ฿28,300/mo</div>
-        </div>
-        <div style="background:#fff;border-radius:var(--r);box-shadow:var(--sh);padding:20px;text-align:center;border-top:4px solid var(--gold);">
-          <div style="font-size:32px;margin-bottom:8px;">🏙️</div>
-          <div style="font-size:12px;font-weight:700;color:var(--gold);letter-spacing:1px;margin-bottom:4px;">DUPLEX</div>
-          <div style="font-size:15px;font-weight:700;color:var(--navy);">72–76 sqm</div>
-          <div style="font-size:13px;color:var(--txl);margin:4px 0 10px;">2-Floor · Panoramic Sea View</div>
-          <div style="font-size:20px;font-weight:800;color:var(--navy);">฿13.1M</div>
-          <div style="font-size:12px;color:var(--txl);">from ฿72,800/mo</div>
-        </div>
-        <div style="background:#fff;border-radius:var(--r);box-shadow:var(--sh);padding:20px;text-align:center;border-top:4px solid #e74c3c;">
-          <div style="font-size:32px;margin-bottom:8px;">🏡</div>
-          <div style="font-size:12px;font-weight:700;color:#e74c3c;letter-spacing:1px;margin-bottom:4px;">POOL VILLA</div>
-          <div style="font-size:15px;font-weight:700;color:var(--navy);">66 sqm</div>
-          <div style="font-size:13px;color:var(--txl);margin:4px 0 10px;">Private Pool + Pavilion</div>
-          <div style="font-size:20px;font-weight:800;color:var(--navy);">฿7.9M</div>
-          <div style="font-size:12px;color:var(--txl);">from ฿43,900/mo</div>
-        </div>
-      </div>
-      <div style="margin-top:18px;background:var(--teal-p);border-radius:var(--rs);padding:14px 18px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
+      <div style="margin-top:14px;background:var(--teal-p);border-radius:var(--rs);padding:14px 18px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
         <div style="font-size:13px;color:var(--teal);"><strong>🔑 Foreign Quota</strong> · Chanote title deed · Sea/Garden/Pool/Golden views · Buildings A–H</div>
-        <button class="btn bt bsm" onclick="goTo('home')">View All 136 Units →</button>
+        <button class="btn bt bsm">View All 136 Units →</button>
       </div>
     </div>
   </div>
 
-  <!-- How R2O Works -->
+  <!-- ── WHY STAYVERSE ── -->
   <div class="sec sec-w">
     <div class="wrap">
       <div class="st" style="text-align:center;">
-        <h2 data-i18n="how_h">How Rent-to-Own Works</h2>
-        <p data-i18n="how_sub">Pay monthly, build equity, own outright — no large down payment needed</p>
+        <div class="tag tn" style="margin-bottom:10px;">WHY STAYVERSE</div>
+        <h2 data-i18n="why_title">ทำไมต้องเลือก StayVerse?</h2>
+        <p>เหนือกว่าการเช่าธรรมดา ไม่ต้องกู้แบงก์ เริ่มเป็นเจ้าของได้วันนี้</p>
+      </div>
+      <div class="g3" style="margin-bottom:28px;">
+        <div style="background:var(--grey);border-radius:var(--r);padding:24px;text-align:center;">
+          <div style="font-size:40px;margin-bottom:12px;">📈</div>
+          <h3 style="font-size:16px;font-weight:700;color:var(--navy);margin-bottom:8px;">ทุกบาทที่จ่ายสร้าง Equity</h3>
+          <p style="font-size:13px;color:var(--txl);line-height:1.7;">ค่าเช่าทุกเดือนไม่ได้หายไปเปล่า — แต่แปลงเป็นกรรมสิทธิ์ในทรัพย์สินของคุณ เหมือนการผ่อนบ้านแต่ไม่ต้องมีสินเชื่อ</p>
+        </div>
+        <div style="background:var(--grey);border-radius:var(--r);padding:24px;text-align:center;">
+          <div style="font-size:40px;margin-bottom:12px;">🚀</div>
+          <h3 style="font-size:16px;font-weight:700;color:var(--navy);margin-bottom:8px;">ไม่ต้องวางเงินดาวน์ก้อนใหญ่</h3>
+          <p style="font-size:13px;color:var(--txl);line-height:1.7;">เริ่มต้นที่ 5% เท่านั้น ไม่ต้องกู้แบงก์ ไม่ต้องใช้เครดิตสกอร์ เพียงแค่ยืนยันตัวตน 5 นาทีก็เริ่มได้</p>
+        </div>
+        <div style="background:var(--grey);border-radius:var(--r);padding:24px;text-align:center;">
+          <div style="font-size:40px;margin-bottom:12px;">📱</div>
+          <h3 style="font-size:16px;font-weight:700;color:var(--navy);margin-bottom:8px;">ชำระอัตโนมัติ ผ่าน All Wallet</h3>
+          <p style="font-size:13px;color:var(--txl);line-height:1.7;">ตัดเงินอัตโนมัติทุกเดือน ไม่ต้องตามจ่าย ไม่ต้องโอนเอง Seamless ผ่านระบบ ALL Ecosystem</p>
+        </div>
+        <div style="background:var(--grey);border-radius:var(--r);padding:24px;text-align:center;">
+          <div style="font-size:40px;margin-bottom:12px;">🔑</div>
+          <h3 style="font-size:16px;font-weight:700;color:var(--navy);margin-bottom:8px;">ทรัพย์สินผ่านการยืนยันแล้ว</h3>
+          <p style="font-size:13px;color:var(--txl);line-height:1.7;">ทุก listing ผ่านการตรวจสอบสิทธิ์กรรมสิทธิ์ ราคาตลาดยุติธรรม โปร่งใส ไม่มีต้นทุนซ่อน</p>
+        </div>
+        <div style="background:var(--grey);border-radius:var(--r);padding:24px;text-align:center;">
+          <div style="font-size:40px;margin-bottom:12px;">🌏</div>
+          <h3 style="font-size:16px;font-weight:700;color:var(--navy);margin-bottom:8px;">4 ภาษา · ชาวต่างชาติเช่าได้</h3>
+          <p style="font-size:13px;color:var(--txl);line-height:1.7;">รองรับ Foreign Quota โดยเฉพาะ ให้บริการเป็นภาษาอังกฤษ ไทย จีน รัสเซีย ตลอด process</p>
+        </div>
+        <div style="background:var(--grey);border-radius:var(--r);padding:24px;text-align:center;">
+          <div style="font-size:40px;margin-bottom:12px;">🏡</div>
+          <h3 style="font-size:16px;font-weight:700;color:var(--navy);margin-bottom:8px;">Living+ Service ครบครัน</h3>
+          <p style="font-size:13px;color:var(--txl);line-height:1.7;">ตัวเลือก Service Apartment Package — Housekeeping, Laundry, Concierge ทำให้ห้องของคุณพร้อมเช่าในราคาที่ดีขึ้น</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── HOW IT WORKS ── -->
+  <div class="sec" style="background:linear-gradient(180deg,#f4f6f9,#fff);">
+    <div class="wrap">
+      <div class="st" style="text-align:center;">
+        <div class="tag tt" style="margin-bottom:10px;">HOW IT WORKS</div>
+        <h2 data-i18n="how_title">Rent Today. Own Tomorrow.</h2>
+        <p>3 ขั้นตอนง่ายๆ สู่การเป็นเจ้าของ ไม่ต้องกู้แบงก์</p>
       </div>
       <div class="g3">
         <div class="stepcard">
           <div class="sico" style="background:var(--teal-p);">🔍</div>
-          <div class="snum" data-i18n="s1n">STEP 01</div>
-          <h3 data-i18n="s1h">Choose Your Home</h3>
-          <p data-i18n="s1p">Browse verified properties. Use the equity calculator to find the plan that fits your monthly budget and timeline.</p>
+          <div class="snum">STEP 01</div>
+          <h3>เลือกห้องที่ใช่</h3>
+          <p>Browse verified properties พร้อม RTO Calculator แบบ Real-time เลือกดาวน์ เลือกระยะ ดูตัวเลขก่อนตัดสินใจ</p>
         </div>
         <div class="stepcard">
-          <div class="sico" style="background:var(--gold-p);">📱</div>
-          <div class="snum" data-i18n="s2n">STEP 02</div>
-          <h3 data-i18n="s2h">Apply in Minutes</h3>
-          <p data-i18n="s2p">Submit your application online. Identity verified digitally. Move in within days of approval — no bank loan required.</p>
+          <div class="sico" style="background:var(--gold-p);">✅</div>
+          <div class="snum">STEP 02</div>
+          <h3>สมัครใน 5 นาที</h3>
+          <p>ยืนยันตัวตนผ่าน All ID (Digital KYC) ไม่ต้องใช้ใบรับรองรายได้ ไม่ต้องผ่านแบงก์ อนุมัติภายใน 24 ชั่วโมง</p>
         </div>
         <div class="stepcard">
           <div class="sico" style="background:var(--green-p);">📈</div>
-          <div class="snum" data-i18n="s3n">STEP 03</div>
-          <h3 data-i18n="s3h">Pay & Own</h3>
-          <p data-i18n="s3p">Every payment increases your ownership share. When you reach 100%, the property is fully yours — simple as that.</p>
+          <div class="snum">STEP 03</div>
+          <h3>จ่ายรายเดือน · สะสม Equity</h3>
+          <p>ทุกงวดเพิ่มกรรมสิทธิ์ ระบบ All Wallet ตัดอัตโนมัติ ดู Dashboard Real-time เมื่อครบก็เป็นเจ้าของ 100%</p>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- For Developers CTA -->
+
+  <!-- ── ARTICLES ── -->
+  <div class="sec sec-w">
+    <div class="wrap">
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:24px;">
+        <div><div class="tag tn" style="margin-bottom:8px;">CONTENT HUB</div><h2 style="font-size:22px;font-weight:800;color:var(--navy);" data-i18n="art_title">บทความ & Insights</h2><p style="color:var(--txl);font-size:13px;margin-top:4px;">ความรู้ Living Solution · Real Estate Insights · Sponsorship</p></div>
+        <div style="display:flex;gap:6px;flex-shrink:0;">
+          <button class="fp on" style="border-radius:20px;font-size:12px;">ทั้งหมด</button>
+          <button class="fp" style="border-radius:20px;font-size:12px;">StayVerse</button>
+          <button class="fp" style="border-radius:20px;font-size:12px;">Living</button>
+          <button class="fp" style="border-radius:20px;font-size:12px;">Sponsored</button>
+        </div>
+      </div>
+      <div class="g3">
+        <!-- Article 1: StayVerse content -->
+        <div class="artcard">
+          <div class="artimg" style="background:linear-gradient(135deg,#1B3A6B,#0E7C7B);">
+            <div class="artcat" style="top:12px;left:12px;"><span class="tag tt" style="font-size:11px;">StayVerse · RTO Guide</span></div>
+            <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:48px;opacity:.4;">🏠</div>
+          </div>
+          <div class="artbody">
+            <h4>ทำไม Rent-to-Own ถึงดีกว่าการเช่าธรรมดา? เปรียบเทียบตัวเลขจริง</h4>
+            <div class="artmeta">Propholic × StayVerse · 8 March 2026 · 5 min read</div>
+          </div>
+        </div>
+        <!-- Article 2: Living Solution -->
+        <div class="artcard">
+          <div class="artimg" style="background:linear-gradient(135deg,#2E7D32,#1B5E20);">
+            <div class="artcat"><span class="tag tgr" style="font-size:11px;">Living Solution</span></div>
+            <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:48px;opacity:.4;">🗺️</div>
+          </div>
+          <div class="artbody">
+            <h4>5 ทำเลทอง EEC ที่น่าลงทุนปี 2026 — ราคายังไม่วิ่ง แต่โครงสร้างพื้นฐานพร้อมแล้ว</h4>
+            <div class="artmeta">Propholic.com · 5 March 2026 · 7 min read</div>
+          </div>
+        </div>
+        <!-- Article 3: Sponsorship -->
+        <div class="artcard">
+          <div class="artimg" style="background:linear-gradient(135deg,#7c4f00,#C9931A);">
+            <div class="artcat"><span class="tag tg" style="font-size:11px;">✦ Sponsored · Supalai</span></div>
+            <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:48px;opacity:.4;">🏙️</div>
+          </div>
+          <div class="artbody">
+            <h4>Exclusive: ศุภาลัย ไอคอน สาทร — ห้องสุดท้ายในโควต้าต่างชาติ ลดพิเศษ 3 เดือน</h4>
+            <div class="artmeta">Sponsored Content · Supalai PCL · 1 March 2026</div>
+          </div>
+        </div>
+      </div>
+      <div style="text-align:center;margin-top:20px;"><button class="btn bo">ดูบทความทั้งหมด →</button></div>
+    </div>
+  </div>
+
+  <!-- ── TESTIMONIALS & MEDIA ── -->
+  <div class="sec">
+    <div class="wrap">
+      <div class="st" style="text-align:center;">
+        <div class="tag tt" style="margin-bottom:10px;">TRUSTED BY</div>
+        <h2 data-i18n="testi_title">เสียงจากผู้ใช้จริง</h2>
+      </div>
+      <div class="g3" style="margin-bottom:36px;">
+        <div class="testicard">
+          <div class="tquote">"เช่ามา 2 ปี equity ขึ้นมา 13% แล้ว รู้สึกว่าเงินที่จ่ายไปมันมีความหมาย ไม่ใช่แค่จ่ายค่าเช่าแล้วก็หายไป แนะนำมากครับ"</div>
+          <div class="tauthor"><div class="tava">ส</div><div><div class="tname">สมชาย พ.</div><div class="tsub">ผู้เช่า Grand Florida · Pattaya · 2 ปี</div></div><div style="margin-left:auto;font-size:14px;color:var(--gold);">★★★★★</div></div>
+        </div>
+        <div class="testicard">
+          <div class="tquote">"As a foreigner it was impossible to buy property in Thailand before. StayVerse made it simple — digital KYC, no bank needed, fully transparent. I'm now 8% owner of my condo."</div>
+          <div class="tauthor"><div class="tava" style="background:var(--teal);">A</div><div><div class="tname">Alexei M.</div><div class="tsub">Russian Expat · Pattaya · 18 months</div></div><div style="margin-left:auto;font-size:14px;color:var(--gold);">★★★★★</div></div>
+        </div>
+        <div class="testicard">
+          <div class="tquote">"เจ้าของห้องที่ Grand Florida ได้รายได้รายเดือน stable มาก ระบบตัดเงินอัตโนมัติ ไม่ต้องตามผู้เช่าเลย อยากให้ขยายไปโครงการอื่นๆด้วย"</div>
+          <div class="tauthor"><div class="tava" style="background:var(--gold);">น</div><div><div class="tname">นันท์ ว.</div><div class="tsub">เจ้าของ 3 ยูนิต · Developer Partner</div></div><div style="margin-left:auto;font-size:14px;color:var(--gold);">★★★★★</div></div>
+        </div>
+      </div>
+      <!-- Media Partners -->
+      <div style="text-align:center;">
+        <div style="font-size:11px;font-weight:700;color:var(--gd);letter-spacing:1.5px;margin-bottom:14px;">AS SEEN IN / MEDIA PARTNERS</div>
+        <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;align-items:center;">
+          <div style="background:#fff;border-radius:8px;padding:8px 18px;box-shadow:var(--sh);font-size:13px;font-weight:700;color:var(--txl);">Bangkok Post</div>
+          <div style="background:#fff;border-radius:8px;padding:8px 18px;box-shadow:var(--sh);font-size:13px;font-weight:700;color:var(--txl);">The Nation</div>
+          <div style="background:#fff;border-radius:8px;padding:8px 18px;box-shadow:var(--sh);font-size:13px;font-weight:700;color:var(--teal);">Propholic.com</div>
+          <div style="background:#fff;border-radius:8px;padding:8px 18px;box-shadow:var(--sh);font-size:13px;font-weight:700;color:var(--txl);">DDProperty</div>
+          <div style="background:#fff;border-radius:8px;padding:8px 18px;box-shadow:var(--sh);font-size:13px;font-weight:700;color:var(--txl);">Thaiger</div>
+          <div style="background:#fff;border-radius:8px;padding:8px 18px;box-shadow:var(--sh);font-size:13px;font-weight:700;color:var(--navy);">ALL Ecosystems</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── DEVELOPER CTA ── -->
   <div style="background:linear-gradient(135deg,#7c4f00,#b8820a);padding:48px 0;color:#fff;">
     <div class="wrap" style="display:flex;justify-content:space-between;align-items:center;gap:32px;flex-wrap:wrap;">
       <div>
-        <div style="font-size:12px;opacity:.75;margin-bottom:8px;font-weight:600;letter-spacing:1px;" data-i18n="dev_tag">FOR PROPERTY DEVELOPERS</div>
-        <h2 style="font-size:26px;font-weight:800;margin-bottom:8px;" data-i18n="dev_h">Have units to list?</h2>
-        <p style="opacity:.8;max-width:480px;" data-i18n="dev_sub">Turn unsold inventory into guaranteed monthly cashflow. List your property — we handle tenant matching, contracts, and payments.</p>
+        <div style="font-size:12px;opacity:.75;margin-bottom:8px;font-weight:600;letter-spacing:1px;">FOR PROPERTY DEVELOPERS</div>
+        <h2 style="font-size:26px;font-weight:800;margin-bottom:8px;">Have units to list?</h2>
+        <p style="opacity:.8;max-width:480px;">Turn unsold inventory into guaranteed monthly cashflow. List your property — we handle tenant matching, contracts, automatic payments, and KYC.</p>
       </div>
       <div style="display:flex;gap:10px;flex-shrink:0;flex-wrap:wrap;">
-        <button class="btn bow blg" onclick="goTo('dev')" data-i18n="dev_cta1">List a Property</button>
-        <button class="btn bow blg" onclick="goTo('dev')" data-i18n="dev_cta2">Developer Dashboard →</button>
+        <button class="btn bow blg" onclick="goTo('listprop')">View Packages</button>
+        <button class="btn bow blg" onclick="goTo('dev')">Developer Dashboard →</button>
       </div>
     </div>
   </div>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <span class="logo">Stay<span>Verse</span></span>
+          <p style="font-size:13px;color:rgba(255,255,255,.6);line-height:1.7;max-width:240px;" data-i18n="footer_about">Thailand's first Rent-to-Own marketplace. Pay monthly, build equity, own outright.</p>
+          <p style="font-size:12px;color:rgba(255,255,255,.4);margin-top:10px;">Part of ALL Ecosystems · Powered by One Wallet</p>
+          <div class="media-logos">
+            <div class="media-logo">🌐 ALL Ecosystems</div>
+            <div class="media-logo">💳 One Wallet</div>
+            <div class="media-logo">🪪 All ID</div>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h5>Browse</h5>
+          <a onclick="goTo('home')">Rent to Own</a>
+          <a onclick="goTo('rent')">Just Rent</a>
+          <a onclick="goTo('investor')">Investor's Choice</a>
+          <a onclick="goTo('home')">Map Search</a>
+          <a onclick="goTo('home')">Search by Developer</a>
+        </div>
+        <div class="footer-col">
+          <h5>For Owners</h5>
+          <a onclick="goTo('listprop')">List Property</a>
+          <a onclick="goTo('dev')">Developer Portal</a>
+          <a onclick="goTo('listprop')">Pricing Packages</a>
+          <a>Living+ Services</a>
+          <a onclick="goTo('affiliate')">Affiliate Program</a>
+        </div>
+        <div class="footer-col">
+          <h5>Company</h5>
+          <a onclick="goTo('myhome')">My Home</a>
+          <a>About StayVerse</a>
+          <a>Contact Us</a>
+          <a>Terms & Conditions</a>
+          <a>Privacy Policy</a>
+        </div>
+      </div>
+      <!-- Affiliate Banner -->
+      <div style="background:rgba(255,255,255,.06);border-radius:var(--r);padding:18px 22px;margin-bottom:28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+        <div>
+          <div style="font-size:11px;color:rgba(255,255,255,.5);font-weight:700;letter-spacing:1px;margin-bottom:4px;">AFFILIATE PROGRAM</div>
+          <div style="font-size:16px;font-weight:700;color:#fff;">แนะนำ StayVerse — รับค่าคอม ทุก Deal ที่ปิดได้</div>
+          <div style="font-size:12px;color:rgba(255,255,255,.5);margin-top:3px;">สมัครฟรี · รับ Link ของแต่ละ Listing · เผยแพร่ได้เลย · ได้ค่าคอมเมื่อปิดดีล</div>
+        </div>
+        <button class="btn bow" onclick="goTo('affiliate')">สมัคร Affiliate →</button>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 StayVerse — Part of ALL Ecosystems · One Scheme Digital Co., Ltd.</span>
+        <span>stayverse.io · stayverse.app · Powered by One Wallet</span>
+      </div>
+    </div>
+  </footer>
+
 </div><!-- /home -->
 
-<!-- ====== DETAIL ====== -->
-<div class="page" id="pg-detail">
-  <div style="background:var(--navy);padding:16px 0;"><div class="wrap"><button class="btn bow bsm" onclick="goTo('home')">← <span data-i18n="back">Back</span></button></div></div>
-  <div class="sec sec-w">
+
+<!-- ====== JUST RENT ====== -->
+<div class="page" id="pg-rent">
+  <div style="background:linear-gradient(135deg,#2E7D32,#1B5E20);padding:40px 0;color:#fff;">
     <div class="wrap">
-      <div class="g2" style="gap:32px;align-items:start;">
-        <div>
-          <div style="height:280px;background:url('images/hero-detail.jpg') center/cover;border-radius:var(--r);margin-bottom:16px;position:relative;overflow:hidden;"><div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,.5));padding:16px;"><div style="font-size:13px;color:#fff;font-weight:700;">Grand Florida Beachfront · Na Jomtien Pattaya</div><div style="font-size:11px;color:rgba(255,255,255,.75);">Building A · Floor 2 · Sea View · EEC Zone</div></div></div>
-          <div style="display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px;"><span class="tag tgr">Available</span><span class="tag tt">Pattaya EEC</span><span class="tag tn">Sea View Extra</span><span class="tag tg">Foreign Quota</span></div>
-          <h1 style="font-size:24px;font-weight:800;color:var(--navy);margin-bottom:4px;">Grand Florida Beachfront — Unit A201</h1>
-          <div style="color:var(--txl);margin-bottom:16px;font-size:14px;">📍 Na Jomtien, Sattahip, Chonburi · 47.27 sqm · Building A, Floor 2 · Sea View Extra</div>
-          <div style="background:var(--grey);border-radius:var(--r);padding:18px;margin-bottom:16px;">
-            <div style="font-size:12px;font-weight:700;color:var(--txl);margin-bottom:12px;text-transform:uppercase;letter-spacing:.5px;" data-i18n="det_terms">Rent-to-Own Terms</div>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
-              <div><div style="font-size:11px;color:var(--txl);" data-i18n="det_mo">Monthly Payment</div><div style="font-size:20px;font-weight:800;color:var(--navy);">฿35,700</div></div>
-              <div><div style="font-size:11px;color:var(--txl);" data-i18n="det_val">Property Value</div><div style="font-size:20px;font-weight:800;color:var(--navy);">฿6.43M</div></div>
-              <div><div style="font-size:11px;color:var(--txl);" data-i18n="det_eq">Equity/Year</div><div style="font-size:20px;font-weight:800;color:var(--green);">+6.7%</div></div>
-              <div><div style="font-size:11px;color:var(--txl);" data-i18n="det_own">Full Ownership</div><div style="font-size:20px;font-weight:800;color:var(--teal);">~15 yrs</div></div>
-            </div>
-          </div>
-          <button class="btn bt blg" style="width:100%;" onclick="goTo('apply')" data-i18n="det_apply">Apply Now — Free</button>
-        </div>
-        <div>
-          <div style="background:#fff;border-radius:var(--r);box-shadow:var(--sh);padding:22px;margin-bottom:16px;">
-            <h3 style="font-size:15px;font-weight:700;color:var(--navy);margin-bottom:14px;" data-i18n="calc_h">Equity Calculator</h3>
-            <div class="fg"><label data-i18n="calc_yr">Years of Payments</label>
-              <input type="range" min="1" max="15" value="5" style="-webkit-appearance:none;height:5px;background:var(--gm);border-radius:3px;border:none;width:100%;" oninput="document.getElementById('calc-yr').textContent=this.value;document.getElementById('calc-pct').textContent=(this.value*2.5).toFixed(1)+'%';document.getElementById('calc-val').textContent='฿'+(this.value*6.67/100*6429000/1000000).toFixed(2)+'M';">
-            </div>
-            <div style="display:flex;gap:12px;text-align:center;margin-bottom:14px;">
-              <div style="flex:1;background:var(--teal-p);border-radius:var(--rs);padding:12px;"><div style="font-size:11px;color:var(--txl);" data-i18n="calc_yrs">Years</div><div id="calc-yr" style="font-size:24px;font-weight:800;color:var(--teal);">5</div></div>
-              <div style="flex:1;background:var(--green-p);border-radius:var(--rs);padding:12px;"><div style="font-size:11px;color:var(--txl);" data-i18n="calc_eq">Equity</div><div id="calc-pct" style="font-size:24px;font-weight:800;color:var(--green);">12.5%</div></div>
-              <div style="flex:1;background:#e8edf5;border-radius:var(--rs);padding:12px;"><div style="font-size:11px;color:var(--txl);" data-i18n="calc_val">Value Built</div><div id="calc-val" style="font-size:18px;font-weight:800;color:var(--navy);">฿300K</div></div>
-            </div>
-          </div>
-          <div style="background:#fff;border-radius:var(--r);box-shadow:var(--sh);padding:22px;">
-            <h3 style="font-size:15px;font-weight:700;color:var(--navy);margin-bottom:12px;" data-i18n="faq_h">Quick Facts</h3>
-            <div style="display:flex;flex-direction:column;gap:9px;font-size:14px;">
-              <div style="display:flex;justify-content:space-between;"><span style="color:var(--txl);" data-i18n="faq_type">Property Type</span><span style="font-weight:600;">Condominium · High Rise</span></div>
-              <div style="display:flex;justify-content:space-between;"><span style="color:var(--txl);" data-i18n="faq_floor">Floor</span><span style="font-weight:600;">2nd (Buildings A–H)</span></div>
-              <div style="display:flex;justify-content:space-between;"><span style="color:var(--txl);" data-i18n="faq_furn">Furnished</span><span style="font-weight:600;" data-i18n="faq_full">Fully Furnished</span></div>
-              <div style="display:flex;justify-content:space-between;"><span style="color:var(--txl);" data-i18n="faq_avail">Available From</span><span style="font-weight:600;">Q3 2026</span></div>
-              <div style="display:flex;justify-content:space-between;"><span style="color:var(--txl);" data-i18n="faq_kyc">KYC Required</span><span class="tag tt" style="font-size:11px;">Digital · 5 min</span></div>
-            </div>
-                  </div>
-          <!-- Amenities -->
-          <div style="background:#fff;border-radius:var(--r);box-shadow:var(--sh);padding:22px;margin-top:16px;">
-            <h3 style="font-size:15px;font-weight:700;color:var(--navy);margin-bottom:14px;">Project Amenities</h3>
-            <div style="display:flex;flex-wrap:wrap;gap:8px;">
-              <span style="background:var(--teal-p);color:var(--teal);border-radius:20px;padding:5px 12px;font-size:12px;font-weight:600;">🌊 Private Beach</span>
-              <span style="background:var(--teal-p);color:var(--teal);border-radius:20px;padding:5px 12px;font-size:12px;font-weight:600;">💦 Water Park</span>
-              <span style="background:var(--teal-p);color:var(--teal);border-radius:20px;padding:5px 12px;font-size:12px;font-weight:600;">🏊 Infinity Pool</span>
-              <span style="background:var(--gold-p);color:var(--gold);border-radius:20px;padding:5px 12px;font-size:12px;font-weight:600;">🍽️ Restaurant</span>
-              <span style="background:var(--gold-p);color:var(--gold);border-radius:20px;padding:5px 12px;font-size:12px;font-weight:600;">🏋️ Fitness</span>
-              <span style="background:#e8edf5;color:var(--navy);border-radius:20px;padding:5px 12px;font-size:12px;font-weight:600;">🎪 Club House</span>
-              <span style="background:#e8edf5;color:var(--navy);border-radius:20px;padding:5px 12px;font-size:12px;font-weight:600;">🏖️ Beach Bar</span>
-              <span style="background:var(--green-p);color:var(--green);border-radius:20px;padding:5px 12px;font-size:12px;font-weight:600;">🔑 Foreign Quota</span>
-            </div>
-          </div>
-          <!-- Interior Photo Gallery -->
-          <div style="background:#fff;border-radius:var(--r);box-shadow:var(--sh);padding:22px;margin-top:16px;">
-            <h3 style="font-size:15px;font-weight:700;color:var(--navy);margin-bottom:14px;">Interior & Facilities</h3>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
-              <img src="images/interior-bedroom.jpg" alt="Bedroom" style="width:100%;height:140px;object-fit:cover;border-radius:10px;">
-              <img src="images/interior-pool.jpg" alt="Indoor Pool" style="width:100%;height:140px;object-fit:cover;border-radius:10px;">
-              <img src="images/amenity-gym.jpg" alt="Fitness" style="width:100%;height:140px;object-fit:cover;border-radius:10px;">
-              <img src="images/amenity-games.jpg" alt="Game Room" style="width:100%;height:140px;object-fit:cover;border-radius:10px;">
-            </div>
-          </div>
-        </div>
+      <div class="tag" style="background:rgba(255,255,255,.15);color:#fff;margin-bottom:12px;">🔑 Just Rent</div>
+      <h1 style="font-size:30px;font-weight:900;margin-bottom:8px;">เช่าห้องแบบเพียวๆ</h1>
+      <p style="opacity:.8;margin-bottom:20px;">ห้องเช่าจากเจ้าของโดยตรง · Instant Booking · ตัดเงินค่าเช่าอัตโนมัติ</p>
+      <div class="sbox">
+        <span style="font-size:18px;">🔍</span>
+        <input type="text" placeholder="ค้นหาโครงการ ทำเล หรือย่านที่ต้องการ...">
+        <div class="sdiv"></div>
+        <select><option>ทุกเมือง</option><option>กรุงเทพฯ</option><option>พัทยา</option><option>ภูเก็ต</option></select>
+        <div class="sdiv"></div>
+        <select><option>ทุกงบ</option><option>ไม่เกิน ฿8K</option><option>฿8K–15K</option><option>฿15K–30K</option><option>฿30K+</option></select>
+        <button class="btn bgreen">ค้นหา</button>
       </div>
     </div>
   </div>
-</div><!-- /detail -->
-
-<!-- ====== APPLY ====== -->
-<div class="page" id="pg-apply">
-  <div style="background:var(--navy);padding:28px 0;color:#fff;"><div class="wrap"><h1 style="font-size:22px;font-weight:800;" data-i18n="app_h">Apply for Rent-to-Own</h1><p style="opacity:.7;margin-top:4px;font-size:14px;" data-i18n="app_sub">Grand Florida A201 · Free application · 5 minutes</p></div></div>
-  <div class="sec"><div class="wrap" style="max-width:580px;">
-    <div style="background:#fff;border-radius:var(--r);box-shadow:var(--sh);padding:28px;">
-      <div style="display:flex;gap:6px;margin-bottom:24px;">
-        <div style="flex:1;height:3px;background:var(--teal);border-radius:2px;"></div>
-        <div style="flex:1;height:3px;background:var(--gm);border-radius:2px;"></div>
-        <div style="flex:1;height:3px;background:var(--gm);border-radius:2px;"></div>
+  <div class="sec"><div class="wrap">
+    <div style="background:#fff;border-radius:var(--r);box-shadow:var(--sh);padding:20px;margin-bottom:28px;">
+      <div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap;">
+        <div style="font-size:28px;">✅</div>
+        <div>
+          <div style="font-size:15px;font-weight:700;color:var(--navy);">ใครก็ลง Just Rent ได้ ไม่ต้องเป็น Developer</div>
+          <div style="font-size:13px;color:var(--txl);margin-top:3px;">เจ้าของห้องรายย่อย · Property Agent · นายหน้า — ลงทะเบียนฟรี เริ่มต้นที่ Package ฿2,900/เดือน</div>
+        </div>
+        <button class="btn bgreen bsm" style="margin-left:auto;" onclick="goTo('listprop')">ลงประกาศ ฿2,900 →</button>
       </div>
-      <h2 style="font-size:18px;font-weight:700;color:var(--navy);margin-bottom:18px;" data-i18n="app_s1">Step 1 — Personal Information</h2>
-      <div class="g2"><div class="fg"><label data-i18n="f_fn">First Name</label><input type="text" placeholder="Somchai"></div><div class="fg"><label data-i18n="f_ln">Last Name</label><input type="text" placeholder="Jaidee"></div></div>
-      <div class="fg"><label data-i18n="f_em">Email</label><input type="email" placeholder="you@email.com"></div>
-      <div class="fg"><label data-i18n="f_ph">Phone</label><input type="tel" placeholder="+66 8X XXX XXXX"></div>
-      <div class="fg"><label data-i18n="f_na">Nationality</label>
-        <select><option data-i18n="n_th">Thai</option><option data-i18n="n_cn">Chinese</option><option data-i18n="n_ru">Russian</option><option data-i18n="n_ot">Other</option></select>
+    </div>
+    <div style="margin-bottom:18px;"><h3 style="font-size:16px;font-weight:700;color:var(--navy);">Instant Booking Available</h3></div>
+    <div class="g3">
+      <div class="pc">
+        <div class="pt" style="background:url('images/card-poolview.jpg') center/cover;position:relative;">
+          <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(6,74,71,.5),transparent);"></div>
+          <div class="pt-badge"><span class="tag tgr">Instant Book</span></div>
+          <div class="pt-save">♡</div>
+        </div>
+        <div class="pb">
+          <div class="pn">Condo Sukhumvit 24 · Pool View</div>
+          <div class="pl">📍 Asok, Bangkok · 1BR · 35 sqm · Fully Furnished</div>
+          <div class="prow"><div class="pprice">฿18,000<span>/mo</span></div><div style="font-size:12px;color:var(--green);font-weight:700;">⚡ Instant Book</div></div>
+          <div class="pleg">Min 3 months · Auto-debit · Pet-friendly · BTS Asok 5 min</div>
+        </div>
+        <div class="pf"><button class="btn bgreen bsm">Book Instantly</button><button class="btn bo bsm">Details</button></div>
       </div>
-      <div class="fg"><label data-i18n="f_in">Monthly Income (THB)</label><input type="number" placeholder="50,000"></div>
-      <button class="btn bt blg" style="width:100%;margin-top:4px;" onclick="goTo('success')" data-i18n="app_next">Next: Verify Identity →</button>
+      <div class="pc">
+        <div class="pt" style="background:url('images/card-seaview.jpg') center/cover;position:relative;">
+          <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(10,74,130,.5),transparent);"></div>
+          <div class="pt-badge"><span class="tag tgr">Instant Book</span><span class="tag tt" style="font-size:11px;">Sea View</span></div>
+          <div class="pt-save">♡</div>
+        </div>
+        <div class="pb">
+          <div class="pn">Na Jomtien Sea View Studio</div>
+          <div class="pl">📍 Pattaya · Studio · 28 sqm · Mountain to Sea View</div>
+          <div class="prow"><div class="pprice">฿12,000<span>/mo</span></div><div style="font-size:12px;color:var(--green);font-weight:700;">⚡ Instant Book</div></div>
+          <div class="pleg">Min 1 month · Auto-debit · Near beach · Parking included</div>
+        </div>
+        <div class="pf"><button class="btn bgreen bsm">Book Instantly</button><button class="btn bo bsm">Details</button></div>
+      </div>
+      <div class="pc">
+        <div class="pt" style="background:url('images/card-gardenview.jpg') center/cover;position:relative;">
+          <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(26,74,30,.45),transparent);"></div>
+          <div class="pt-badge"><span class="tag tgr">Instant Book</span></div>
+          <div class="pt-save">♡</div>
+        </div>
+        <div class="pb">
+          <div class="pn">Nimman Residence Chiang Mai</div>
+          <div class="pl">📍 Nimmanhaemin, Chiang Mai · 1BR · 42 sqm · Garden View</div>
+          <div class="prow"><div class="pprice">฿14,500<span>/mo</span></div><div style="font-size:12px;color:var(--green);font-weight:700;">⚡ Instant Book</div></div>
+          <div class="pleg">Min 3 months · Auto-debit · WFH Ready · Café district</div>
+        </div>
+        <div class="pf"><button class="btn bgreen bsm">Book Instantly</button><button class="btn bo bsm">Details</button></div>
+      </div>
+    </div>
+    <div style="margin-top:24px;background:var(--green-p);border-radius:var(--r);padding:18px 22px;">
+      <div style="font-size:13px;font-weight:700;color:var(--green);margin-bottom:6px;">⚡ ระบบ Just Rent — ข้อดีของผู้เช่า</div>
+      <div style="display:flex;gap:20px;flex-wrap:wrap;font-size:13px;color:var(--tx);">
+        <span>✓ Instant Booking — จองและเข้าอยู่ได้เลย</span>
+        <span>✓ Auto-debit รายเดือน — ไม่ต้องโอนเอง</span>
+        <span>✓ Digital Contract — ไม่ต้องมาเซ็นเอกสาร</span>
+        <span>✓ KYC 5 นาที — ผ่าน All ID</span>
+      </div>
     </div>
   </div></div>
-</div><!-- /apply -->
+</div><!-- /rent -->
 
-<!-- ====== SUCCESS ====== -->
-<div class="page" id="pg-success">
-  <div style="min-height:80vh;display:flex;align-items:center;justify-content:center;padding:40px 20px;">
-    <div style="text-align:center;max-width:440px;">
-      <div style="font-size:60px;margin-bottom:16px;">🎉</div>
-      <h1 style="font-size:26px;font-weight:800;color:var(--navy);margin-bottom:10px;" data-i18n="suc_h">Application Submitted!</h1>
-      <p style="color:var(--txl);line-height:1.7;margin-bottom:24px;" data-i18n="suc_p">Your details are under review. We'll verify your identity and contact you within 24 hours.</p>
-      <div style="background:#fff;border-radius:var(--r);box-shadow:var(--sh);padding:18px;margin-bottom:20px;text-align:left;">
-        <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--gm);"><span style="color:var(--txl);font-size:14px;" data-i18n="suc_prop">Property</span><span style="font-weight:700;font-size:14px;">Grand Florida A201 · Pattaya</span></div>
-        <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--gm);"><span style="color:var(--txl);font-size:14px;" data-i18n="suc_st">Status</span><span class="tag tg" data-i18n="suc_rv">Under Review</span></div>
-        <div style="display:flex;justify-content:space-between;padding:8px 0;"><span style="color:var(--txl);font-size:14px;" data-i18n="suc_ref">Reference</span><span style="font-weight:700;color:var(--teal);font-size:14px;">#STV-2026-001</span></div>
-      </div>
-      <button class="btn bn blg" onclick="goTo('tenant')" data-i18n="suc_dash">Go to My Dashboard →</button>
+<!-- ====== INVESTOR'S CHOICE ====== -->
+<div class="page" id="pg-investor">
+  <div style="background:linear-gradient(135deg,#b71c1c,#c0392b);padding:40px 0;color:#fff;">
+    <div class="wrap">
+      <div class="tag" style="background:rgba(255,255,255,.15);color:#fff;margin-bottom:12px;">🔥 Investor's Choice · Fire Sale Unit</div>
+      <h1 style="font-size:30px;font-weight:900;margin-bottom:8px;">ห้องพร้อมผู้เช่า · ราคาต่ำกว่าตลาด</h1>
+      <p style="opacity:.8;">เจ้าของต้องการสภาพคล่อง · ราคาเจรจาได้ · พร้อมทำสัญญาโอนทันที</p>
     </div>
   </div>
-</div><!-- /success -->
-
-<!-- ====== TENANT DASH ====== -->
-<div class="page" id="pg-tenant">
-  <div class="dh"><div class="wrap"><h1 data-i18n="td_h">My StayVerse Home</h1><p data-i18n="td_s">Grand Florida A201 · Sea View · Pattaya</p></div></div>
   <div class="sec"><div class="wrap">
-    <div class="g4" style="margin-bottom:28px;">
-      <div class="mc"><div class="mv">8.5%</div><div class="ml" data-i18n="td_eq">My Equity</div><div class="mtr up">▲ +2.5% this year</div></div>
-      <div class="mc"><div class="mv">38</div><div class="ml" data-i18n="td_pm">Payments Made</div><div class="mtr" style="color:var(--gd);">of ~96 total</div></div>
-      <div class="mc"><div class="mv">฿186K</div><div class="ml" data-i18n="td_ev">Equity Value</div><div class="mtr up">▲ growing monthly</div></div>
-      <div class="mc"><div class="mv">4.5 yrs</div><div class="ml" data-i18n="td_re">Remaining</div><div class="mtr" style="color:var(--gd);">to full ownership</div></div>
-    </div>
-    <div class="g2">
-      <div style="background:#fff;border-radius:var(--r);box-shadow:var(--sh);padding:22px;">
-        <h3 style="font-size:15px;font-weight:700;color:var(--navy);margin-bottom:18px;" data-i18n="td_prog">Ownership Progress</h3>
-        <div class="ring">
-          <svg width="110" height="110" viewBox="0 0 110 110"><circle cx="55" cy="55" r="44" fill="none" stroke="#dde1e9" stroke-width="10"/><circle cx="55" cy="55" r="44" fill="none" stroke="#0E7C7B" stroke-width="10" stroke-dasharray="23.4 253.3" stroke-linecap="round"/></svg>
-          <div class="rinn"><div class="rpct">8.5%</div><div class="rlbl" data-i18n="td_own">Owned</div></div>
+    <div style="background:#fff;border-radius:var(--r);box-shadow:var(--sh);padding:20px;margin-bottom:28px;">
+      <div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap;">
+        <div style="font-size:28px;">💡</div>
+        <div>
+          <div style="font-size:15px;font-weight:700;color:var(--navy);">Investor's Choice คืออะไร?</div>
+          <div style="font-size:13px;color:var(--txl);margin-top:3px;">ยูนิตที่เจ้าของ Rent-to-Own ต้องการขายออก พร้อม Active Tenant อยู่ → นักลงทุนซื้อได้ในราคา below market และรับ cashflow ทันที</div>
         </div>
-        <div style="height:6px;background:var(--gm);border-radius:3px;overflow:hidden;margin-top:18px;"><div style="width:8.5%;height:100%;background:var(--teal);border-radius:3px;"></div></div>
-        <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--txl);margin-top:5px;"><span>0%</span><span>8.5%</span><span>100%</span></div>
       </div>
-      <div style="background:#fff;border-radius:var(--r);box-shadow:var(--sh);padding:22px;">
-        <h3 style="font-size:15px;font-weight:700;color:var(--navy);margin-bottom:14px;" data-i18n="td_hist">Payment History</h3>
-        <div style="display:flex;flex-direction:column;gap:8px;">
-          <div style="display:flex;justify-content:space-between;align-items:center;padding:10px;background:var(--green-p);border-radius:var(--rs);"><div><div style="font-weight:600;font-size:14px;" data-i18n="td_m3">March 2026</div><div style="font-size:12px;color:var(--txl);">All Wallet</div></div><div style="font-weight:700;color:var(--green);">฿35,700 ✓</div></div>
-          <div style="display:flex;justify-content:space-between;align-items:center;padding:10px;background:var(--green-p);border-radius:var(--rs);"><div><div style="font-weight:600;font-size:14px;" data-i18n="td_m2">February 2026</div><div style="font-size:12px;color:var(--txl);">All Wallet</div></div><div style="font-weight:700;color:var(--green);">฿35,700 ✓</div></div>
-          <div style="display:flex;justify-content:space-between;align-items:center;padding:10px;background:var(--green-p);border-radius:var(--rs);"><div><div style="font-weight:600;font-size:14px;" data-i18n="td_m1">January 2026</div><div style="font-size:12px;color:var(--txl);">All Wallet</div></div><div style="font-weight:700;color:var(--green);">฿35,700 ✓</div></div>
+    </div>
+    <div class="g3">
+      <div class="pc">
+        <div class="pt" style="background:url('images/card-seaview-extra.jpg') center/cover;position:relative;">
+          <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(180,0,0,.4),transparent);"></div>
+          <div class="pt-badge"><span class="tag tr">🔥 Fire Sale</span><span class="tag tg">Tenant Inside</span></div>
+          <div class="pt-save">♡</div>
         </div>
+        <div class="pb">
+          <div class="pn">Grand Florida A201 — With Tenant</div>
+          <div class="pl">📍 Pattaya · Sea View Extra · 47.27 sqm · 8.5% Equity Built</div>
+          <div class="prow"><div class="pprice">฿5,850,000</div><div style="font-size:11px;background:var(--red-p);color:var(--red);padding:3px 8px;border-radius:20px;font-weight:700;">−9% vs market</div></div>
+          <div class="pbar"><div class="pbf" style="width:8.5%;background:var(--red);"></div></div>
+          <div class="pleg">Cashflow ฿35,700/mo · Tenant contract 4 yrs remaining · ROI 7.3%/yr</div>
+        </div>
+        <div class="pf"><button class="btn br bsm">ซื้อพร้อมผู้เช่า</button><button class="btn bo bsm">รายละเอียด</button></div>
+      </div>
+      <div class="pc">
+        <div class="pt" style="background:url('images/card-duplex.jpg') center/cover;position:relative;">
+          <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(180,0,0,.4),transparent);"></div>
+          <div class="pt-badge"><span class="tag tr">🔥 Fire Sale</span><span class="tag tg">Tenant Inside</span></div>
+          <div class="pt-save">♡</div>
+        </div>
+        <div class="pb">
+          <div class="pn">Grand Florida Duplex A603</div>
+          <div class="pl">📍 Pattaya · Sea View Duplex · 72.72 sqm · 12% Equity Built</div>
+          <div class="prow"><div class="pprice">฿11,540,000</div><div style="font-size:11px;background:var(--red-p);color:var(--red);padding:3px 8px;border-radius:20px;font-weight:700;">−12% vs market</div></div>
+          <div class="pbar"><div class="pbf" style="width:12%;background:var(--red);"></div></div>
+          <div class="pleg">Cashflow ฿72,800/mo · Tenant contract 3 yrs remaining · ROI 7.6%/yr</div>
+        </div>
+        <div class="pf"><button class="btn br bsm">ซื้อพร้อมผู้เช่า</button><button class="btn bo bsm">รายละเอียด</button></div>
+      </div>
+      <div class="pc">
+        <div class="pt" style="background:url('images/card-poolview.jpg') center/cover;position:relative;">
+          <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(180,0,0,.4),transparent);"></div>
+          <div class="pt-badge"><span class="tag tr">🔥 Fire Sale</span></div>
+          <div class="pt-save">♡</div>
+        </div>
+        <div class="pb">
+          <div class="pn">Supalai Icon Sathorn 24F</div>
+          <div class="pl">📍 Bangkok · Pool View · 42 sqm · 30% Equity Built</div>
+          <div class="prow"><div class="pprice">฿6,390,500</div><div style="font-size:11px;background:var(--red-p);color:var(--red);padding:3px 8px;border-radius:20px;font-weight:700;">−39% vs market</div></div>
+          <div class="pbar"><div class="pbf" style="width:30%;background:var(--red);"></div></div>
+          <div class="pleg">Market value ฿10,568,500 · Cashflow ฿65,000/mo · Tenant contract 3 yrs</div>
+        </div>
+        <div class="pf"><button class="btn br bsm">ซื้อพร้อมผู้เช่า</button><button class="btn bo bsm">รายละเอียด</button></div>
       </div>
     </div>
   </div></div>
-</div><!-- /tenant -->
+</div><!-- /investor -->
 
-<!-- ====== DEVELOPER DASH ====== -->
-<div class="page" id="pg-dev">
-  <div class="dh" style="background:linear-gradient(135deg,#7c4f00,#C9931A);"><div class="wrap"><h1 data-i18n="dd_h">Developer Portal</h1><p data-i18n="dd_s">Manage your listings and track monthly income</p></div></div>
-  <div class="sec"><div class="wrap">
-    <div class="g4" style="margin-bottom:28px;">
-      <div class="mc"><div class="mv">3</div><div class="ml" data-i18n="dd_pr">Active Listings</div><div class="mtr up">▲ +1 this month</div></div>
-      <div class="mc"><div class="mv">฿89.7K</div><div class="ml" data-i18n="dd_rv">Monthly Income</div><div class="mtr up">▲ vs last month</div></div>
-      <div class="mc"><div class="mv">5</div><div class="ml" data-i18n="dd_tn">Active Tenants</div><div class="mtr" style="color:var(--gd);">0 vacancies</div></div>
-      <div class="mc"><div class="mv">100%</div><div class="ml" data-i18n="dd_occ">Occupancy Rate</div><div class="mtr up">▲ Full</div></div>
+
+<!-- ═══════════════════════════════════════════════════════ DETAIL PAGE -->
+<div id="pg-detail" class="pg" style="display:none">
+  <div style="max-width:1100px;margin:0 auto;padding:20px 16px 60px">
+
+    <!-- Breadcrumb -->
+    <div style="font-size:12px;color:var(--muted);margin-bottom:16px">
+      <span onclick="goTo('home')" style="cursor:pointer;color:var(--navy)">Home</span> ›
+      <span onclick="goTo('investor')" style="cursor:pointer;color:var(--navy)">Investor's Choice</span> ›
+      <span>Supalai Icon Sathorn</span>
     </div>
-    <div class="g2">
-      <div style="background:#fff;border-radius:var(--r);box-shadow:var(--sh);padding:22px;">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">
-          <h3 style="font-size:15px;font-weight:700;color:var(--navy);" data-i18n="dd_lst">My Properties</h3>
-          <button class="btn bt bsm" data-i18n="dd_add">+ Add Listing</button>
+
+    <div style="display:grid;grid-template-columns:1fr 400px;gap:32px;align-items:start" class="detail-grid">
+
+      <!-- LEFT COLUMN -->
+      <div>
+        <!-- Image gallery strip -->
+        <div style="position:relative;border-radius:16px;overflow:hidden;height:320px;background:#ddd;margin-bottom:12px">
+          <div style="width:100%;height:100%;background:linear-gradient(135deg,#1B3A5C 0%,#2E6B9E 60%,#006B6B 100%);display:flex;align-items:center;justify-content:center;color:#fff;font-size:20px;font-weight:700">
+            📸 Supalai Icon Sathorn — Gallery
+          </div>
+          <div style="position:absolute;top:12px;left:12px;display:flex;gap:6px;flex-wrap:wrap">
+            <span class="tag" style="background:var(--red);color:#fff;">🔥 Fire Sale</span>
+            <span class="tag" style="background:#B8860B;color:#fff;">★ Investor Pick</span>
+          </div>
+          <div style="position:absolute;bottom:12px;right:12px;display:flex;gap:6px">
+            <button class="btn bo bsm">📷 12 Photos</button>
+            <button class="btn bo bsm">▶ VDO</button>
+          </div>
         </div>
-        <div style="display:flex;flex-direction:column;gap:9px;">
-          <div style="display:flex;justify-content:space-between;align-items:center;padding:11px;background:var(--grey);border-radius:var(--rs);"><div><div style="font-weight:700;font-size:14px;">Grand Florida A201 · Sea View Extra</div><div style="font-size:12px;color:var(--txl);">Pattaya · 1BR · 47.27 sqm</div></div><div style="text-align:right;"><div style="font-weight:700;color:var(--green);font-size:14px;">฿35,700/mo</div><span class="tag tgr" style="font-size:11px;" data-i18n="dd_occ2">Occupied</span></div></div>
-          <div style="display:flex;justify-content:space-between;align-items:center;padding:11px;background:var(--grey);border-radius:var(--rs);"><div><div style="font-weight:700;font-size:14px;">Grand Florida B202 · Sea View</div><div style="font-size:12px;color:var(--txl);">Pattaya · 1BR · 36.44 sqm</div></div><div style="text-align:right;"><div style="font-weight:700;color:var(--green);font-size:14px;">฿28,500/mo</div><span class="tag tgr" style="font-size:11px;" data-i18n="dd_occ2">Occupied</span></div></div>
-          <div style="display:flex;justify-content:space-between;align-items:center;padding:11px;background:var(--grey);border-radius:var(--rs);"><div><div style="font-weight:700;font-size:14px;">Grand Florida H201 · Garden View</div><div style="font-size:12px;color:var(--txl);">Pattaya · 1BR · 38.07 sqm</div></div><div style="text-align:right;"><div style="font-weight:700;color:var(--teal);font-size:14px;">฿25,500/mo</div><span class="tag tg" style="font-size:11px;" data-i18n="dd_av2">Seeking Tenant</span></div></div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:24px">
+          <div style="height:72px;background:linear-gradient(135deg,#E8F0F8,#ccd9e8);border-radius:8px"></div>
+          <div style="height:72px;background:linear-gradient(135deg,#E0F2F1,#b2dfdb);border-radius:8px"></div>
+          <div style="height:72px;background:linear-gradient(135deg,#FFF8E1,#ffe082);border-radius:8px"></div>
+          <div style="height:72px;background:linear-gradient(135deg,#E8F5E9,#c8e6c9);border-radius:8px"></div>
+        </div>
+
+        <!-- Project Info -->
+        <div style="background:#fff;border:1px solid #e8e8e8;border-radius:16px;padding:24px;margin-bottom:20px">
+          <div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:16px">
+            <div>
+              <h1 style="font-size:24px;font-weight:800;color:var(--navy);margin:0 0 4px">Supalai Icon Sathorn</h1>
+              <div style="color:var(--muted);font-size:13px">📍 Sathorn, Bangkok &nbsp;·&nbsp; BTS Chong Nonsi 5 min &nbsp;·&nbsp; Floor 24</div>
+            </div>
+            <div style="text-align:right">
+              <div style="font-size:12px;color:var(--muted)">Rental Price</div>
+              <div style="font-size:26px;font-weight:800;color:var(--teal)">฿65,000<span style="font-size:14px;font-weight:400">/mo</span></div>
+            </div>
+          </div>
+
+          <!-- Key stats bar -->
+          <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;padding:16px 0;border-top:1px solid #f0f0f0;border-bottom:1px solid #f0f0f0;margin-bottom:16px">
+            <div style="text-align:center"><div style="font-size:18px;font-weight:800;color:var(--navy)">1</div><div style="font-size:11px;color:var(--muted)">Bedroom</div></div>
+            <div style="text-align:center"><div style="font-size:18px;font-weight:800;color:var(--navy)">1</div><div style="font-size:11px;color:var(--muted)">Bathroom</div></div>
+            <div style="text-align:center"><div style="font-size:18px;font-weight:800;color:var(--navy)">42</div><div style="font-size:11px;color:var(--muted)">sqm</div></div>
+            <div style="text-align:center"><div style="font-size:18px;font-weight:800;color:var(--teal)">3yr</div><div style="font-size:11px;color:var(--muted)">Contract</div></div>
+            <div style="text-align:center"><div style="font-size:18px;font-weight:800;color:var(--green)">8.48%</div><div style="font-size:11px;color:var(--muted)">Equity/yr</div></div>
+          </div>
+
+          <!-- Description -->
+          <p style="color:#444;font-size:14px;line-height:1.7;margin:0 0 12px">Supalai Icon Sathorn is a premium high-rise condominium ideally located in the heart of Bangkok's CBD. This 24th floor unit offers breathtaking city views, fully furnished with high-end appliances. The project features world-class amenities including infinity pool, sky lounge, and 24-hr concierge.</p>
+          <p style="color:#444;font-size:14px;line-height:1.7;margin:0">โครงการ Supalai Icon Sathorn ตั้งอยู่ใจกลาง CBD ของกรุงเทพฯ ห้องชั้น 24 วิวเมือง พร้อมเฟอร์นิเจอร์ครบครัน เหมาะสำหรับนักลงทุนที่ต้องการ passive income พร้อมผู้เช่าอยู่แล้ว ไม่ต้องหาผู้เช่าใหม่</p>
+        </div>
+
+        <!-- Amenities -->
+        <div style="background:#fff;border:1px solid #e8e8e8;border-radius:16px;padding:24px;margin-bottom:20px">
+          <h3 style="font-size:16px;font-weight:700;color:var(--navy);margin:0 0 16px">สิ่งอำนวยความสะดวก</h3>
+          <div style="display:flex;flex-wrap:wrap;gap:10px">
+            <span class="tag">♾ Infinity Pool</span><span class="tag">🏋 Fitness 24hr</span><span class="tag">🏛 Sky Lounge</span>
+            <span class="tag">🔒 24hr Security</span><span class="tag">🚗 Parking 1 slot</span><span class="tag">📶 Fiber Internet</span>
+            <span class="tag">🛋 Fully Furnished</span><span class="tag">❄ A/C x3</span><span class="tag">🍽 Kitchen Built-in</span>
+            <span class="tag">🌆 City View</span><span class="tag">🏥 BNH 8 min</span><span class="tag">🛒 Tops 3 min</span>
+          </div>
+        </div>
+
+        <!-- Financials for investors -->
+        <div style="background:var(--red-p);border:1px solid #fcc;border-radius:16px;padding:24px;margin-bottom:20px">
+          <h3 style="font-size:16px;font-weight:700;color:var(--red);margin:0 0 14px">📊 ข้อมูลสำหรับนักลงทุน</h3>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+            <div style="background:#fff;border-radius:10px;padding:14px;text-align:center">
+              <div style="font-size:20px;font-weight:800;color:var(--red)">฿9,190,000</div>
+              <div style="font-size:12px;color:var(--muted)">ราคาขาย (Fire Sale)</div>
+            </div>
+            <div style="background:#fff;border-radius:10px;padding:14px;text-align:center">
+              <div style="font-size:20px;font-weight:800;color:var(--navy)">฿10,568,500</div>
+              <div style="font-size:12px;color:var(--muted)">Market Value (est.)</div>
+            </div>
+            <div style="background:#fff;border-radius:10px;padding:14px;text-align:center">
+              <div style="font-size:20px;font-weight:800;color:var(--green)">฿780,000</div>
+              <div style="font-size:12px;color:var(--muted)">Cashflow/yr (rental)</div>
+            </div>
+            <div style="background:#fff;border-radius:10px;padding:14px;text-align:center">
+              <div style="font-size:20px;font-weight:800;color:var(--gold)">3 yrs</div>
+              <div style="font-size:12px;color:var(--muted)">Existing Tenant Contract</div>
+            </div>
+          </div>
+        </div>
+      </div><!-- /left column -->
+
+      <!-- RIGHT COLUMN: RTO Calculator -->
+      <div style="position:sticky;top:20px">
+        <div class="calc-box">
+          <div style="font-size:16px;font-weight:800;color:var(--navy);margin-bottom:4px">🧮 Rent-to-Own Calculator</div>
+          <div style="font-size:12px;color:var(--muted);margin-bottom:20px">คำนวณ equity ที่คุณจะได้รับ</div>
+
+          <!-- Sale Price display -->
+          <div style="background:var(--navy-p);border-radius:10px;padding:12px;margin-bottom:16px;text-align:center">
+            <div style="font-size:12px;color:var(--muted)">Sale Price</div>
+            <div style="font-size:22px;font-weight:800;color:var(--navy)">฿9,190,000</div>
+          </div>
+
+          <!-- Down Payment Slider -->
+          <div style="margin-bottom:16px">
+            <div style="display:flex;justify-content:space-between;margin-bottom:6px">
+              <label style="font-size:13px;font-weight:600;color:var(--navy)">Down Payment</label>
+              <span id="downPct" style="font-size:13px;font-weight:700;color:var(--teal)">5% = ฿459,500</span>
+            </div>
+            <input type="range" id="slDown" min="5" max="50" value="5" step="1" oninput="calcRTO()" style="width:100%;accent-color:var(--teal)">
+            <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-top:4px"><span>5%</span><span>50%</span></div>
+          </div>
+
+          <!-- Monthly Rent Slider -->
+          <div style="margin-bottom:16px">
+            <div style="display:flex;justify-content:space-between;margin-bottom:6px">
+              <label style="font-size:13px;font-weight:600;color:var(--navy)">Monthly Rent</label>
+              <span id="rentVal" style="font-size:13px;font-weight:700;color:var(--teal)">฿65,000/mo</span>
+            </div>
+            <input type="range" id="slRent" min="55000" max="85000" value="65000" step="1000" oninput="calcRTO()" style="width:100%;accent-color:var(--teal)">
+            <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-top:4px"><span>฿55K</span><span>฿85K</span></div>
+          </div>
+
+          <!-- Duration Buttons -->
+          <div style="margin-bottom:20px">
+            <div style="font-size:13px;font-weight:600;color:var(--navy);margin-bottom:8px">Contract Duration</div>
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px">
+              <button class="dur-btn" id="dur1" onclick="setDur(1)">1 Year</button>
+              <button class="dur-btn active" id="dur3" onclick="setDur(3)">3 Years</button>
+              <button class="dur-btn" id="dur5" onclick="setDur(5)">5 Years</button>
+            </div>
+          </div>
+
+          <!-- Results Grid -->
+          <div class="result-grid" id="rtoResults">
+            <div class="result-cell">
+              <div class="rc-label">Total Rent Paid</div>
+              <div class="rc-val" id="r-totalrent">฿2,340,000</div>
+            </div>
+            <div class="result-cell">
+              <div class="rc-label">Down Payment</div>
+              <div class="rc-val" id="r-down">฿459,500</div>
+            </div>
+            <div class="result-cell" style="background:var(--teal-p)">
+              <div class="rc-label" style="color:var(--teal)">Equity Earned</div>
+              <div class="rc-val" style="color:var(--teal)" id="r-equity">30.46%</div>
+            </div>
+            <div class="result-cell" style="background:var(--green-p)">
+              <div class="rc-label" style="color:var(--green)">Buy Now Price</div>
+              <div class="rc-val" style="color:var(--green)" id="r-buynow">฿6,390,500</div>
+            </div>
+            <div class="result-cell">
+              <div class="rc-label">Market Est. Price</div>
+              <div class="rc-val" id="r-market">฿10,568,500</div>
+            </div>
+            <div class="result-cell" style="background:var(--gold-p)">
+              <div class="rc-label" style="color:var(--gold)">Your Savings</div>
+              <div class="rc-val" style="color:var(--gold)" id="r-savings">฿4,178,000</div>
+            </div>
+          </div>
+
+          <!-- Monthly summary -->
+          <div style="background:var(--navy-p);border-radius:10px;padding:14px;margin:16px 0;font-size:13px">
+            <div style="display:flex;justify-content:space-between;margin-bottom:4px">
+              <span style="color:var(--muted)">Monthly rent</span>
+              <span id="r-monthly" style="font-weight:700;color:var(--navy)">฿65,000</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;margin-bottom:4px">
+              <span style="color:var(--muted)">Total commitment</span>
+              <span id="r-total" style="font-weight:700;color:var(--navy)">฿2,799,500</span>
+            </div>
+            <div style="display:flex;justify-content:space-between">
+              <span style="color:var(--muted)">Equity rate/yr</span>
+              <span style="font-weight:700;color:var(--teal)">8.48%</span>
+            </div>
+          </div>
+
+          <!-- CTAs -->
+          <div style="display:grid;gap:10px">
+            <button class="btn btn-green" onclick="goTo('home')" style="width:100%;padding:14px;font-size:15px;font-weight:700;border-radius:12px">
+              🏠 สนใจเช่าห้องนี้
+            </button>
+            <button class="btn btn-red" onclick="goTo('investor')" style="width:100%;padding:14px;font-size:15px;font-weight:700;border-radius:12px">
+              💼 สนใจซื้อห้องนี้ พร้อมผู้เช่า
+            </button>
+          </div>
+
+          <div style="text-align:center;font-size:11px;color:var(--muted);margin-top:12px">
+            ค่าคำนวณเป็นการประมาณการเท่านั้น · ราคาจริงขึ้นอยู่กับเงื่อนไขสัญญา
+          </div>
+        </div><!-- /calc-box -->
+      </div><!-- /right column -->
+    </div><!-- /detail-grid -->
+
+    <!-- Below listing: 3 thumbnail sections -->
+    <div style="margin-top:40px;display:grid;grid-template-columns:repeat(3,1fr);gap:24px" class="thumb-sections">
+
+      <!-- Developer's other listings -->
+      <div>
+        <h3 style="font-size:16px;font-weight:700;color:var(--navy);margin:0 0 12px">🏢 จาก Supalai (Developer)</h3>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="display:flex;gap:10px;align-items:center;background:#fff;border:1px solid #eee;border-radius:10px;padding:10px;cursor:pointer">
+            <div style="width:64px;height:48px;border-radius:8px;background:linear-gradient(135deg,#1B3A5C,#2E6B9E);flex-shrink:0"></div>
+            <div><div style="font-size:13px;font-weight:600">Supalai Oriental</div><div style="font-size:11px;color:var(--muted)">฿58,000/mo · 2BR · 65 sqm</div></div>
+          </div>
+          <div style="display:flex;gap:10px;align-items:center;background:#fff;border:1px solid #eee;border-radius:10px;padding:10px;cursor:pointer">
+            <div style="width:64px;height:48px;border-radius:8px;background:linear-gradient(135deg,#006B6B,#4db6ac);flex-shrink:0"></div>
+            <div><div style="font-size:13px;font-weight:600">Supalai Prime CBD</div><div style="font-size:11px;color:var(--muted)">฿45,000/mo · 1BR · 35 sqm</div></div>
+          </div>
+          <div style="display:flex;gap:10px;align-items:center;background:#fff;border:1px solid #eee;border-radius:10px;padding:10px;cursor:pointer">
+            <div style="width:64px;height:48px;border-radius:8px;background:linear-gradient(135deg,#B8860B,#ffd54f);flex-shrink:0"></div>
+            <div><div style="font-size:13px;font-weight:600">Supalai Casa Ville</div><div style="font-size:11px;color:var(--muted)">฿35,000/mo · 1BR · 30 sqm</div></div>
+          </div>
         </div>
       </div>
-      <div style="background:#fff;border-radius:var(--r);box-shadow:var(--sh);padding:22px;">
-        <h3 style="font-size:15px;font-weight:700;color:var(--navy);margin-bottom:14px;" data-i18n="dd_inc">Income Summary</h3>
-        <div style="display:flex;flex-direction:column;gap:0;">
-          <div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--gm);"><span style="color:var(--txl);font-size:14px;" data-i18n="dd_gr">Gross Collected</span><span style="font-weight:700;">฿89,700</span></div>
-          <div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--gm);"><span style="color:var(--txl);font-size:14px;" data-i18n="dd_fe">Platform & Processing</span><span style="font-weight:700;color:var(--red);">−฿3,239</span></div>
-          <div style="display:flex;justify-content:space-between;padding:12px 0;"><span style="font-weight:700;font-size:15px;" data-i18n="dd_ne">Net Income</span><span style="font-size:22px;font-weight:800;color:var(--green);">฿86,461</span></div>
+
+      <!-- Related by area/type -->
+      <div>
+        <h3 style="font-size:16px;font-weight:700;color:var(--navy);margin:0 0 12px">📍 ใกล้เคียง Sathorn</h3>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="display:flex;gap:10px;align-items:center;background:#fff;border:1px solid #eee;border-radius:10px;padding:10px;cursor:pointer">
+            <div style="width:64px;height:48px;border-radius:8px;background:linear-gradient(135deg,#C62828,#ef9a9a);flex-shrink:0"></div>
+            <div><div style="font-size:13px;font-weight:600">The Ritz Sathorn</div><div style="font-size:11px;color:var(--muted)">฿72,000/mo · 1BR · 48 sqm</div></div>
+          </div>
+          <div style="display:flex;gap:10px;align-items:center;background:#fff;border:1px solid #eee;border-radius:10px;padding:10px;cursor:pointer">
+            <div style="width:64px;height:48px;border-radius:8px;background:linear-gradient(135deg,#E65100,#ffcc80);flex-shrink:0"></div>
+            <div><div style="font-size:13px;font-weight:600">Rhythm Sathorn</div><div style="font-size:11px;color:var(--muted)">฿60,000/mo · 1BR · 40 sqm</div></div>
+          </div>
+          <div style="display:flex;gap:10px;align-items:center;background:#fff;border:1px solid #eee;border-radius:10px;padding:10px;cursor:pointer">
+            <div style="width:64px;height:48px;border-radius:8px;background:linear-gradient(135deg,#2E7D32,#a5d6a7);flex-shrink:0"></div>
+            <div><div style="font-size:13px;font-weight:600">Lumpini Suite Sathorn</div><div style="font-size:11px;color:var(--muted)">฿42,000/mo · 1BR · 33 sqm</div></div>
+          </div>
         </div>
-        <div style="background:var(--green-p);border-radius:var(--rs);padding:12px;margin-top:8px;text-align:center;">
-          <div style="font-size:12px;color:var(--green);font-weight:600;" data-i18n="dd_nb">Next payout:</div>
-          <div style="font-size:18px;font-weight:800;color:var(--green);">April 5, 2026</div>
+      </div>
+
+      <!-- Articles / VDO about project -->
+      <div>
+        <h3 style="font-size:16px;font-weight:700;color:var(--navy);margin:0 0 12px">📰 บทความ & VDO เกี่ยวกับโครงการ</h3>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="background:#fff;border:1px solid #eee;border-radius:10px;padding:12px;cursor:pointer">
+            <div style="font-size:12px;color:var(--red);font-weight:600;margin-bottom:4px">▶ VDO Review</div>
+            <div style="font-size:13px;font-weight:600;margin-bottom:2px">รีวิว Supalai Icon Sathorn ห้องจริง ชั้น 24</div>
+            <div style="font-size:11px;color:var(--muted)">Propholic.com · 15 min</div>
+          </div>
+          <div style="background:#fff;border:1px solid #eee;border-radius:10px;padding:12px;cursor:pointer">
+            <div style="font-size:12px;color:var(--teal);font-weight:600;margin-bottom:4px">📖 Living Guide</div>
+            <div style="font-size:13px;font-weight:600;margin-bottom:2px">ซื้อพร้อมผู้เช่า คุ้มไหม? ต้องรู้อะไรบ้าง</div>
+            <div style="font-size:11px;color:var(--muted)">StayVerse Guide · 8 min read</div>
+          </div>
+          <div style="background:#fff;border:1px solid #eee;border-radius:10px;padding:12px;cursor:pointer">
+            <div style="font-size:12px;color:var(--gold);font-weight:600;margin-bottom:4px">★ Sponsored</div>
+            <div style="font-size:13px;font-weight:600;margin-bottom:2px">Sathorn CBD: ทำเลทองของนักลงทุนอสังหาฯ</div>
+            <div style="font-size:11px;color:var(--muted)">Supalai PCL · 5 min read</div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /thumb-sections -->
+  </div>
+</div><!-- /pg-detail -->
+
+<!-- ═══════════════════════════════════════════════════════ MY HOME PAGE -->
+<div id="pg-myhome" class="pg" style="display:none">
+  <div style="max-width:480px;margin:60px auto;padding:0 16px 80px">
+    <div style="text-align:center;margin-bottom:32px">
+      <div style="font-size:48px;margin-bottom:12px">🏠</div>
+      <h1 style="font-size:28px;font-weight:800;color:var(--navy);margin:0 0 8px">My Home</h1>
+      <p style="color:var(--muted);font-size:14px;margin:0">ติดตาม credit score · ดูความคืบหน้า equity · บริหาร property ของคุณ</p>
+    </div>
+
+    <!-- Feature teasers -->
+    <div style="display:grid;gap:12px;margin-bottom:32px">
+      <div style="background:#fff;border:1px solid #e8e8e8;border-radius:14px;padding:18px;display:flex;gap:14px;align-items:center">
+        <div style="font-size:28px;flex-shrink:0">📈</div>
+        <div>
+          <div style="font-weight:700;color:var(--navy);margin-bottom:2px">Build Your Credit Score</div>
+          <div style="font-size:13px;color:var(--muted)">ทุกๆ การจ่ายเช่าตรงเวลา = credit score ที่สูงขึ้น พร้อมสำหรับการขอสินเชื่อในอนาคต</div>
+        </div>
+      </div>
+      <div style="background:#fff;border:1px solid #e8e8e8;border-radius:14px;padding:18px;display:flex;gap:14px;align-items:center">
+        <div style="font-size:28px;flex-shrink:0">🏡</div>
+        <div>
+          <div style="font-weight:700;color:var(--navy);margin-bottom:2px">Real-Time Property Dashboard</div>
+          <div style="font-size:13px;color:var(--muted)">Monitor rental payment history · equity accumulated · estimated property value · days to ownership</div>
+        </div>
+      </div>
+      <div style="background:#fff;border:1px solid #e8e8e8;border-radius:14px;padding:18px;display:flex;gap:14px;align-items:center">
+        <div style="font-size:28px;flex-shrink:0">💳</div>
+        <div>
+          <div style="font-weight:700;color:var(--navy);margin-bottom:2px">Auto Monthly Deduction</div>
+          <div style="font-size:13px;color:var(--muted)">ตัดจ่ายอัตโนมัติผ่าน All Wallet · ไม่มีค่าธรรมเนียมการโอน · รับใบเสร็จทันที</div>
         </div>
       </div>
     </div>
-  </div></div>
-</div><!-- /dev -->
 
+    <!-- Login card -->
+    <div style="background:#fff;border:1px solid #e0e8f0;border-radius:20px;padding:28px;box-shadow:0 4px 20px rgba(27,58,92,.08)">
+      <div style="font-size:16px;font-weight:700;color:var(--navy);margin-bottom:20px;text-align:center">เข้าสู่ระบบ Dashboard</div>
+
+      <div style="margin-bottom:14px">
+        <label style="font-size:13px;color:var(--muted);margin-bottom:4px;display:block">Email / เบอร์โทรศัพท์</label>
+        <input type="text" placeholder="email@example.com หรือ 08X-XXX-XXXX" style="width:100%;padding:12px 14px;border:1.5px solid #dde3ea;border-radius:10px;font-size:14px;box-sizing:border-box;outline:none">
+      </div>
+      <div style="margin-bottom:20px">
+        <label style="font-size:13px;color:var(--muted);margin-bottom:4px;display:block">Password</label>
+        <input type="password" placeholder="••••••••" style="width:100%;padding:12px 14px;border:1.5px solid #dde3ea;border-radius:10px;font-size:14px;box-sizing:border-box;outline:none">
+      </div>
+
+      <button class="btn btn-green" style="width:100%;padding:14px;font-size:15px;font-weight:700;border-radius:12px;margin-bottom:12px">
+        🔑 เข้าสู่ระบบ
+      </button>
+
+      <div style="text-align:center;font-size:13px;color:var(--muted);margin-bottom:12px">หรือ</div>
+
+      <button class="btn" style="width:100%;padding:12px;font-size:14px;font-weight:600;border-radius:12px;background:#fff;border:1.5px solid #dde3ea;color:var(--navy);margin-bottom:8px">
+        <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" style="width:18px;vertical-align:middle;margin-right:8px">Sign in with Google
+      </button>
+
+      <div style="text-align:center;margin-top:16px">
+        <span style="font-size:13px;color:var(--muted)">ยังไม่มีบัญชี? </span>
+        <span style="font-size:13px;color:var(--teal);font-weight:600;cursor:pointer">สมัครสมาชิกฟรี</span>
+      </div>
+    </div>
+
+    <!-- Dashboard preview teaser (blurred) -->
+    <div style="margin-top:24px;border-radius:16px;overflow:hidden;position:relative">
+      <div style="background:linear-gradient(135deg,#E8F0F8,#E0F2F1);padding:20px;filter:blur(4px)">
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+          <div style="background:#fff;border-radius:10px;padding:12px;text-align:center">
+            <div style="font-size:18px;font-weight:800;color:var(--teal)">67%</div>
+            <div style="font-size:10px;color:var(--muted)">Credit Score</div>
+          </div>
+          <div style="background:#fff;border-radius:10px;padding:12px;text-align:center">
+            <div style="font-size:18px;font-weight:800;color:var(--navy)">฿1.2M</div>
+            <div style="font-size:10px;color:var(--muted)">Equity Earned</div>
+          </div>
+          <div style="background:#fff;border-radius:10px;padding:12px;text-align:center">
+            <div style="font-size:18px;font-weight:800;color:var(--green)">18mo</div>
+            <div style="font-size:10px;color:var(--muted)">To Ownership</div>
+          </div>
+        </div>
+      </div>
+      <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.3)">
+        <div style="background:var(--navy);color:#fff;padding:10px 20px;border-radius:20px;font-size:13px;font-weight:600">🔒 Login to view your dashboard</div>
+      </div>
+    </div>
+  </div>
+</div><!-- /pg-myhome -->
+
+<!-- ═══════════════════════════════════════════════════════ LIST PROPERTY PAGE -->
+<div id="pg-listprop" class="pg" style="display:none">
+  <div style="max-width:960px;margin:0 auto;padding:40px 16px 80px">
+    <div style="text-align:center;margin-bottom:40px">
+      <h1 style="font-size:32px;font-weight:800;color:var(--navy);margin:0 0 10px">List Your Property on StayVerse</h1>
+      <p style="color:var(--muted);font-size:16px;max-width:560px;margin:0 auto">เลือก package ที่เหมาะกับคุณ · Reach ผู้เช่าและนักลงทุนที่ใช่ · เริ่มต้นได้เลยวันนี้</p>
+    </div>
+
+    <!-- Package cards -->
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:40px" class="pkg-grid">
+
+      <!-- Basic -->
+      <div class="pkgcard">
+        <div style="font-size:13px;font-weight:600;color:var(--muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:1px">Basic</div>
+        <div style="font-size:36px;font-weight:800;color:var(--navy)">฿2,900</div>
+        <div style="font-size:12px;color:var(--muted);margin-bottom:20px">/เดือน · ต่อ listing</div>
+        <hr style="border:none;border-top:1px solid #f0f0f0;margin:0 0 20px">
+        <ul style="list-style:none;padding:0;margin:0 0 28px;display:flex;flex-direction:column;gap:10px;font-size:14px">
+          <li>✅ ลง listing 1 ห้อง</li>
+          <li>✅ รูปสูงสุด 10 รูป</li>
+          <li>✅ VR Tour (360°)</li>
+          <li>✅ แสดงบน Search Results</li>
+          <li>✅ Contact form</li>
+          <li style="color:var(--muted)">✗ Homepage Spotlight</li>
+          <li style="color:var(--muted)">✗ Priority search ranking</li>
+          <li style="color:var(--muted)">✗ SEM boost</li>
+          <li style="color:var(--muted)">✗ Analytics dashboard</li>
+        </ul>
+        <button class="btn bo" style="width:100%;padding:12px;border-radius:10px;font-weight:600">เริ่มต้น Basic</button>
+      </div>
+
+      <!-- Pro (highlighted) -->
+      <div class="pkgcard" style="border-color:var(--teal);background:linear-gradient(180deg,var(--teal-p) 0%,#fff 40%);position:relative;transform:translateY(-8px);box-shadow:0 8px 32px rgba(0,107,107,.15)">
+        <div style="position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--teal);color:#fff;padding:4px 16px;border-radius:20px;font-size:12px;font-weight:700;white-space:nowrap">⭐ Most Popular</div>
+        <div style="font-size:13px;font-weight:600;color:var(--teal);margin-bottom:8px;text-transform:uppercase;letter-spacing:1px">Pro</div>
+        <div style="font-size:36px;font-weight:800;color:var(--navy)">฿7,900</div>
+        <div style="font-size:12px;color:var(--muted);margin-bottom:20px">/เดือน · ต่อ listing</div>
+        <hr style="border:none;border-top:1px solid #e0f2f1;margin:0 0 20px">
+        <ul style="list-style:none;padding:0;margin:0 0 28px;display:flex;flex-direction:column;gap:10px;font-size:14px">
+          <li>✅ ลง listing ได้ไม่จำกัด</li>
+          <li>✅ รูปสูงสุด 30 รูป + Video</li>
+          <li>✅ VR Tour (360°)</li>
+          <li>✅ <strong>Priority Search Ranking</strong></li>
+          <li>✅ Contact form + WhatsApp</li>
+          <li>✅ <strong>Search Top Placement ฿3K-10K</strong></li>
+          <li>✅ Analytics dashboard</li>
+          <li>✅ Developer brand page</li>
+          <li style="color:var(--muted)">✗ Homepage Spotlight</li>
+        </ul>
+        <button class="btn btn-green" style="width:100%;padding:12px;border-radius:10px;font-weight:700">เลือก Pro</button>
+      </div>
+
+      <!-- Premium -->
+      <div class="pkgcard" style="border-color:var(--gold);background:linear-gradient(180deg,var(--gold-p) 0%,#fff 40%)">
+        <div style="font-size:13px;font-weight:600;color:var(--gold);margin-bottom:8px;text-transform:uppercase;letter-spacing:1px">Premium</div>
+        <div style="font-size:36px;font-weight:800;color:var(--navy)">฿19,900</div>
+        <div style="font-size:12px;color:var(--muted);margin-bottom:20px">/เดือน · ต่อ project</div>
+        <hr style="border:none;border-top:1px solid #fff8e1;margin:0 0 20px">
+        <ul style="list-style:none;padding:0;margin:0 0 28px;display:flex;flex-direction:column;gap:10px;font-size:14px">
+          <li>✅ ลง listing ทุก unit ไม่จำกัด</li>
+          <li>✅ รูป + Video + VR ไม่จำกัด</li>
+          <li>✅ <strong>Homepage Spotlight ฿15K-30K/mo</strong></li>
+          <li>✅ <strong>Google Ads SEM Boost</strong></li>
+          <li>✅ Dedicated account manager</li>
+          <li>✅ Analytics + Lead reports</li>
+          <li>✅ Developer brand page (Premium)</li>
+          <li>✅ WeChat / LINE / WhatsApp leads</li>
+          <li>✅ Featured in Articles & Email blast</li>
+        </ul>
+        <button class="btn" style="width:100%;padding:12px;border-radius:10px;font-weight:700;background:linear-gradient(135deg,#B8860B,#ffd54f);color:#fff;border:none">เลือก Premium</button>
+      </div>
+    </div><!-- /pkg-grid -->
+
+    <!-- Paid placement info -->
+    <div style="background:var(--navy-p);border-radius:16px;padding:24px;margin-bottom:32px">
+      <h3 style="font-size:16px;font-weight:700;color:var(--navy);margin:0 0 16px">📊 Paid Placement — เพิ่ม Visibility</h3>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
+        <div style="background:#fff;border-radius:12px;padding:16px;text-align:center">
+          <div style="font-size:20px;margin-bottom:6px">🏆</div>
+          <div style="font-weight:700;color:var(--gold);margin-bottom:4px">Homepage Spotlight</div>
+          <div style="font-size:20px;font-weight:800;color:var(--navy);margin-bottom:4px">฿15K–30K</div>
+          <div style="font-size:11px;color:var(--muted)">/เดือน · แสดงหน้าแรก</div>
+        </div>
+        <div style="background:#fff;border-radius:12px;padding:16px;text-align:center">
+          <div style="font-size:20px;margin-bottom:6px">🔍</div>
+          <div style="font-weight:700;color:var(--teal);margin-bottom:4px">Search Top</div>
+          <div style="font-size:20px;font-weight:800;color:var(--navy);margin-bottom:4px">฿3K–10K</div>
+          <div style="font-size:11px;color:var(--muted)">/เดือน · ติด Top 3 ใน search</div>
+        </div>
+        <div style="background:#fff;border-radius:12px;padding:16px;text-align:center">
+          <div style="font-size:20px;margin-bottom:6px">📢</div>
+          <div style="font-weight:700;color:var(--red);margin-bottom:4px">Google Ads Boost</div>
+          <div style="font-size:20px;font-weight:800;color:var(--navy);margin-bottom:4px">Custom</div>
+          <div style="font-size:11px;color:var(--muted)">SEM campaign จัดการให้</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Login gate message -->
+    <div style="background:#fff;border:2px solid var(--teal);border-radius:16px;padding:28px;text-align:center">
+      <div style="font-size:32px;margin-bottom:12px">🔐</div>
+      <h3 style="font-size:18px;font-weight:700;color:var(--navy);margin:0 0 8px">เริ่มต้น List Property</h3>
+      <p style="color:var(--muted);font-size:14px;margin:0 0 20px">สร้างบัญชีฟรี · ไม่มีค่าใช้จ่ายในการสมัคร · ยกเลิกได้ทุกเมื่อ</p>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+        <button class="btn btn-green" onclick="goTo('myhome')" style="padding:12px 28px;font-size:15px;font-weight:700;border-radius:12px">สมัครฟรี เพื่อเริ่มลง Listing</button>
+        <button class="btn bo" style="padding:12px 28px;font-size:15px;font-weight:600;border-radius:12px">ติดต่อ Sales</button>
+      </div>
+    </div>
+  </div>
+</div><!-- /pg-listprop -->
+
+<!-- ═══════════════════════════════════════════════════════ AFFILIATE PAGE -->
+<div id="pg-affiliate" class="pg" style="display:none">
+  <div style="max-width:840px;margin:0 auto;padding:40px 16px 80px">
+    <div style="text-align:center;margin-bottom:40px">
+      <div style="font-size:52px;margin-bottom:12px">🤝</div>
+      <h1 style="font-size:32px;font-weight:800;color:var(--navy);margin:0 0 10px">StayVerse Affiliate Program</h1>
+      <p style="color:var(--muted);font-size:16px;max-width:500px;margin:0 auto">แนะนำเพื่อน · แชร์ listing · รับ commission ทุกครั้งที่ปิดดีล</p>
+    </div>
+
+    <!-- How it works -->
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:40px">
+      <div style="background:#fff;border:1px solid #e8e8e8;border-radius:14px;padding:24px;text-align:center">
+        <div style="font-size:36px;margin-bottom:12px">1️⃣</div>
+        <div style="font-weight:700;color:var(--navy);margin-bottom:6px">สมัครฟรี</div>
+        <div style="font-size:13px;color:var(--muted)">สร้างบัญชี affiliate ไม่มีค่าสมัคร · อนุมัติทันที</div>
+      </div>
+      <div style="background:#fff;border:1px solid #e8e8e8;border-radius:14px;padding:24px;text-align:center">
+        <div style="font-size:36px;margin-bottom:12px">2️⃣</div>
+        <div style="font-weight:700;color:var(--navy);margin-bottom:6px">รับ Link ของคุณ</div>
+        <div style="font-size:13px;color:var(--muted)">ทุก listing มี affiliate link เฉพาะของคุณ · share ได้ทุก platform</div>
+      </div>
+      <div style="background:#fff;border:1px solid #e8e8e8;border-radius:14px;padding:24px;text-align:center">
+        <div style="font-size:36px;margin-bottom:12px">3️⃣</div>
+        <div style="font-weight:700;color:var(--navy);margin-bottom:6px">รับ Commission</div>
+        <div style="font-size:13px;color:var(--muted)">ทุกดีลที่ปิดผ่าน link คุณ รับ commission อัตโนมัติ</div>
+      </div>
+    </div>
+
+    <!-- Commission structure -->
+    <div style="background:var(--teal-p);border-radius:16px;padding:28px;margin-bottom:32px">
+      <h3 style="font-size:18px;font-weight:700;color:var(--teal);margin:0 0 20px;text-align:center">💰 Commission Structure</h3>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
+        <div style="background:#fff;border-radius:12px;padding:20px;text-align:center">
+          <div style="font-size:13px;font-weight:600;color:var(--muted);margin-bottom:8px">Rental Deal</div>
+          <div style="font-size:28px;font-weight:800;color:var(--teal)">50%</div>
+          <div style="font-size:12px;color:var(--muted);margin-top:4px">ของ 1 เดือนแรก</div>
+        </div>
+        <div style="background:#fff;border-radius:12px;padding:20px;text-align:center">
+          <div style="font-size:13px;font-weight:600;color:var(--muted);margin-bottom:8px">RTO Contract</div>
+          <div style="font-size:28px;font-weight:800;color:var(--navy)">1%</div>
+          <div style="font-size:12px;color:var(--muted);margin-top:4px">ของ sale price</div>
+        </div>
+        <div style="background:#fff;border-radius:12px;padding:20px;text-align:center">
+          <div style="font-size:13px;font-weight:600;color:var(--muted);margin-bottom:8px">Investor Sale</div>
+          <div style="font-size:28px;font-weight:800;color:var(--gold)">2%</div>
+          <div style="font-size:12px;color:var(--muted);margin-top:4px">ของ transaction</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Signup CTA -->
+    <div style="background:#fff;border:2px solid var(--navy);border-radius:16px;padding:28px;text-align:center">
+      <h3 style="font-size:20px;font-weight:700;color:var(--navy);margin:0 0 8px">เริ่มรับ Commission วันนี้</h3>
+      <p style="color:var(--muted);font-size:14px;margin:0 0 20px">สมัครฟรี · ไม่ต้องลงทุน · earn passive income จากเครือข่ายของคุณ</p>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+        <button class="btn btn-green" onclick="goTo('myhome')" style="padding:12px 32px;font-size:15px;font-weight:700;border-radius:12px">สมัคร Affiliate ฟรี</button>
+        <button class="btn bo" style="padding:12px 28px;font-size:15px;font-weight:600;border-radius:12px">ดูตัวอย่าง Dashboard</button>
+      </div>
+    </div>
+  </div>
+</div><!-- /pg-affiliate -->
+
+<!-- ═══════════════════════════════════════════════════════ TENANT DASHBOARD -->
+<div id="pg-tenant" class="pg" style="display:none">
+  <div style="max-width:900px;margin:0 auto;padding:30px 16px 80px">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:28px">
+      <div>
+        <h1 style="font-size:24px;font-weight:800;color:var(--navy);margin:0 0 4px">Tenant Dashboard</h1>
+        <p style="color:var(--muted);font-size:14px;margin:0">สวัสดี Nueng · ห้อง Supalai Icon Sathorn 24F</p>
+      </div>
+      <div style="display:flex;gap:8px">
+        <button class="btn bo bsm">⚙ Settings</button>
+        <button class="btn bo bsm">📄 Statements</button>
+      </div>
+    </div>
+
+    <!-- Stats row -->
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:24px">
+      <div style="background:#fff;border:1px solid #e8e8e8;border-radius:14px;padding:18px;text-align:center">
+        <div style="font-size:24px;font-weight:800;color:var(--teal)">30.46%</div>
+        <div style="font-size:12px;color:var(--muted);margin-top:4px">Equity Earned</div>
+        <div class="pbar" style="margin-top:8px"><div class="pbf" style="width:30.46%;background:var(--teal)"></div></div>
+      </div>
+      <div style="background:#fff;border:1px solid #e8e8e8;border-radius:14px;padding:18px;text-align:center">
+        <div style="font-size:24px;font-weight:800;color:var(--navy)">฿2.8M</div>
+        <div style="font-size:12px;color:var(--muted);margin-top:4px">Equity Value</div>
+      </div>
+      <div style="background:#fff;border:1px solid #e8e8e8;border-radius:14px;padding:18px;text-align:center">
+        <div style="font-size:24px;font-weight:800;color:var(--green)">36</div>
+        <div style="font-size:12px;color:var(--muted);margin-top:4px">Payments On Time</div>
+      </div>
+      <div style="background:#fff;border:1px solid #e8e8e8;border-radius:14px;padding:18px;text-align:center">
+        <div style="font-size:24px;font-weight:800;color:var(--gold)">712</div>
+        <div style="font-size:12px;color:var(--muted);margin-top:4px">Credit Score</div>
+      </div>
+    </div>
+
+    <!-- Payment history -->
+    <div style="background:#fff;border:1px solid #e8e8e8;border-radius:16px;padding:24px;margin-bottom:20px">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+        <h3 style="font-size:16px;font-weight:700;color:var(--navy);margin:0">Payment History</h3>
+        <span style="font-size:12px;color:var(--teal);cursor:pointer">ดูทั้งหมด</span>
+      </div>
+      <table style="width:100%;border-collapse:collapse;font-size:13px">
+        <thead><tr style="background:var(--navy-p)">
+          <th style="padding:8px 12px;text-align:left;color:var(--navy);font-weight:600">เดือน</th>
+          <th style="padding:8px 12px;text-align:right;color:var(--navy);font-weight:600">ยอดชำระ</th>
+          <th style="padding:8px 12px;text-align:right;color:var(--navy);font-weight:600">Equity This Mo.</th>
+          <th style="padding:8px 12px;text-align:center;color:var(--navy);font-weight:600">Status</th>
+        </tr></thead>
+        <tbody>
+          <tr style="border-bottom:1px solid #f5f5f5"><td style="padding:10px 12px">มี.ค. 2026</td><td style="padding:10px 12px;text-align:right">฿65,000</td><td style="padding:10px 12px;text-align:right;color:var(--green)">+฿77,637</td><td style="padding:10px 12px;text-align:center"><span style="background:var(--green-p);color:var(--green);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600">✓ ชำระแล้ว</span></td></tr>
+          <tr style="border-bottom:1px solid #f5f5f5"><td style="padding:10px 12px">ก.พ. 2026</td><td style="padding:10px 12px;text-align:right">฿65,000</td><td style="padding:10px 12px;text-align:right;color:var(--green)">+฿77,637</td><td style="padding:10px 12px;text-align:center"><span style="background:var(--green-p);color:var(--green);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600">✓ ชำระแล้ว</span></td></tr>
+          <tr style="border-bottom:1px solid #f5f5f5"><td style="padding:10px 12px">ม.ค. 2026</td><td style="padding:10px 12px;text-align:right">฿65,000</td><td style="padding:10px 12px;text-align:right;color:var(--green)">+฿77,637</td><td style="padding:10px 12px;text-align:center"><span style="background:var(--green-p);color:var(--green);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600">✓ ชำระแล้ว</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Next payment -->
+    <div style="background:linear-gradient(135deg,var(--teal),#1B3A5C);border-radius:16px;padding:24px;color:#fff;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px">
+      <div>
+        <div style="font-size:13px;opacity:.8;margin-bottom:4px">Next Payment Due</div>
+        <div style="font-size:26px;font-weight:800">฿65,000</div>
+        <div style="font-size:12px;opacity:.8;margin-top:4px">1 เม.ย. 2026 · Auto-deduct via All Wallet</div>
+      </div>
+      <button class="btn" style="background:#fff;color:var(--navy);padding:12px 24px;font-weight:700;border-radius:12px;border:none">Pay Now</button>
+    </div>
+  </div>
+</div><!-- /pg-tenant -->
+
+<!-- ═══════════════════════════════════════════════════════ DEVELOPER DASHBOARD -->
+<div id="pg-dev" class="pg" style="display:none">
+  <div style="max-width:1000px;margin:0 auto;padding:30px 16px 80px">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:28px">
+      <div>
+        <h1 style="font-size:24px;font-weight:800;color:var(--navy);margin:0 0 4px">Developer Dashboard</h1>
+        <p style="color:var(--muted);font-size:14px;margin:0">Supalai PCL · Premium Package</p>
+      </div>
+      <div style="display:flex;gap:8px">
+        <button class="btn bo bsm">+ เพิ่ม Listing</button>
+        <button class="btn btn-green bsm" onclick="goTo('listprop')">Upgrade Package</button>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:24px">
+      <div style="background:#fff;border:1px solid #e8e8e8;border-radius:14px;padding:18px;text-align:center">
+        <div style="font-size:24px;font-weight:800;color:var(--navy)">12</div>
+        <div style="font-size:12px;color:var(--muted)">Active Listings</div>
+      </div>
+      <div style="background:#fff;border:1px solid #e8e8e8;border-radius:14px;padding:18px;text-align:center">
+        <div style="font-size:24px;font-weight:800;color:var(--teal)">847</div>
+        <div style="font-size:12px;color:var(--muted)">Views This Month</div>
+      </div>
+      <div style="background:#fff;border:1px solid #e8e8e8;border-radius:14px;padding:18px;text-align:center">
+        <div style="font-size:24px;font-weight:800;color:var(--green)">23</div>
+        <div style="font-size:12px;color:var(--muted)">Leads Generated</div>
+      </div>
+      <div style="background:#fff;border:1px solid #e8e8e8;border-radius:14px;padding:18px;text-align:center">
+        <div style="font-size:24px;font-weight:800;color:var(--gold)">3</div>
+        <div style="font-size:12px;color:var(--muted)">Closed Deals</div>
+      </div>
+    </div>
+
+    <!-- Listing table -->
+    <div style="background:#fff;border:1px solid #e8e8e8;border-radius:16px;padding:24px">
+      <h3 style="font-size:16px;font-weight:700;color:var(--navy);margin:0 0 16px">Active Listings</h3>
+      <table style="width:100%;border-collapse:collapse;font-size:13px">
+        <thead><tr style="background:var(--navy-p)">
+          <th style="padding:8px 12px;text-align:left;color:var(--navy);font-weight:600">Project</th>
+          <th style="padding:8px 12px;text-align:center;color:var(--navy);font-weight:600">Type</th>
+          <th style="padding:8px 12px;text-align:right;color:var(--navy);font-weight:600">Rent</th>
+          <th style="padding:8px 12px;text-align:center;color:var(--navy);font-weight:600">Views</th>
+          <th style="padding:8px 12px;text-align:center;color:var(--navy);font-weight:600">Placement</th>
+          <th style="padding:8px 12px;text-align:center;color:var(--navy);font-weight:600">Actions</th>
+        </tr></thead>
+        <tbody>
+          <tr style="border-bottom:1px solid #f5f5f5"><td style="padding:10px 12px;font-weight:600">Supalai Icon Sathorn 24F</td><td style="padding:10px 12px;text-align:center"><span class="tag tr">RTO</span></td><td style="padding:10px 12px;text-align:right">฿65,000</td><td style="padding:10px 12px;text-align:center">312</td><td style="padding:10px 12px;text-align:center"><span style="background:var(--gold-p);color:var(--gold);padding:2px 8px;border-radius:10px;font-size:11px;font-weight:600">★ Homepage</span></td><td style="padding:10px 12px;text-align:center"><button class="btn bo bsm">Edit</button></td></tr>
+          <tr style="border-bottom:1px solid #f5f5f5"><td style="padding:10px 12px;font-weight:600">Supalai Oriental 12F</td><td style="padding:10px 12px;text-align:center"><span class="tag">Rent</span></td><td style="padding:10px 12px;text-align:right">฿58,000</td><td style="padding:10px 12px;text-align:center">189</td><td style="padding:10px 12px;text-align:center"><span style="background:var(--teal-p);color:var(--teal);padding:2px 8px;border-radius:10px;font-size:11px;font-weight:600">🔍 Search Top</span></td><td style="padding:10px 12px;text-align:center"><button class="btn bo bsm">Edit</button></td></tr>
+          <tr><td style="padding:10px 12px;font-weight:600">Supalai Prime CBD 5F</td><td style="padding:10px 12px;text-align:center"><span class="tag">Rent</span></td><td style="padding:10px 12px;text-align:right">฿45,000</td><td style="padding:10px 12px;text-align:center">97</td><td style="padding:10px 12px;text-align:center"><span style="background:#f5f5f5;color:var(--muted);padding:2px 8px;border-radius:10px;font-size:11px">Standard</span></td><td style="padding:10px 12px;text-align:center"><button class="btn bo bsm">Edit</button></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div><!-- /pg-dev -->
+
+<!-- ═══════════════════════════════════════════════════════ APPLICATION PAGES -->
+<div id="pg-apply" class="pg" style="display:none">
+  <div style="max-width:560px;margin:60px auto;padding:0 16px 80px">
+    <div style="text-align:center;margin-bottom:32px">
+      <div style="font-size:42px;margin-bottom:10px">📋</div>
+      <h1 style="font-size:26px;font-weight:800;color:var(--navy);margin:0 0 8px">Apply for Rent-to-Own</h1>
+      <p style="color:var(--muted);font-size:14px">Supalai Icon Sathorn · ฿65,000/mo · 3yr contract</p>
+    </div>
+    <div style="background:#fff;border:1px solid #e8e8e8;border-radius:20px;padding:28px">
+      <div style="display:grid;gap:14px">
+        <div><label style="font-size:13px;color:var(--muted);margin-bottom:4px;display:block">Full Name / ชื่อ-นามสกุล</label><input type="text" placeholder="ชื่อ นามสกุล" style="width:100%;padding:11px 14px;border:1.5px solid #dde3ea;border-radius:10px;font-size:14px;box-sizing:border-box"></div>
+        <div><label style="font-size:13px;color:var(--muted);margin-bottom:4px;display:block">Phone / โทรศัพท์</label><input type="tel" placeholder="08X-XXX-XXXX" style="width:100%;padding:11px 14px;border:1.5px solid #dde3ea;border-radius:10px;font-size:14px;box-sizing:border-box"></div>
+        <div><label style="font-size:13px;color:var(--muted);margin-bottom:4px;display:block">Email</label><input type="email" placeholder="your@email.com" style="width:100%;padding:11px 14px;border:1.5px solid #dde3ea;border-radius:10px;font-size:14px;box-sizing:border-box"></div>
+        <div><label style="font-size:13px;color:var(--muted);margin-bottom:4px;display:block">Monthly Income / รายได้ต่อเดือน</label>
+          <select style="width:100%;padding:11px 14px;border:1.5px solid #dde3ea;border-radius:10px;font-size:14px;box-sizing:border-box">
+            <option>฿80,000 - ฿120,000</option><option>฿120,000 - ฿200,000</option><option>฿200,000+</option>
+          </select>
+        </div>
+        <div><label style="font-size:13px;color:var(--muted);margin-bottom:4px;display:block">Down Payment Ready / เงินดาวน์พร้อม</label>
+          <select style="width:100%;padding:11px 14px;border:1.5px solid #dde3ea;border-radius:10px;font-size:14px;box-sizing:border-box">
+            <option>5% (฿459,500)</option><option>10% (฿919,000)</option><option>20% (฿1,838,000)</option><option>30% (฿2,757,000)</option>
+          </select>
+        </div>
+        <div style="background:var(--navy-p);border-radius:10px;padding:14px;font-size:13px;color:var(--navy)">
+          ✅ ดาวน์ 5% = ฿459,500 · เช่า 3yr · Buy now ฿6,390,500 · Equity 30.46%
+        </div>
+        <button class="btn btn-green" onclick="goTo('success')" style="width:100%;padding:14px;font-size:15px;font-weight:700;border-radius:12px;margin-top:4px">
+          ยื่นใบสมัคร →
+        </button>
+      </div>
+    </div>
+  </div>
+</div><!-- /pg-apply -->
+
+<div id="pg-success" class="pg" style="display:none">
+  <div style="max-width:480px;margin:80px auto;text-align:center;padding:0 16px">
+    <div style="font-size:72px;margin-bottom:20px">🎉</div>
+    <h1 style="font-size:28px;font-weight:800;color:var(--green);margin:0 0 10px">ยื่นใบสมัครสำเร็จ!</h1>
+    <p style="color:var(--muted);font-size:15px;margin:0 0 32px">ทีมงาน StayVerse จะติดต่อกลับภายใน 24 ชั่วโมง · ตรวจสอบอีเมลของคุณ</p>
+    <div style="background:var(--green-p);border-radius:16px;padding:24px;margin-bottom:24px;text-align:left">
+      <div style="font-weight:700;color:var(--green);margin-bottom:12px">ขั้นตอนต่อไป</div>
+      <div style="font-size:14px;color:#444;display:flex;flex-direction:column;gap:8px">
+        <div>1️⃣ ทีมงานตรวจสอบข้อมูลภายใน 24 ชม.</div>
+        <div>2️⃣ นัด Video Call เพื่อ KYC</div>
+        <div>3️⃣ เซ็นสัญญา Rent-to-Own</div>
+        <div>4️⃣ โอนเงินดาวน์ผ่าน All Wallet</div>
+        <div>5️⃣ รับกุญแจ & เข้าอยู่!</div>
+      </div>
+    </div>
+    <button class="btn btn-green" onclick="goTo('tenant')" style="width:100%;padding:14px;font-size:15px;font-weight:700;border-radius:12px;margin-bottom:10px">
+      ไปที่ Tenant Dashboard
+    </button>
+    <button class="btn bo" onclick="goTo('home')" style="width:100%;padding:12px;font-size:14px;font-weight:600;border-radius:12px">
+      กลับหน้าหลัก
+    </button>
+  </div>
+</div><!-- /pg-success -->
+
+</div><!-- /#app -->
 
 <script>
-const T={
-en:{nav_buy:"Buy",nav_rent:"Rent",nav_inv:"Investors",nav_my:"My Home",nav_dev:"List Property ▸",hero_tag:"🏠 Rent-to-Own Marketplace",hero_h1:"Find your home.<br>Start owning it today.",hero_sub:"Browse verified properties — pay monthly, build equity, own outright.",search_btn:"Search",f_all:"All Cities",f_any:"Any Budget",f_10:"Under ฿10K/mo",f_20:"฿10K–20K/mo",f_30:"฿20K–30K/mo","f_30p":"฿30K+/mo",qs_prop:"Properties",qs_city:"Cities",qs_dev:"Developers",qs_lang:"Languages",feat_h:"Featured Properties",feat_sub:"Verified, ready for Rent-to-Own",feat_all:"View all →",fp_all:"All",fp_bkk:"Bangkok",fp_pkt:"Phuket",fp_cnx:"Chiang Mai",fp_pty:"Pattaya",fp_studio:"Studio",fp_1b:"1 Bed",fp_2b:"2 Bed",c_avail:"Available",c_hot:"Popular",c_new:"New",c_deal:"Best Value",eq_yr:"+equity/yr",p1_leg:"Own in ~8 years · 2-Bedroom · High floor",p2_leg:"Own in ~10 years · Sea view · 1-Bedroom",p3_leg:"Own in ~12 years · Studio · Quiet area",p4_leg:"Own in ~15 years · 3-Bedroom · Garden",p5_leg:"Own in ~9 years · 2-Bedroom · Pool access",p6_leg:"Own in ~10 years · 1-Bedroom · CBD",p_view:"View Details",p_calc:"Calculate",how_h:"How Rent-to-Own Works",how_sub:"Pay monthly, build equity, own outright — no large down payment needed",s1n:"STEP 01",s1h:"Choose Your Home",s1p:"Browse verified properties. Use the equity calculator to find the plan that fits your monthly budget and timeline.",s2n:"STEP 02",s2h:"Apply in Minutes",s2p:"Submit online. Identity verified digitally. Move in within days — no bank loan required.",s3n:"STEP 03",s3h:"Pay & Own",s3p:"Every payment increases your ownership share. When you reach 100%, the property is fully yours.",dev_tag:"FOR PROPERTY DEVELOPERS",dev_h:"Have units to list?",dev_sub:"Turn unsold inventory into guaranteed monthly cashflow. We handle tenant matching, contracts, and payments.",dev_cta1:"List a Property",dev_cta2:"Developer Dashboard →",back:"Back",det_terms:"Rent-to-Own Terms",det_mo:"Monthly Payment",det_val:"Property Value",det_eq:"Equity/Year",det_own:"Full Ownership",det_apply:"Apply Now — Free",calc_h:"Equity Calculator",calc_yr:"Years of Payments",calc_yrs:"Years",calc_eq:"Equity",calc_val:"Value Built",faq_h:"Quick Facts",faq_type:"Property Type",faq_floor:"Floor",faq_furn:"Furnished",faq_full:"Fully Furnished",faq_avail:"Available From",faq_kyc:"KYC Required",app_h:"Apply for Rent-to-Own",app_sub:"Sukhumvit Sky · Free · 5 minutes",app_s1:"Step 1 — Personal Information",f_fn:"First Name",f_ln:"Last Name",f_em:"Email",f_ph:"Phone",f_na:"Nationality",f_in:"Monthly Income (THB)",app_next:"Next: Verify Identity →",n_th:"Thai",n_cn:"Chinese",n_ru:"Russian",n_ot:"Other",suc_h:"Application Submitted!",suc_p:"Your details are under review. We'll verify and contact you within 24 hours.",suc_prop:"Property",suc_st:"Status",suc_rv:"Under Review",suc_ref:"Reference",suc_dash:"Go to My Dashboard →",td_h:"My StayVerse Home",td_s:"Sukhumvit Sky 24A · Bangkok",td_eq:"My Equity",td_pm:"Payments Made",td_ev:"Equity Value",td_re:"Remaining",td_prog:"Ownership Progress",td_own:"Owned",td_hist:"Payment History",td_m3:"March 2026",td_m2:"February 2026",td_m1:"January 2026",dd_h:"Developer Portal",dd_s:"Manage your listings and track monthly income",dd_pr:"Active Listings",dd_rv:"Monthly Income",dd_tn:"Active Tenants",dd_occ:"Occupancy Rate",dd_lst:"My Properties",dd_add:"+ Add Listing",dd_occ2:"Occupied",dd_av2:"Seeking Tenant",dd_inc:"Income Summary",dd_gr:"Gross Collected",dd_fe:"Platform & Processing",dd_ne:"Net Income",dd_nb:"Next payout:"},
-th:{nav_buy:"ซื้อ",nav_rent:"เช่า",nav_inv:"นักลงทุน",nav_my:"บ้านของฉัน",nav_dev:"ลงประกาศ ▸",hero_tag:"🏠 Rent-to-Own Marketplace",hero_h1:"หาบ้านในฝัน<br>เริ่มเป็นเจ้าของวันนี้",hero_sub:"เลือกดูอสังหาฯ ที่ผ่านการรับรอง จ่ายรายเดือน สะสม equity จนเป็นเจ้าของ",search_btn:"ค้นหา",f_all:"ทุกเมือง",f_any:"ทุกงบ",f_10:"ไม่เกิน ฿10K/เดือน",f_20:"฿10K–20K/เดือน",f_30:"฿20K–30K/เดือน","f_30p":"฿30K+/เดือน",qs_prop:"อสังหาริมทรัพย์",qs_city:"เมือง",qs_dev:"นักพัฒนา",qs_lang:"ภาษา",feat_h:"อสังหาฯ แนะนำ",feat_sub:"ผ่านการรับรอง พร้อม Rent-to-Own",feat_all:"ดูทั้งหมด →",fp_all:"ทั้งหมด",fp_bkk:"กรุงเทพฯ",fp_pkt:"ภูเก็ต",fp_cnx:"เชียงใหม่",fp_pty:"พัทยา",fp_studio:"สตูดิโอ",fp_1b:"1 ห้องนอน",fp_2b:"2 ห้องนอน",c_avail:"ว่าง",c_hot:"ยอดนิยม",c_new:"ใหม่",c_deal:"คุ้มที่สุด",eq_yr:"+equity/ปี",p1_leg:"เป็นเจ้าของใน ~8 ปี · 2 ห้องนอน · ชั้นสูง",p2_leg:"เป็นเจ้าของใน ~10 ปี · วิวทะเล · 1 ห้องนอน",p3_leg:"เป็นเจ้าของใน ~12 ปี · สตูดิโอ · เงียบสงบ",p4_leg:"เป็นเจ้าของใน ~15 ปี · 3 ห้องนอน · มีสวน",p5_leg:"เป็นเจ้าของใน ~9 ปี · 2 ห้องนอน · สระว่ายน้ำ",p6_leg:"เป็นเจ้าของใน ~10 ปี · 1 ห้องนอน · ใจกลางเมือง",p_view:"ดูรายละเอียด",p_calc:"คำนวณ",how_h:"Rent-to-Own ทำงานอย่างไร",how_sub:"จ่ายรายเดือน สะสม equity จนเป็นเจ้าของ ไม่ต้องวางเงินดาวน์ก้อนใหญ่",s1n:"ขั้นที่ 01",s1h:"เลือกบ้านที่ใช่",s1p:"เลือกดูอสังหาฯ ที่ผ่านการรับรอง ใช้เครื่องคำนวณ equity หาแผนที่เหมาะกับงบและระยะเวลา",s2n:"ขั้นที่ 02",s2h:"สมัครได้ในไม่กี่นาที",s2p:"ยื่นใบสมัครออนไลน์ ยืนยันตัวตนดิจิทัล ย้ายเข้าได้ภายในไม่กี่วัน ไม่ต้องกู้แบงก์",s3n:"ขั้นที่ 03",s3h:"จ่าย & เป็นเจ้าของ",s3p:"ทุกการจ่ายเพิ่ม equity ของคุณ เมื่อครบ 100% อสังหาฯ เป็นของคุณอย่างสมบูรณ์",dev_tag:"สำหรับนักพัฒนาอสังหาริมทรัพย์",dev_h:"มีห้องที่อยากปล่อยไหม?",dev_sub:"เปลี่ยน inventory ที่ยังขายไม่ออกเป็น cashflow รายเดือน เราจัดการผู้เช่า สัญญา และการชำระเงิน",dev_cta1:"ลงประกาศอสังหาฯ",dev_cta2:"Developer Dashboard →",back:"กลับ",det_terms:"เงื่อนไข Rent-to-Own",det_mo:"ค่าเช่ารายเดือน",det_val:"มูลค่าอสังหาฯ",det_eq:"Equity/ปี",det_own:"เป็นเจ้าของเต็มใน",det_apply:"สมัครฟรี",calc_h:"คำนวณ Equity",calc_yr:"ระยะเวลาการจ่าย",calc_yrs:"ปี",calc_eq:"Equity",calc_val:"มูลค่าที่ได้",faq_h:"ข้อมูลทั่วไป",faq_type:"ประเภทอสังหาฯ",faq_floor:"ชั้น",faq_furn:"เฟอร์นิเจอร์",faq_full:"ครบครัน",faq_avail:"พร้อมเข้าอยู่",faq_kyc:"ยืนยันตัวตน",app_h:"สมัคร Rent-to-Own",app_sub:"Sukhumvit Sky · ฟรี · 5 นาที",app_s1:"ขั้นที่ 1 — ข้อมูลส่วนตัว",f_fn:"ชื่อ",f_ln:"นามสกุล",f_em:"อีเมล",f_ph:"โทรศัพท์",f_na:"สัญชาติ",f_in:"รายได้ต่อเดือน (บาท)",app_next:"ถัดไป: ยืนยันตัวตน →",n_th:"ไทย",n_cn:"จีน",n_ru:"รัสเซีย",n_ot:"อื่นๆ",suc_h:"ส่งใบสมัครแล้ว!",suc_p:"ข้อมูลของคุณอยู่ระหว่างการตรวจสอบ เราจะยืนยันและติดต่อกลับภายใน 24 ชั่วโมง",suc_prop:"อสังหาริมทรัพย์",suc_st:"สถานะ",suc_rv:"อยู่ระหว่างพิจารณา",suc_ref:"รหัสอ้างอิง",suc_dash:"ไปที่ Dashboard →",td_h:"บ้าน StayVerse ของฉัน",td_s:"Sukhumvit Sky 24A · กรุงเทพฯ",td_eq:"Equity ของฉัน",td_pm:"จำนวนการชำระ",td_ev:"มูลค่า Equity",td_re:"เหลืออีก",td_prog:"ความคืบหน้าการเป็นเจ้าของ",td_own:"เป็นเจ้าของแล้ว",td_hist:"ประวัติการชำระ",td_m3:"มีนาคม 2026",td_m2:"กุมภาพันธ์ 2026",td_m1:"มกราคม 2026",dd_h:"Developer Portal",dd_s:"จัดการ listing และติดตามรายได้รายเดือน",dd_pr:"Listing ที่ active",dd_rv:"รายได้รายเดือน",dd_tn:"ผู้เช่าปัจจุบัน",dd_occ:"อัตราการใช้ห้อง",dd_lst:"อสังหาฯ ของฉัน",dd_add:"+ เพิ่ม listing",dd_occ2:"มีผู้เช่า",dd_av2:"กำลังหาผู้เช่า",dd_inc:"สรุปรายได้",dd_gr:"ค่าเช่าที่เก็บได้",dd_fe:"ค่าแพลตฟอร์มและประมวลผล",dd_ne:"รายได้สุทธิ",dd_nb:"รอบจ่ายถัดไป:"},
-zh:{nav_buy:"购房",nav_rent:"租房",nav_inv:"投资者",nav_my:"我的家",nav_dev:"发布房源 ▸",hero_tag:"🏠 租购合一市场",hero_h1:"找到您的家<br>今天开始拥有它",hero_sub:"浏览经过认证的房产——按月付款，积累权益，直至完全拥有。",search_btn:"搜索",f_all:"所有城市",f_any:"不限预算",f_10:"1万铢以下/月",f_20:"1–2万铢/月",f_30:"2–3万铢/月","f_30p":"3万铢以上/月",qs_prop:"房源",qs_city:"城市",qs_dev:"开发商",qs_lang:"语言",feat_h:"推荐房源",feat_sub:"经过认证，可租购合一",feat_all:"查看全部 →",fp_all:"全部",fp_bkk:"曼谷",fp_pkt:"普吉岛",fp_cnx:"清迈",fp_pty:"芭提雅",fp_studio:"公寓",fp_1b:"一室",fp_2b:"两室",c_avail:"可租",c_hot:"热门",c_new:"新上",c_deal:"最划算",eq_yr:"+权益/年",p1_leg:"约8年拥有 · 两室 · 高层",p2_leg:"约10年拥有 · 海景 · 一室",p3_leg:"约12年拥有 · 公寓 · 安静",p4_leg:"约15年拥有 · 三室 · 花园",p5_leg:"约9年拥有 · 两室 · 泳池",p6_leg:"约10年拥有 · 一室 · CBD",p_view:"查看详情",p_calc:"计算权益",how_h:"租购合一如何运作",how_sub:"按月付款，积累权益，无需大额首付",s1n:"第一步",s1h:"选择您的家",s1p:"浏览认证房源，使用权益计算器找到符合预算和时间表的方案。",s2n:"第二步",s2h:"几分钟内申请",s2p:"在线提交申请，数字身份验证，无需银行贷款，获批后数日内入住。",s3n:"第三步",s3h:"付款即拥有",s3p:"每次付款都增加您的所有权份额，达到100%时房产完全属于您。",dev_tag:"面向房地产开发商",dev_h:"有房源想要出租？",dev_sub:"将滞销库存转化为稳定月收入。我们处理租客匹配、合同和付款事宜。",dev_cta1:"发布房源",dev_cta2:"开发商后台 →",back:"返回",det_terms:"租购合一条款",det_mo:"月付款",det_val:"房产价值",det_eq:"权益/年",det_own:"完全拥有",det_apply:"免费申请",calc_h:"权益计算器",calc_yr:"付款年数",calc_yrs:"年",calc_eq:"权益",calc_val:"价值积累",faq_h:"基本信息",faq_type:"房产类型",faq_floor:"楼层",faq_furn:"装修",faq_full:"精装交付",faq_avail:"可入住时间",faq_kyc:"身份验证",app_h:"申请租购合一",app_sub:"Sukhumvit Sky · 免费 · 5分钟",app_s1:"第一步 — 个人信息",f_fn:"名字",f_ln:"姓氏",f_em:"电子邮件",f_ph:"电话",f_na:"国籍",f_in:"月收入（泰铢）",app_next:"下一步：身份验证 →",n_th:"泰国",n_cn:"中国",n_ru:"俄罗斯",n_ot:"其他",suc_h:"申请已提交！",suc_p:"您的信息正在审核中，我们将在24小时内完成验证并联系您。",suc_prop:"房产",suc_st:"状态",suc_rv:"审核中",suc_ref:"参考编号",suc_dash:"前往我的后台 →",td_h:"我的StayVerse住所",td_s:"Sukhumvit Sky 24A · 曼谷",td_eq:"我的权益",td_pm:"已付款次数",td_ev:"权益价值",td_re:"剩余时间",td_prog:"所有权进度",td_own:"已拥有",td_hist:"付款历史",td_m3:"2026年3月",td_m2:"2026年2月",td_m1:"2026年1月",dd_h:"开发商后台",dd_s:"管理您的房源并追踪月收入",dd_pr:"在租房源",dd_rv:"月收入",dd_tn:"当前租客",dd_occ:"出租率",dd_lst:"我的房产",dd_add:"+ 添加房源",dd_occ2:"已出租",dd_av2:"寻找租客",dd_inc:"收益明细",dd_gr:"已收租金",dd_fe:"平台及处理费",dd_ne:"净收益",dd_nb:"下次打款："},
-ru:{nav_buy:"Купить",nav_rent:"Снять",nav_inv:"Инвесторам",nav_my:"Мой дом",nav_dev:"Разместить объект ▸",hero_tag:"🏠 Платформа Аренда-в-Собственность",hero_h1:"Найдите свой дом.<br>Начните владеть им сегодня.",hero_sub:"Просматривайте проверенные объекты — платите ежемесячно, накапливайте долю, станьте полным владельцем.",search_btn:"Поиск",f_all:"Все города",f_any:"Любой бюджет",f_10:"До ฿10К/мес",f_20:"฿10–20К/мес",f_30:"฿20–30К/мес","f_30p":"฿30К+/мес",qs_prop:"Объектов",qs_city:"Городов",qs_dev:"Застройщиков",qs_lang:"Языков",feat_h:"Рекомендуемые объекты",feat_sub:"Проверено, готово к Rent-to-Own",feat_all:"Все объекты →",fp_all:"Все",fp_bkk:"Бангкок",fp_pkt:"Пхукет",fp_cnx:"Чиангмай",fp_pty:"Паттайя",fp_studio:"Студия",fp_1b:"1 спальня",fp_2b:"2 спальни",c_avail:"Свободно",c_hot:"Популярно",c_new:"Новое",c_deal:"Лучшая цена",eq_yr:"+доля/год",p1_leg:"Владеете через ~8 лет · 2 спальни · Высокий этаж",p2_leg:"Владеете через ~10 лет · Вид на море · 1 спальня",p3_leg:"Владеете через ~12 лет · Студия · Тихий район",p4_leg:"Владеете через ~15 лет · 3 спальни · Сад",p5_leg:"Владеете через ~9 лет · 2 спальни · Бассейн",p6_leg:"Владеете через ~10 лет · 1 спальня · Центр",p_view:"Подробнее",p_calc:"Рассчитать",how_h:"Как работает Rent-to-Own",how_sub:"Платите ежемесячно, накапливайте долю, владейте — без крупного первого взноса",s1n:"ШАГ 01",s1h:"Выберите жильё",s1p:"Просматривайте проверенные объекты. Рассчитайте план, подходящий по бюджету и срокам.",s2n:"ШАГ 02",s2h:"Подайте заявку за минуты",s2p:"Онлайн-заявка. Цифровая верификация. Въезд через несколько дней — без банковского кредита.",s3n:"ШАГ 03",s3h:"Платите и владейте",s3p:"Каждый платёж увеличивает вашу долю. При 100% объект полностью ваш.",dev_tag:"ДЛЯ ЗАСТРОЙЩИКОВ",dev_h:"Есть объекты для размещения?",dev_sub:"Превратите нераспроданный инвентарь в стабильный ежемесячный доход. Мы берём на себя подбор арендаторов, договоры и платежи.",dev_cta1:"Разместить объект",dev_cta2:"Кабинет застройщика →",back:"Назад",det_terms:"Условия Rent-to-Own",det_mo:"Ежемесячный платёж",det_val:"Стоимость объекта",det_eq:"Доля/год",det_own:"Полное владение",det_apply:"Подать заявку — бесплатно",calc_h:"Калькулятор доли",calc_yr:"Период платежей",calc_yrs:"Лет",calc_eq:"Доля",calc_val:"Накопленная стоимость",faq_h:"Основная информация",faq_type:"Тип недвижимости",faq_floor:"Этаж",faq_furn:"Меблировка",faq_full:"Полная меблировка",faq_avail:"Доступно с",faq_kyc:"Верификация",app_h:"Заявка на Rent-to-Own",app_sub:"Sukhumvit Sky · Бесплатно · 5 минут",app_s1:"Шаг 1 — Личные данные",f_fn:"Имя",f_ln:"Фамилия",f_em:"Электронная почта",f_ph:"Телефон",f_na:"Гражданство",f_in:"Ежемесячный доход (бат)",app_next:"Далее: Верификация →",n_th:"Тайское",n_cn:"Китайское",n_ru:"Российское",n_ot:"Другое",suc_h:"Заявка отправлена!",suc_p:"Ваши данные проверяются. Мы верифицируем вас и свяжемся в течение 24 часов.",suc_prop:"Объект",suc_st:"Статус",suc_rv:"На рассмотрении",suc_ref:"Номер заявки",suc_dash:"Перейти в личный кабинет →",td_h:"Моё жильё StayVerse",td_s:"Sukhumvit Sky 24A · Бангкок",td_eq:"Моя доля",td_pm:"Платежей внесено",td_ev:"Стоимость доли",td_re:"Осталось",td_prog:"Прогресс владения",td_own:"Во владении",td_hist:"История платежей",td_m3:"Март 2026",td_m2:"Февраль 2026",td_m1:"Январь 2026",dd_h:"Кабинет застройщика",dd_s:"Управляйте объектами и отслеживайте доход",dd_pr:"Активных объектов",dd_rv:"Ежемесячный доход",dd_tn:"Активных арендаторов",dd_occ:"Заполняемость",dd_lst:"Мои объекты",dd_add:"+ Добавить объект",dd_occ2:"Занято",dd_av2:"Поиск арендатора",dd_inc:"Сводка доходов",dd_gr:"Получено платежей",dd_fe:"Комиссия платформы",dd_ne:"Чистый доход",dd_nb:"Следующая выплата:"}
+// ═══════════════════════════════════════════════════════════════
+// SPA NAVIGATION
+// ═══════════════════════════════════════════════════════════════
+const pageMap = {
+  home:      'pg-home',
+  rent:      'pg-rent',
+  investor:  'pg-investor',
+  detail:    'pg-detail',
+  myhome:    'pg-myhome',
+  listprop:  'pg-listprop',
+  affiliate: 'pg-affiliate',
+  tenant:    'pg-tenant',
+  dev:       'pg-dev',
+  apply:     'pg-apply',
+  success:   'pg-success',
 };
 
-const pageMap={home:'pg-home',detail:'pg-detail',apply:'pg-apply',success:'pg-success',tenant:'pg-tenant',dev:'pg-dev'};
-let lang='en';
+const navMap = {
+  home:     'nav-rto',
+  rent:     'nav-rent',
+  investor: 'nav-inv',
+  myhome:   'nav-my',
+  listprop: 'nav-list',
+};
 
-function setLang(l){
-  lang=l;
-  document.querySelectorAll('.lb').forEach(b=>b.classList.remove('on'));
-  const labels={en:'EN',th:'TH',zh:'中文',ru:'RU'};
-  document.querySelectorAll('.lb').forEach(b=>{if(b.textContent===labels[l])b.classList.add('on');});
-  document.querySelectorAll('[data-i18n]').forEach(el=>{
-    const k=el.getAttribute('data-i18n');
-    if(T[l]&&T[l][k])el.innerHTML=T[l][k];
+function goTo(page) {
+  // hide all pages
+  Object.values(pageMap).forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.style.display = 'none';
+  });
+  // show target
+  const target = document.getElementById(pageMap[page]);
+  if (target) target.style.display = 'block';
+  // update nav active state
+  Object.values(navMap).forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.classList.remove('on');
+  });
+  if (navMap[page]) {
+    const nav = document.getElementById(navMap[page]);
+    if (nav) nav.classList.add('on');
+  }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Init
+goTo('home');
+
+// ═══════════════════════════════════════════════════════════════
+// MAP TOGGLE
+// ═══════════════════════════════════════════════════════════════
+let mapVisible = false;
+function toggleMap() {
+  mapVisible = !mapVisible;
+  const mapEl = document.getElementById('mockMap');
+  const listEl = document.getElementById('propListGrid');
+  const btn = document.getElementById('mapToggleBtn');
+  if (mapEl) mapEl.style.display = mapVisible ? 'block' : 'none';
+  if (listEl) listEl.style.display = mapVisible ? 'none' : 'grid';
+  if (btn) btn.textContent = mapVisible ? '📋 List View' : '🗺 Map View';
+}
+
+// ═══════════════════════════════════════════════════════════════
+// LIFESTYLE FILTER TOGGLE
+// ═══════════════════════════════════════════════════════════════
+let lfVisible = false;
+function toggleLifestyle() {
+  lfVisible = !lfVisible;
+  const panel = document.getElementById('lfPanel');
+  const btn = document.getElementById('lfToggleBtn');
+  if (panel) panel.style.display = lfVisible ? 'flex' : 'none';
+  if (btn) btn.classList.toggle('on', lfVisible);
+}
+
+function selectLF(el) {
+  el.classList.toggle('on');
+}
+
+// ═══════════════════════════════════════════════════════════════
+// RTO CALCULATOR
+// ═══════════════════════════════════════════════════════════════
+const SALE_PRICE = 9190000;
+const MARKET_MULT = 1.15;   // 15% appreciation estimate
+let _dur = 3;               // years
+
+function setDur(yr) {
+  _dur = yr;
+  [1,3,5].forEach(y => {
+    const btn = document.getElementById('dur' + y);
+    if (btn) btn.classList.toggle('active', y === yr);
+  });
+  calcRTO();
+}
+
+function fmt(n) {
+  return '฿' + Math.round(n).toLocaleString('en-US');
+}
+
+function calcRTO() {
+  const downPct = parseInt(document.getElementById('slDown').value) / 100;
+  const rent    = parseInt(document.getElementById('slRent').value);
+
+  const down       = SALE_PRICE * downPct;
+  const totalRent  = rent * 12 * _dur;
+  const equity     = (totalRent + down) / SALE_PRICE;
+  const buyNow     = SALE_PRICE - (totalRent + down);
+  const market     = SALE_PRICE * MARKET_MULT;
+  const savings    = market - buyNow;
+
+  // Update display labels
+  const pctRound   = Math.round(downPct * 100);
+  const downEl     = document.getElementById('downPct');
+  if (downEl) downEl.textContent = `${pctRound}% = ${fmt(down)}`;
+
+  const rentEl     = document.getElementById('rentVal');
+  if (rentEl) rentEl.textContent = `฿${(rent/1000).toFixed(0)}K/mo`;
+
+  // Update result cells
+  function setCell(id, val) {
+    const el = document.getElementById(id);
+    if (el) el.textContent = val;
+  }
+  setCell('r-totalrent', fmt(totalRent));
+  setCell('r-down',      fmt(down));
+  setCell('r-equity',    (equity * 100).toFixed(2) + '%');
+  setCell('r-buynow',    buyNow > 0 ? fmt(buyNow) : '฿0 (Fully Owned)');
+  setCell('r-market',    fmt(market));
+  setCell('r-savings',   fmt(savings));
+  setCell('r-monthly',   '฿' + rent.toLocaleString('en-US'));
+  setCell('r-total',     fmt(totalRent + down));
+}
+
+// ═══════════════════════════════════════════════════════════════
+// i18n
+// ═══════════════════════════════════════════════════════════════
+const T = {
+  en: {
+    hero_title:   'Your Path to Property Ownership',
+    hero_sub:     'Rent smart. Build equity. Own your home.',
+    search_ph:    'Search project, area, BTS station…',
+    feat_title:   'Featured Properties',
+    why_title:    'Why Choose StayVerse?',
+    how_title:    'How It Works',
+    art_title:    'Living Guides & Stories',
+    testi_title:  'What Our Members Say',
+    footer_about: 'StayVerse — Rent-to-Own platform transforming the way Thailand rents and owns property.',
+  },
+  th: {
+    hero_title:   'เส้นทางสู่การเป็นเจ้าของบ้าน',
+    hero_sub:     'เช่าอย่างฉลาด สะสม Equity เป็นเจ้าของได้จริง',
+    search_ph:    'ค้นหาโครงการ ทำเล สถานี BTS…',
+    feat_title:   'โครงการแนะนำ',
+    why_title:    'ทำไมต้อง StayVerse?',
+    how_title:    'วิธีการทำงาน',
+    art_title:    'บทความ & Living Guide',
+    testi_title:  'เสียงจากผู้ใช้จริง',
+    footer_about: 'StayVerse — แพลตฟอร์ม Rent-to-Own เปลี่ยนวิธีการเช่าและเป็นเจ้าของบ้านในประเทศไทย',
+  },
+  zh: {
+    hero_title:   '您的房产所有权之路',
+    hero_sub:     '智慧租房，积累权益，真正拥有',
+    search_ph:    '搜索项目、地区、BTS站…',
+    feat_title:   '精选房源',
+    why_title:    '为什么选择StayVerse?',
+    how_title:    '如何运作',
+    art_title:    '生活指南与故事',
+    testi_title:  '会员评价',
+    footer_about: 'StayVerse — 泰国租购并举平台，改变租房和购房方式。',
+  },
+  ru: {
+    hero_title:   'Ваш путь к собственному жилью',
+    hero_sub:     'Умная аренда. Накопление доли. Реальное владение.',
+    search_ph:    'Поиск по проекту, району, BTS…',
+    feat_title:   'Рекомендуемые объекты',
+    why_title:    'Почему StayVerse?',
+    how_title:    'Как это работает',
+    art_title:    'Гиды и истории',
+    testi_title:  'Отзывы участников',
+    footer_about: 'StayVerse — платформа аренды с выкупом, меняющая рынок недвижимости Таиланда.',
+  },
+};
+
+let currentLang = 'th';
+
+function setLang(lang) {
+  if (!T[lang]) return;
+  currentLang = lang;
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (T[lang][key]) el.textContent = T[lang][key];
+  });
+  document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+    const key = el.getAttribute('data-i18n-ph');
+    if (T[lang][key]) el.placeholder = T[lang][key];
+  });
+  // Update lang button active states
+  document.querySelectorAll('.lb').forEach(btn => {
+    const d = btn.getAttribute('onclick');
+    if (d) btn.classList.toggle('on', d.includes("'" + lang + "'"));
   });
 }
 
-function goTo(p){
-  document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
-  const id=pageMap[p]||'pg-home';
-  const el=document.getElementById(id);
-  if(el){el.classList.add('active');window.scrollTo(0,0);}
-  document.querySelectorAll('.nb').forEach(b=>b.classList.remove('on'));
-}
-
-document.querySelectorAll('.fp').forEach(b=>{
-  b.addEventListener('click',function(){
-    document.querySelectorAll('.fp').forEach(x=>x.classList.remove('on'));
-    this.classList.add('on');
-  });
+// Init calculator on load
+window.addEventListener('DOMContentLoaded', function() {
+  calcRTO();
+  setLang('th');
 });
-
-setLang('en');
 </script>
 </body>
 </html>
