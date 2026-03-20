@@ -1,5 +1,21 @@
+# Internal documents — do NOT push to GitHub
+01_Strategy/
+03_Product/
+04_Finance/
+05_Pitch/
+StayVerse_Guide_MVP.docx
+StayVerse_Prototype_v3.html
+StayVerse_ActionPlan_2026.md
+Typography_Standard_v1.docx
+README.md
+
+# macOS
 .DS_Store
+**/.DS_Store
+
+# Windows
 Thumbs.db
+
+# Uploads / temp
+*.tmp
 *.log
-__pycache__/
-*.pyc
