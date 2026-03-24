@@ -5,13 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>StayVerse — Rent Today. Own Tomorrow.</title>
 
-<!-- Google Analytics GA4 -->
+<!-- Google Analytics GA4 — initialized only after cookie consent (PDPA compliant) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-BS63SGDWSC"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-  gtag('config', 'G-BS63SGDWSC');
+  // gtag('config') is called only after user accepts cookies — see initGA4()
 </script>
 
 <!-- SEO -->
@@ -439,10 +439,10 @@ footer{background:var(--navy);color:#fff;padding:48px 0 24px;}
   <div style="background:var(--navy);padding:14px 0;">
     <div class="wrap">
       <div style="display:flex;gap:32px;justify-content:center;flex-wrap:wrap;">
-        <div style="text-align:center;color:#fff;"><span style="font-size:18px;font-weight:800;">136+</span><span style="font-size:12px;opacity:.65;margin-left:6px;">Verified Units</span></div>
-        <div style="text-align:center;color:#fff;"><span style="font-size:18px;font-weight:800;">4</span><span style="font-size:12px;opacity:.65;margin-left:6px;">Cities · BKK, Pattaya, Phuket, CNX</span></div>
-        <div style="text-align:center;color:#fff;"><span style="font-size:18px;font-weight:800;">0%</span><span style="font-size:12px;opacity:.65;margin-left:6px;">Interest · First 6 Months</span></div>
-        <div style="text-align:center;color:#fff;"><span style="font-size:18px;font-weight:800;">4</span><span style="font-size:12px;opacity:.65;margin-left:6px;">Languages</span></div>
+        <div style="text-align:center;color:#fff;"><span style="font-size:18px;font-weight:800;">136+</span><span style="font-size:12px;opacity:.65;margin-left:6px;" data-i18n="stats_units">Verified Units</span></div>
+        <div style="text-align:center;color:#fff;"><span style="font-size:18px;font-weight:800;">4</span><span style="font-size:12px;opacity:.65;margin-left:6px;" data-i18n="stats_cities">Cities · BKK, Pattaya, Phuket, CNX</span></div>
+        <div style="text-align:center;color:#fff;"><span style="font-size:18px;font-weight:800;">0%</span><span style="font-size:12px;opacity:.65;margin-left:6px;" data-i18n="stats_interest">Interest · First 6 Months</span></div>
+        <div style="text-align:center;color:#fff;"><span style="font-size:18px;font-weight:800;">5</span><span style="font-size:12px;opacity:.65;margin-left:6px;" data-i18n="stats_langs">Languages</span></div>
       </div>
     </div>
   </div>
@@ -507,15 +507,26 @@ footer{background:var(--navy);color:#fff;padding:48px 0 24px;}
 
       <!-- Video Banner — Official YouTube -->
       <div style="border-radius:var(--r);overflow:hidden;margin-bottom:22px;position:relative;background:#000;">
-        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;">
-          <iframe
-            src="https://www.youtube.com/embed/nG66rfX6NxE?rel=0&modestbranding=1"
-            title="Grand Florida Pattaya — Luxury Beachfront Condo Resort"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
-            style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;">
-          </iframe>
+        <div id="yt-player-wrap" style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;cursor:pointer;background:#0D2137;"
+          onclick="document.getElementById('yt-player-wrap').innerHTML='<iframe src=\'https://www.youtube-nocookie.com/embed/nG66rfX6NxE?rel=0&modestbranding=1&autoplay=1\' frameborder=\'0\' allow=\'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\' allowfullscreen style=\'position:absolute;top:0;left:0;width:100%;height:100%;border:0;\'></iframe>'">
+          <!-- Thumbnail via YouTube API -->
+          <img
+            src="https://img.youtube.com/vi/nG66rfX6NxE/maxresdefault.jpg"
+            onerror="this.onerror=null;this.src='https://img.youtube.com/vi/nG66rfX6NxE/hqdefault.jpg'"
+            alt="Grand Florida Pattaya Showreel"
+            style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;filter:brightness(.75);">
+          <!-- Gradient overlay -->
+          <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(13,33,55,.6) 0%,rgba(14,124,123,.3) 100%);"></div>
+          <!-- Play button -->
+          <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:14px">
+            <div style="width:72px;height:72px;background:rgba(220,0,0,.9);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 28px rgba(0,0,0,.5);transition:.2s"
+              onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+              <div style="width:0;height:0;border-top:15px solid transparent;border-bottom:15px solid transparent;border-left:26px solid #fff;margin-left:6px"></div>
+            </div>
+            <div style="color:#fff;font-size:13px;font-weight:600;text-shadow:0 1px 4px rgba(0,0,0,.6);letter-spacing:.5px">▶ คลิกเพื่อเล่นวิดีโอ</div>
+          </div>
+          <!-- Duration badge -->
+          <div style="position:absolute;bottom:12px;right:14px;background:rgba(0,0,0,.75);color:#fff;font-size:11px;font-weight:700;padding:3px 8px;border-radius:4px;letter-spacing:.5px">4:32</div>
         </div>
         <div style="background:var(--navy-p);padding:10px 16px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
           <div>
@@ -548,13 +559,13 @@ footer{background:var(--navy);color:#fff;padding:48px 0 24px;}
             <div class="pbar"><div class="pbf" style="width:0%;background:var(--navy);"></div></div>
             <div class="pleg">Own in ~15 years · Duplex Penthouse · 2-Floor · ฿13,100,000</div>
           </div>
-          <div class="pf"><button class="btn bt bsm" onclick="event.stopPropagation();goTo('detail')">View Details</button><button class="btn bo bsm" onclick="event.stopPropagation();">Calculate</button></div>
+          <div class="pf"><button class="btn bt bsm" onclick="event.stopPropagation();goTo('detail')" data-i18n="btn_detail">View Details</button><button class="btn bo bsm" onclick="event.stopPropagation();" data-i18n="btn_calc">Calculate</button></div>
         </div>
         <!-- Sea View Extra A201 -->
         <div class="pc" onclick="goTo('detail')">
           <div class="pt" style="background:url('images/GrandFlorida_Images/ext-3.jpg') center/cover;position:relative;">
             <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(13,59,110,.5),transparent);border-radius:inherit;"></div>
-            <div class="pt-badge"><span class="tag tgr">Available</span><span class="tag tt" style="font-size:11px;">Sea View</span></div>
+            <div class="pt-badge"><span class="tag tgr" data-i18n="tag_available">Available</span><span class="tag tt" style="font-size:11px;">Sea View</span></div>
             <div class="pt-save">♡</div>
             <div style="position:absolute;bottom:10px;right:12px;background:rgba(255,255,255,.15);border-radius:6px;padding:2px 8px;font-size:11px;color:#fff;font-weight:700;">Bldg A · Fl.2</div>
           </div>
@@ -565,13 +576,13 @@ footer{background:var(--navy);color:#fff;padding:48px 0 24px;}
             <div class="pbar"><div class="pbf" style="width:0%;background:var(--teal);"></div></div>
             <div class="pleg">Own in ~15 years · 1BR Extra · Beachfront Sea View · ฿6,429,000</div>
           </div>
-          <div class="pf"><button class="btn bt bsm" onclick="event.stopPropagation();goTo('detail')">View Details</button><button class="btn bo bsm" onclick="event.stopPropagation();">Calculate</button></div>
+          <div class="pf"><button class="btn bt bsm" onclick="event.stopPropagation();goTo('detail')" data-i18n="btn_detail">View Details</button><button class="btn bo bsm" onclick="event.stopPropagation();" data-i18n="btn_calc">Calculate</button></div>
         </div>
         <!-- Sea View B202 -->
         <div class="pc" onclick="goTo('detail')">
           <div class="pt" style="background:url('images/GrandFlorida_Images/ext-5.jpg') center/cover;position:relative;">
             <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(10,74,130,.5),transparent);border-radius:inherit;"></div>
-            <div class="pt-badge"><span class="tag tg">Popular</span><span class="tag tt" style="font-size:11px;">Sea View</span></div>
+            <div class="pt-badge"><span class="tag tg" data-i18n="tag_popular">Popular</span><span class="tag tt" style="font-size:11px;">Sea View</span></div>
             <div class="pt-save">♡</div>
             <div style="position:absolute;bottom:10px;right:12px;background:rgba(255,255,255,.15);border-radius:6px;padding:2px 8px;font-size:11px;color:#fff;font-weight:700;">Bldg B · Fl.2</div>
           </div>
@@ -582,7 +593,7 @@ footer{background:var(--navy);color:#fff;padding:48px 0 24px;}
             <div class="pbar"><div class="pbf" style="width:0%;background:var(--teal);"></div></div>
             <div class="pleg">Own in ~15 years · 1 Bedroom · Full Sea View · ฿5,129,000</div>
           </div>
-          <div class="pf"><button class="btn bt bsm" onclick="event.stopPropagation();goTo('detail')">View Details</button><button class="btn bo bsm" onclick="event.stopPropagation();">Calculate</button></div>
+          <div class="pf"><button class="btn bt bsm" onclick="event.stopPropagation();goTo('detail')" data-i18n="btn_detail">View Details</button><button class="btn bo bsm" onclick="event.stopPropagation();" data-i18n="btn_calc">Calculate</button></div>
         </div>
         <!-- Pool View F712 -->
         <div class="pc" onclick="goTo('detail')">
@@ -599,13 +610,13 @@ footer{background:var(--navy);color:#fff;padding:48px 0 24px;}
             <div class="pbar"><div class="pbf" style="width:0%;background:var(--teal);"></div></div>
             <div class="pleg">Own in ~15 years · 1 Bedroom · Pool View · ฿4,290,000</div>
           </div>
-          <div class="pf"><button class="btn bt bsm" onclick="event.stopPropagation();goTo('detail')">View Details</button><button class="btn bo bsm" onclick="event.stopPropagation();">Calculate</button></div>
+          <div class="pf"><button class="btn bt bsm" onclick="event.stopPropagation();goTo('detail')" data-i18n="btn_detail">View Details</button><button class="btn bo bsm" onclick="event.stopPropagation();" data-i18n="btn_calc">Calculate</button></div>
         </div>
         <!-- Garden View H201 -->
         <div class="pc" onclick="goTo('detail')">
           <div class="pt" style="background:url('images/GrandFlorida_Images/type-a-corner.jpg') center/cover;position:relative;">
             <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(26,74,30,.45),transparent);border-radius:inherit;"></div>
-            <div class="pt-badge"><span class="tag tgr">Available</span><span class="tag tn" style="font-size:11px;">Garden View</span></div>
+            <div class="pt-badge"><span class="tag tgr" data-i18n="tag_available">Available</span><span class="tag tn" style="font-size:11px;">Garden View</span></div>
             <div class="pt-save">♡</div>
             <div style="position:absolute;bottom:10px;right:12px;background:rgba(255,255,255,.15);border-radius:6px;padding:2px 8px;font-size:11px;color:#fff;font-weight:700;">Bldg H · Fl.2</div>
           </div>
@@ -616,7 +627,7 @@ footer{background:var(--navy);color:#fff;padding:48px 0 24px;}
             <div class="pbar"><div class="pbf" style="width:0%;background:var(--green);"></div></div>
             <div class="pleg">Own in ~15 years · 1 Bedroom · Garden View · ฿4,599,000</div>
           </div>
-          <div class="pf"><button class="btn bt bsm" onclick="event.stopPropagation();goTo('detail')">View Details</button><button class="btn bo bsm" onclick="event.stopPropagation();">Calculate</button></div>
+          <div class="pf"><button class="btn bt bsm" onclick="event.stopPropagation();goTo('detail')" data-i18n="btn_detail">View Details</button><button class="btn bo bsm" onclick="event.stopPropagation();" data-i18n="btn_calc">Calculate</button></div>
         </div>
         <!-- Golden View G315 -->
         <div class="pc" onclick="goTo('detail')">
@@ -633,13 +644,13 @@ footer{background:var(--navy);color:#fff;padding:48px 0 24px;}
             <div class="pbar"><div class="pbf" style="width:0%;background:var(--gold);"></div></div>
             <div class="pleg">Own in ~15 years · 1 Bedroom · Corner Unit · ฿4,829,000</div>
           </div>
-          <div class="pf"><button class="btn bt bsm" onclick="event.stopPropagation();goTo('detail')">View Details</button><button class="btn bo bsm" onclick="event.stopPropagation();">Calculate</button></div>
+          <div class="pf"><button class="btn bt bsm" onclick="event.stopPropagation();goTo('detail')" data-i18n="btn_detail">View Details</button><button class="btn bo bsm" onclick="event.stopPropagation();" data-i18n="btn_calc">Calculate</button></div>
         </div>
       </div><!-- /g3 cards -->
 
       <div style="margin-top:14px;background:var(--teal-p);border-radius:var(--rs);padding:14px 18px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
         <div style="font-size:13px;color:var(--teal);"><strong>🔑 Foreign Quota</strong> · Chanote title deed · Sea/Garden/Pool/Golden views · Buildings A–H</div>
-        <button class="btn bt bsm">View All 136 Units →</button>
+        <button class="btn bt bsm" data-i18n="btn_viewall136">View All 136 Units →</button>
       </div>
       <!-- Grand Florida Amenities Gallery -->
       <div style="margin:40px 0 0">
@@ -670,7 +681,7 @@ footer{background:var(--navy);color:#fff;padding:48px 0 24px;}
       <div class="st" style="text-align:center;">
         <div class="tag tn" style="margin-bottom:10px;">WHY STAYVERSE</div>
         <h2 data-i18n="why_title">ทำไมต้องเลือก StayVerse?</h2>
-        <p>เหนือกว่าการเช่าธรรมดา ไม่ต้องกู้แบงก์ เริ่มเป็นเจ้าของได้วันนี้</p>
+        <p data-i18n="why_sub">เหนือกว่าการเช่าธรรมดา ไม่ต้องกู้แบงก์ เริ่มเป็นเจ้าของได้วันนี้</p>
       </div>
       <div class="g3" style="margin-bottom:28px;">
         <div style="background:var(--grey);border-radius:var(--r);padding:24px;text-align:center;">
@@ -713,7 +724,7 @@ footer{background:var(--navy);color:#fff;padding:48px 0 24px;}
       <div class="st" style="text-align:center;">
         <div class="tag tt" style="margin-bottom:10px;">HOW IT WORKS</div>
         <h2 data-i18n="how_title">Rent Today. Own Tomorrow.</h2>
-        <p>3 ขั้นตอนง่ายๆ สู่การเป็นเจ้าของ ไม่ต้องกู้แบงก์</p>
+        <p data-i18n="how_sub">3 ขั้นตอนง่ายๆ สู่การเป็นเจ้าของ ไม่ต้องกู้แบงก์</p>
       </div>
       <div class="g3">
         <div class="stepcard">
@@ -742,29 +753,29 @@ footer{background:var(--navy);color:#fff;padding:48px 0 24px;}
   <div style="background:linear-gradient(160deg,#0d2444 0%,#1B3A6B 55%,#0d5e5d 100%);padding:52px 0;">
     <div class="wrap">
       <div class="st" style="text-align:center;margin-bottom:36px;">
-        <div class="tag" style="background:rgba(255,255,255,.15);color:#fff;border-radius:20px;padding:3px 10px;font-size:12px;font-weight:600;display:inline-block;margin-bottom:10px;">THE HOUSING OWNERSHIP PROBLEM IN THAILAND</div>
-        <h2 style="color:#fff;font-size:26px;font-weight:800;">ปัญหาที่ StayVerse เกิดมาเพื่อแก้ไข</h2>
-        <p style="color:rgba(255,255,255,.7);">Rising prices, strict lending, and zero equity — millions are locked out of homeownership</p>
+        <div class="tag" style="background:rgba(255,255,255,.15);color:#fff;border-radius:20px;padding:3px 10px;font-size:12px;font-weight:600;display:inline-block;margin-bottom:10px;">🔒 THE HOUSING OWNERSHIP PROBLEM IN THAILAND</div>
+        <h2 style="color:#fff;font-size:26px;font-weight:800;" data-i18n="prob_title">ปัญหาที่ StayVerse เกิดมาเพื่อแก้ไข</h2>
+        <p style="color:rgba(255,255,255,.7);" data-i18n="prob_sub">Rising prices, strict lending, and zero equity — millions are locked out of homeownership</p>
       </div>
       <div class="g3">
         <div style="background:rgba(255,255,255,.08);border-radius:var(--r);padding:32px 24px;text-align:center;border:1px solid rgba(255,255,255,.12);">
           <div style="font-size:54px;font-weight:900;color:#C9931A;line-height:1;">70%<sup style="font-size:28px;">+</sup></div>
-          <div style="font-size:11px;font-weight:800;color:rgba(255,255,255,.9);letter-spacing:1.5px;margin:10px 0;text-transform:uppercase;">Mortgage Rejection Rate</div>
-          <p style="font-size:13px;color:rgba(255,255,255,.65);line-height:1.7;">Most applicants rejected by Thai banks due to insufficient income documents, informal employment, or weak credit history.</p>
+          <div style="font-size:11px;font-weight:800;color:rgba(255,255,255,.9);letter-spacing:1.5px;margin:10px 0;text-transform:uppercase;" data-i18n="prob1_label">Mortgage Rejection Rate</div>
+          <p style="font-size:13px;color:rgba(255,255,255,.65);line-height:1.7;" data-i18n="prob1_body">Most applicants rejected by Thai banks due to insufficient income documents, informal employment, or weak credit history.</p>
         </div>
         <div style="background:rgba(255,255,255,.08);border-radius:var(--r);padding:32px 24px;text-align:center;border:1px solid rgba(255,255,255,.12);">
           <div style="font-size:54px;font-weight:900;color:#C9931A;line-height:1;">฿560K<sup style="font-size:28px;">+</sup></div>
-          <div style="font-size:11px;font-weight:800;color:rgba(255,255,255,.9);letter-spacing:1.5px;margin:10px 0;text-transform:uppercase;">Average Down Payment Required</div>
-          <p style="font-size:13px;color:rgba(255,255,255,.65);line-height:1.7;">Equivalent to 3+ years of household savings for most Thai families — an insurmountable upfront barrier.</p>
+          <div style="font-size:11px;font-weight:800;color:rgba(255,255,255,.9);letter-spacing:1.5px;margin:10px 0;text-transform:uppercase;" data-i18n="prob2_label">Average Down Payment Required</div>
+          <p style="font-size:13px;color:rgba(255,255,255,.65);line-height:1.7;" data-i18n="prob2_body">Equivalent to 3+ years of household savings for most Thai families — an insurmountable upfront barrier.</p>
         </div>
         <div style="background:rgba(255,255,255,.08);border-radius:var(--r);padding:32px 24px;text-align:center;border:1px solid rgba(255,255,255,.12);">
           <div style="font-size:54px;font-weight:900;color:#C9931A;line-height:1;">฿2.16M</div>
-          <div style="font-size:11px;font-weight:800;color:rgba(255,255,255,.9);letter-spacing:1.5px;margin:10px 0;text-transform:uppercase;">Lifetime Rent · Zero Equity</div>
-          <p style="font-size:13px;color:rgba(255,255,255,.65);line-height:1.7;">The average Thai renter pays ฿2.16M over a lifetime with no asset accumulation. Every payment disappears.</p>
+          <div style="font-size:11px;font-weight:800;color:rgba(255,255,255,.9);letter-spacing:1.5px;margin:10px 0;text-transform:uppercase;" data-i18n="prob3_label">Lifetime Rent · Zero Equity</div>
+          <p style="font-size:13px;color:rgba(255,255,255,.65);line-height:1.7;" data-i18n="prob3_body">The average Thai renter pays ฿2.16M over a lifetime with no asset accumulation. Every payment disappears.</p>
         </div>
       </div>
       <div style="text-align:center;margin-top:28px;">
-        <p style="color:rgba(255,255,255,.6);font-size:13px;font-style:italic;">StayVerse transforms every monthly payment into real property equity — automatically, transparently, digitally.</p>
+        <p style="color:rgba(255,255,255,.6);font-size:13px;font-style:italic;" data-i18n="prob_tagline">StayVerse transforms every monthly payment into real property equity — automatically, transparently, digitally.</p>
       </div>
     </div>
   </div>
@@ -774,39 +785,39 @@ footer{background:var(--navy);color:#fff;padding:48px 0 24px;}
     <div class="wrap">
       <div class="st" style="text-align:center;">
         <div class="tag tt" style="margin-bottom:10px;">PLATFORM MODULES</div>
-        <h2>ครบทุก Module ในที่เดียว</h2>
-        <p>StayVerse digital platform ที่ developer, investor, และ tenant ใช้งานได้พร้อมกัน</p>
+        <h2 data-i18n="mod_title">ครบทุก Module ในที่เดียว</h2>
+        <p data-i18n="mod_sub">StayVerse digital platform ที่ developer, investor, และ tenant ใช้งานได้พร้อมกัน</p>
       </div>
       <div class="g3">
         <div style="background:var(--grey);border-radius:var(--r);padding:24px;">
           <div style="font-size:28px;margin-bottom:10px;">🔍</div>
-          <h3 style="font-size:14px;font-weight:800;color:var(--navy);margin-bottom:6px;">Front-End Listing</h3>
-          <p style="font-size:13px;color:var(--txl);line-height:1.6;">Dynamic listing พร้อม search engine กรองตามทำเล ราคา และ equity rate</p>
+          <h3 style="font-size:14px;font-weight:800;color:var(--navy);margin-bottom:6px;" data-i18n="mod1_title">Front-End Listing</h3>
+          <p style="font-size:13px;color:var(--txl);line-height:1.6;" data-i18n="mod1_body">Dynamic listing พร้อม search engine กรองตามทำเล ราคา และ equity rate</p>
         </div>
         <div style="background:var(--grey);border-radius:var(--r);padding:24px;">
           <div style="font-size:28px;margin-bottom:10px;">📄</div>
-          <h3 style="font-size:14px;font-weight:800;color:var(--navy);margin-bottom:6px;">Back-End Reports & Docs</h3>
-          <p style="font-size:13px;color:var(--txl);line-height:1.6;">Hire Purchase Contract, Invoice & Receipt, Payment Calculator, Statement — Document Exchange Hub for Banking</p>
+          <h3 style="font-size:14px;font-weight:800;color:var(--navy);margin-bottom:6px;" data-i18n="mod2_title">Back-End Reports & Docs</h3>
+          <p style="font-size:13px;color:var(--txl);line-height:1.6;" data-i18n="mod2_body">Hire Purchase Contract, Invoice & Receipt, Payment Calculator, Statement — Document Exchange Hub for Banking</p>
         </div>
         <div style="background:var(--grey);border-radius:var(--r);padding:24px;">
           <div style="font-size:28px;margin-bottom:10px;">🔥</div>
-          <h3 style="font-size:14px;font-weight:800;color:var(--navy);margin-bottom:6px;">Fire Sale Price Listing</h3>
-          <p style="font-size:13px;color:var(--txl);line-height:1.6;">End-of-contract unit listing with fire sale price — gives developers a guaranteed exit strategy</p>
+          <h3 style="font-size:14px;font-weight:800;color:var(--navy);margin-bottom:6px;" data-i18n="mod3_title">Fire Sale Price Listing</h3>
+          <p style="font-size:13px;color:var(--txl);line-height:1.6;" data-i18n="mod3_body">End-of-contract unit listing with fire sale price — gives developers a guaranteed exit strategy</p>
         </div>
         <div style="background:var(--grey);border-radius:var(--r);padding:24px;">
           <div style="font-size:28px;margin-bottom:10px;">📈</div>
-          <h3 style="font-size:14px;font-weight:800;color:var(--navy);margin-bottom:6px;">Investor Hub</h3>
-          <p style="font-size:13px;color:var(--txl);line-height:1.6;">Portal สำหรับนักลงทุนที่ต้องการซื้อ unit เพื่อลงทุน พร้อม real-time equity tracking dashboard</p>
+          <h3 style="font-size:14px;font-weight:800;color:var(--navy);margin-bottom:6px;" data-i18n="mod4_title">Investor Hub</h3>
+          <p style="font-size:13px;color:var(--txl);line-height:1.6;" data-i18n="mod4_body">Portal สำหรับนักลงทุนที่ต้องการซื้อ unit เพื่อลงทุน พร้อม real-time equity tracking dashboard</p>
         </div>
         <div style="background:var(--grey);border-radius:var(--r);padding:24px;">
           <div style="font-size:28px;margin-bottom:10px;">💳</div>
-          <h3 style="font-size:14px;font-weight:800;color:var(--navy);margin-bottom:6px;">Payment Gateway & Wallet</h3>
-          <p style="font-size:13px;color:var(--txl);line-height:1.6;">Integrated กับ One Wallet — ตัดอัตโนมัติทุกเดือน ไม่ต้องมีบัญชีธนาคารไทย รองรับ cross-border</p>
+          <h3 style="font-size:14px;font-weight:800;color:var(--navy);margin-bottom:6px;" data-i18n="mod5_title">Payment Gateway & Wallet</h3>
+          <p style="font-size:13px;color:var(--txl);line-height:1.6;" data-i18n="mod5_body">Integrated กับ One Wallet — ตัดอัตโนมัติทุกเดือน ไม่ต้องมีบัญชีธนาคารไทย รองรับ cross-border</p>
         </div>
         <div style="background:var(--grey);border-radius:var(--r);padding:24px;">
           <div style="font-size:28px;margin-bottom:10px;">🏠</div>
-          <h3 style="font-size:14px;font-weight:800;color:var(--navy);margin-bottom:6px;">Value Added Services</h3>
-          <p style="font-size:13px;color:var(--txl);line-height:1.6;">Housekeeping, Laundry, Relocation service — ทำให้ห้องพร้อม move-in และเพิ่มมูลค่าให้ผู้เช่า</p>
+          <h3 style="font-size:14px;font-weight:800;color:var(--navy);margin-bottom:6px;" data-i18n="mod6_title">Value Added Services</h3>
+          <p style="font-size:13px;color:var(--txl);line-height:1.6;" data-i18n="mod6_body">Housekeeping, Laundry, Relocation service — ทำให้ห้องพร้อม move-in และเพิ่มมูลค่าให้ผู้เช่า</p>
         </div>
       </div>
     </div>
@@ -817,8 +828,8 @@ footer{background:var(--navy);color:#fff;padding:48px 0 24px;}
     <div class="wrap">
       <div class="st" style="text-align:center;">
         <div class="tag tn" style="margin-bottom:10px;">FOR DEVELOPERS & LANDLORDS</div>
-        <h2>List Your Properties. Close More Deals.</h2>
-        <p>SaaS + Transaction Commission — sustainable, scalable, not cash-burning</p>
+        <h2 data-i18n="dev_price_title">List Your Properties. Close More Deals.</h2>
+        <p data-i18n="dev_price_sub">SaaS + Transaction Commission — sustainable, scalable, not cash-burning</p>
       </div>
       <div class="g3">
         <!-- Starter -->
@@ -830,7 +841,7 @@ footer{background:var(--navy);color:#fff;padding:48px 0 24px;}
           </div>
           <div style="padding:20px 24px;">
             <div style="font-size:13px;color:var(--tx);line-height:2.1;">✓ Basic listing & contract tools<br>✓ Email support (48h response)<br>✓ Monthly performance report<br>✓ Standard contract templates</div>
-            <button class="btn bo" style="width:100%;margin-top:16px;justify-content:center;" onclick="goTo('listprop')">Get Started →</button>
+            <button class="btn bo" style="width:100%;margin-top:16px;justify-content:center;" onclick="goTo('listprop')" data-i18n="btn_getstarted">Get Started →</button>
           </div>
         </div>
         <!-- Professional (Featured) -->
@@ -843,7 +854,7 @@ footer{background:var(--navy);color:#fff;padding:48px 0 24px;}
           </div>
           <div style="padding:0 24px 24px;">
             <div style="font-size:13px;color:rgba(255,255,255,.9);line-height:2.1;">✓ Priority listing placement<br>✓ API & system integration<br>✓ Dedicated account manager<br>✓ Real-time analytics dashboard</div>
-            <button class="btn" style="width:100%;margin-top:16px;justify-content:center;background:#fff;color:var(--teal);font-weight:700;" onclick="goTo('listprop')">List Your Units →</button>
+            <button class="btn" style="width:100%;margin-top:16px;justify-content:center;background:#fff;color:var(--teal);font-weight:700;" onclick="goTo('listprop')" data-i18n="btn_listunits">List Your Units →</button>
           </div>
         </div>
         <!-- Enterprise -->
@@ -855,7 +866,7 @@ footer{background:var(--navy);color:#fff;padding:48px 0 24px;}
           </div>
           <div style="padding:20px 24px;">
             <div style="font-size:13px;color:var(--tx);line-height:2.1;">✓ White-label branding option<br>✓ Custom contract structures<br>✓ 24/7 priority support hotline<br>✓ Bulk management & API access</div>
-            <button class="btn bo" style="width:100%;margin-top:16px;justify-content:center;" onclick="goTo('listprop')">Contact Us →</button>
+            <button class="btn bo" style="width:100%;margin-top:16px;justify-content:center;" onclick="goTo('listprop')" data-i18n="btn_contact">Contact Us →</button>
           </div>
         </div>
       </div>
@@ -871,10 +882,10 @@ footer{background:var(--navy);color:#fff;padding:48px 0 24px;}
       <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:24px;">
         <div><div class="tag tn" style="margin-bottom:8px;">CONTENT HUB</div><h2 style="font-size:22px;font-weight:800;color:var(--navy);" data-i18n="art_title">บทความ & Insights</h2><p style="color:var(--txl);font-size:13px;margin-top:4px;">ความรู้ Living Solution · Real Estate Insights · Sponsorship</p></div>
         <div style="display:flex;gap:6px;flex-shrink:0;">
-          <button class="fp on" style="border-radius:20px;font-size:12px;">ทั้งหมด</button>
-          <button class="fp" style="border-radius:20px;font-size:12px;">StayVerse</button>
-          <button class="fp" style="border-radius:20px;font-size:12px;">Living</button>
-          <button class="fp" style="border-radius:20px;font-size:12px;">Sponsored</button>
+          <button class="fp on" style="border-radius:20px;font-size:12px;" data-i18n="art_filter_all">ทั้งหมด</button>
+          <button class="fp" style="border-radius:20px;font-size:12px;" data-i18n="art_filter_sv">StayVerse</button>
+          <button class="fp" style="border-radius:20px;font-size:12px;" data-i18n="art_filter_living">Living</button>
+          <button class="fp" style="border-radius:20px;font-size:12px;" data-i18n="art_filter_sponsored">Sponsored</button>
         </div>
       </div>
       <div class="g3">
@@ -1002,7 +1013,7 @@ footer{background:var(--navy);color:#fff;padding:48px 0 24px;}
           <a>About StayVerse</a>
           <a>Contact Us</a>
           <a>Terms & Conditions</a>
-          <a>Privacy Policy</a>
+          <a onclick="goTo('privacy')" style="cursor:pointer">Privacy Policy</a>
         </div>
       </div>
       <!-- Affiliate Banner -->
@@ -1067,7 +1078,7 @@ footer{background:var(--navy);color:#fff;padding:48px 0 24px;}
           <div class="prow"><div class="pprice">฿18,000<span>/mo</span></div><div style="font-size:12px;color:var(--green);font-weight:700;">⚡ Instant Book</div></div>
           <div class="pleg">Min 3 months · Auto-debit · Pet-friendly · BTS Asok 5 min</div>
         </div>
-        <div class="pf"><button class="btn bgreen bsm">Book Instantly</button><button class="btn bo bsm">Details</button></div>
+        <div class="pf"><button class="btn bgreen bsm" data-i18n="btn_book">Book Instantly</button><button class="btn bo bsm" data-i18n="btn_details">Details</button></div>
       </div>
       <div class="pc">
         <div class="pt" style="background:url('images/GrandFlorida_Images/ext-5.jpg') center/cover;position:relative;">
@@ -1081,7 +1092,7 @@ footer{background:var(--navy);color:#fff;padding:48px 0 24px;}
           <div class="prow"><div class="pprice">฿12,000<span>/mo</span></div><div style="font-size:12px;color:var(--green);font-weight:700;">⚡ Instant Book</div></div>
           <div class="pleg">Min 1 month · Auto-debit · Near beach · Parking included</div>
         </div>
-        <div class="pf"><button class="btn bgreen bsm">Book Instantly</button><button class="btn bo bsm">Details</button></div>
+        <div class="pf"><button class="btn bgreen bsm" data-i18n="btn_book">Book Instantly</button><button class="btn bo bsm" data-i18n="btn_details">Details</button></div>
       </div>
       <div class="pc">
         <div class="pt" style="background:url('images/GrandFlorida_Images/type-a-corner.jpg') center/cover;position:relative;">
@@ -1095,7 +1106,7 @@ footer{background:var(--navy);color:#fff;padding:48px 0 24px;}
           <div class="prow"><div class="pprice">฿14,500<span>/mo</span></div><div style="font-size:12px;color:var(--green);font-weight:700;">⚡ Instant Book</div></div>
           <div class="pleg">Min 3 months · Auto-debit · WFH Ready · Café district</div>
         </div>
-        <div class="pf"><button class="btn bgreen bsm">Book Instantly</button><button class="btn bo bsm">Details</button></div>
+        <div class="pf"><button class="btn bgreen bsm" data-i18n="btn_book">Book Instantly</button><button class="btn bo bsm" data-i18n="btn_details">Details</button></div>
       </div>
     </div>
     <div style="margin-top:24px;background:var(--green-p);border-radius:var(--r);padding:18px 22px;">
@@ -1116,7 +1127,7 @@ footer{background:var(--navy);color:#fff;padding:48px 0 24px;}
     <div class="wrap">
       <div class="tag" style="background:rgba(255,255,255,.15);color:#fff;margin-bottom:12px;">🔥 Investor's Choice · Fire Sale Unit</div>
       <h1 style="font-size:30px;font-weight:900;margin-bottom:8px;" data-i18n="investor_title">ห้องพร้อมผู้เช่า · ราคาต่ำกว่าตลาด</h1>
-      <p style="opacity:.8;">เจ้าของต้องการสภาพคล่อง · ราคาเจรจาได้ · พร้อมทำสัญญาโอนทันที</p>
+      <p style="opacity:.8;" data-i18n="investor_hero_sub">เจ้าของต้องการสภาพคล่อง · ราคาเจรจาได้ · พร้อมทำสัญญาโอนทันที</p>
     </div>
   </div>
   <div class="sec"><div class="wrap">
@@ -1124,8 +1135,8 @@ footer{background:var(--navy);color:#fff;padding:48px 0 24px;}
       <div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap;">
         <div style="font-size:28px;">💡</div>
         <div>
-          <div style="font-size:15px;font-weight:700;color:var(--navy);">Investor's Choice คืออะไร?</div>
-          <div style="font-size:13px;color:var(--txl);margin-top:3px;">ยูนิตที่เจ้าของ Rent-to-Own ต้องการขายออก พร้อม Active Tenant อยู่ → นักลงทุนซื้อได้ในราคา below market และรับ cashflow ทันที</div>
+          <div style="font-size:15px;font-weight:700;color:var(--navy);" data-i18n="inv_what_title">Investor's Choice คืออะไร?</div>
+          <div style="font-size:13px;color:var(--txl);margin-top:3px;" data-i18n="inv_what_body">ยูนิตที่เจ้าของ Rent-to-Own ต้องการขายออก พร้อม Active Tenant อยู่ → นักลงทุนซื้อได้ในราคา below market และรับ cashflow ทันที</div>
         </div>
       </div>
     </div>
@@ -1350,30 +1361,30 @@ footer{background:var(--navy);color:#fff;padding:48px 0 24px;}
           <!-- Monthly summary -->
           <div style="background:var(--navy-p);border-radius:10px;padding:14px;margin:16px 0;font-size:13px">
             <div style="display:flex;justify-content:space-between;margin-bottom:4px">
-              <span style="color:var(--muted)">Monthly rent</span>
+              <span style="color:var(--muted)" data-i18n="calc_monthly_lbl">Monthly rent</span>
               <span id="r-monthly" style="font-weight:700;color:var(--navy)">฿65,000</span>
             </div>
             <div style="display:flex;justify-content:space-between;margin-bottom:4px">
-              <span style="color:var(--muted)">Total commitment</span>
+              <span style="color:var(--muted)" data-i18n="calc_commit_lbl">Total commitment</span>
               <span id="r-total" style="font-weight:700;color:var(--navy)">฿2,799,500</span>
             </div>
             <div style="display:flex;justify-content:space-between">
-              <span style="color:var(--muted)">Equity rate/yr</span>
+              <span style="color:var(--muted)" data-i18n="calc_equity_yr">Equity rate/yr</span>
               <span style="font-weight:700;color:var(--teal)">8.48%</span>
             </div>
           </div>
 
           <!-- CTAs -->
           <div style="display:grid;gap:10px">
-            <button class="btn btn-green" onclick="goTo('apply')" style="width:100%;padding:14px;font-size:15px;font-weight:700;border-radius:12px">
+            <button class="btn btn-green" onclick="goTo('apply')" style="width:100%;padding:14px;font-size:15px;font-weight:700;border-radius:12px" data-i18n="btn_rent_this_unit">
               🏠 สนใจเช่าห้องนี้
             </button>
-            <button class="btn btn-red" onclick="goTo('investor')" style="width:100%;padding:14px;font-size:15px;font-weight:700;border-radius:12px">
+            <button class="btn btn-red" onclick="goTo('investor')" style="width:100%;padding:14px;font-size:15px;font-weight:700;border-radius:12px" data-i18n="btn_buy_with_tenant_unit">
               💼 สนใจซื้อห้องนี้ พร้อมผู้เช่า
             </button>
           </div>
 
-          <div style="text-align:center;font-size:11px;color:var(--muted);margin-top:12px">
+          <div style="text-align:center;font-size:11px;color:var(--muted);margin-top:12px" data-i18n="calc_est_note">
             ค่าคำนวณเป็นการประมาณการเท่านั้น · ราคาจริงขึ้นอยู่กับเงื่อนไขสัญญา
           </div>
         </div><!-- /calc-box -->
@@ -1472,7 +1483,7 @@ footer{background:var(--navy);color:#fff;padding:48px 0 24px;}
     <div style="text-align:center;margin-bottom:32px">
       <div style="font-size:48px;margin-bottom:12px">🏠</div>
       <h1 style="font-size:28px;font-weight:800;color:var(--navy);margin:0 0 8px" data-i18n="myhome_title">My Home</h1>
-      <p style="color:var(--muted);font-size:14px;margin:0">ติดตาม credit score · ดูความคืบหน้า equity · บริหาร property ของคุณ</p>
+      <p style="color:var(--muted);font-size:14px;margin:0" data-i18n="myhome_page_sub">ติดตาม credit score · ดูความคืบหน้า equity · บริหาร property ของคุณ</p>
     </div>
 
     <!-- Feature teasers -->
@@ -1480,29 +1491,29 @@ footer{background:var(--navy);color:#fff;padding:48px 0 24px;}
       <div style="background:#fff;border:1px solid #e8e8e8;border-radius:14px;padding:18px;display:flex;gap:14px;align-items:center">
         <div style="font-size:28px;flex-shrink:0">📈</div>
         <div>
-          <div style="font-weight:700;color:var(--navy);margin-bottom:2px">Build Your Credit Score</div>
-          <div style="font-size:13px;color:var(--muted)">ทุกๆ การจ่ายเช่าตรงเวลา = credit score ที่สูงขึ้น พร้อมสำหรับการขอสินเชื่อในอนาคต</div>
+          <div style="font-weight:700;color:var(--navy);margin-bottom:2px" data-i18n="myhome_f1_title">Build Your Credit Score</div>
+          <div style="font-size:13px;color:var(--muted)" data-i18n="myhome_f1_body">ทุกๆ การจ่ายเช่าตรงเวลา = credit score ที่สูงขึ้น พร้อมสำหรับการขอสินเชื่อในอนาคต</div>
         </div>
       </div>
       <div style="background:#fff;border:1px solid #e8e8e8;border-radius:14px;padding:18px;display:flex;gap:14px;align-items:center">
         <div style="font-size:28px;flex-shrink:0">🏡</div>
         <div>
-          <div style="font-weight:700;color:var(--navy);margin-bottom:2px">Real-Time Property Dashboard</div>
-          <div style="font-size:13px;color:var(--muted)">Monitor rental payment history · equity accumulated · estimated property value · days to ownership</div>
+          <div style="font-weight:700;color:var(--navy);margin-bottom:2px" data-i18n="myhome_f2_title">Real-Time Property Dashboard</div>
+          <div style="font-size:13px;color:var(--muted)" data-i18n="myhome_f2_body">Monitor rental payment history · equity accumulated · estimated property value · days to ownership</div>
         </div>
       </div>
       <div style="background:#fff;border:1px solid #e8e8e8;border-radius:14px;padding:18px;display:flex;gap:14px;align-items:center">
         <div style="font-size:28px;flex-shrink:0">💳</div>
         <div>
-          <div style="font-weight:700;color:var(--navy);margin-bottom:2px">Auto Monthly Deduction</div>
-          <div style="font-size:13px;color:var(--muted)">ตัดจ่ายอัตโนมัติ · ไม่มีค่าธรรมเนียมการโอน · รับใบเสร็จทันที</div>
+          <div style="font-weight:700;color:var(--navy);margin-bottom:2px" data-i18n="myhome_f3_title">Auto Monthly Deduction</div>
+          <div style="font-size:13px;color:var(--muted)" data-i18n="myhome_f3_body">ตัดจ่ายอัตโนมัติ · ไม่มีค่าธรรมเนียมการโอน · รับใบเสร็จทันที</div>
         </div>
       </div>
     </div>
 
     <!-- Login card -->
     <div style="background:#fff;border:1px solid #e0e8f0;border-radius:20px;padding:28px;box-shadow:0 4px 20px rgba(27,58,92,.08)">
-      <div style="font-size:16px;font-weight:700;color:var(--navy);margin-bottom:20px;text-align:center">เข้าสู่ระบบ Dashboard</div>
+      <div style="font-size:16px;font-weight:700;color:var(--navy);margin-bottom:20px;text-align:center" data-i18n="myhome_login_title">เข้าสู่ระบบ Dashboard</div>
 
       <div style="margin-bottom:14px">
         <label style="font-size:13px;color:var(--muted);margin-bottom:4px;display:block">Email / เบอร์โทรศัพท์</label>
@@ -1517,15 +1528,15 @@ footer{background:var(--navy);color:#fff;padding:48px 0 24px;}
         🔑 เข้าสู่ระบบ
       </button>
 
-      <div style="text-align:center;font-size:13px;color:var(--muted);margin-bottom:12px">หรือ</div>
+      <div style="text-align:center;font-size:13px;color:var(--muted);margin-bottom:12px" data-i18n="myhome_or">หรือ</div>
 
       <button class="btn" style="width:100%;padding:12px;font-size:14px;font-weight:600;border-radius:12px;background:#fff;border:1.5px solid #dde3ea;color:var(--navy);margin-bottom:8px">
         <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" style="width:18px;vertical-align:middle;margin-right:8px">Sign in with Google
       </button>
 
       <div style="text-align:center;margin-top:16px">
-        <span style="font-size:13px;color:var(--muted)">ยังไม่มีบัญชี? </span>
-        <span style="font-size:13px;color:var(--teal);font-weight:600;cursor:pointer">สมัครสมาชิกฟรี</span>
+        <span style="font-size:13px;color:var(--muted)" data-i18n="myhome_no_account">ยังไม่มีบัญชี? </span>
+        <span style="font-size:13px;color:var(--teal);font-weight:600;cursor:pointer" data-i18n="myhome_signup_link">สมัครสมาชิกฟรี</span>
       </div>
     </div>
 
@@ -1548,7 +1559,7 @@ footer{background:var(--navy);color:#fff;padding:48px 0 24px;}
         </div>
       </div>
       <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.3)">
-        <div style="background:var(--navy);color:#fff;padding:10px 20px;border-radius:20px;font-size:13px;font-weight:600">🔒 Login to view your dashboard</div>
+        <div style="background:var(--navy);color:#fff;padding:10px 20px;border-radius:20px;font-size:13px;font-weight:600" data-i18n="myhome_lock_msg">🔒 Login to view your dashboard</div>
       </div>
     </div>
   </div>
@@ -1559,7 +1570,7 @@ footer{background:var(--navy);color:#fff;padding:48px 0 24px;}
   <div style="max-width:960px;margin:0 auto;padding:40px 16px 80px">
     <div style="text-align:center;margin-bottom:40px">
       <h1 style="font-size:32px;font-weight:800;color:var(--navy);margin:0 0 10px" data-i18n="listprop_title">List Your Property on StayVerse</h1>
-      <p style="color:var(--muted);font-size:16px;max-width:560px;margin:0 auto">เลือก package ที่เหมาะกับคุณ · Reach ผู้เช่าและนักลงทุนที่ใช่ · เริ่มต้นได้เลยวันนี้</p>
+      <p style="color:var(--muted);font-size:16px;max-width:560px;margin:0 auto" data-i18n="listprop_page_sub">เลือก package ที่เหมาะกับคุณ · Reach ผู้เช่าและนักลงทุนที่ใช่ · เริ่มต้นได้เลยวันนี้</p>
     </div>
 
     <!-- Package cards -->
@@ -1569,85 +1580,85 @@ footer{background:var(--navy);color:#fff;padding:48px 0 24px;}
       <div class="pkgcard">
         <div style="font-size:13px;font-weight:600;color:var(--muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:1px">Basic</div>
         <div style="font-size:36px;font-weight:800;color:var(--navy)">฿2,900</div>
-        <div style="font-size:12px;color:var(--muted);margin-bottom:20px">/เดือน · ต่อ listing</div>
+        <div style="font-size:12px;color:var(--muted);margin-bottom:20px" data-i18n="pkg_per_listing">/เดือน · ต่อ listing</div>
         <hr style="border:none;border-top:1px solid #f0f0f0;margin:0 0 20px">
         <ul style="list-style:none;padding:0;margin:0 0 28px;display:flex;flex-direction:column;gap:10px;font-size:14px">
-          <li>✅ ลง listing 1 ห้อง</li>
-          <li>✅ รูปสูงสุด 10 รูป</li>
-          <li>✅ VR Tour (360°)</li>
-          <li>✅ แสดงบน Search Results</li>
-          <li>✅ Contact form</li>
-          <li style="color:var(--muted)">✗ Homepage Spotlight</li>
-          <li style="color:var(--muted)">✗ Priority search ranking</li>
-          <li style="color:var(--muted)">✗ SEM boost</li>
-          <li style="color:var(--muted)">✗ Analytics dashboard</li>
+          <li data-i18n="pkg_b1">✅ ลง listing 1 ห้อง</li>
+          <li data-i18n="pkg_b2">✅ รูปสูงสุด 10 รูป</li>
+          <li data-i18n="pkg_b3">✅ VR Tour (360°)</li>
+          <li data-i18n="pkg_b4">✅ แสดงบน Search Results</li>
+          <li data-i18n="pkg_b5">✅ Contact form</li>
+          <li style="color:var(--muted)" data-i18n="pkg_b_no1">✗ Homepage Spotlight</li>
+          <li style="color:var(--muted)" data-i18n="pkg_b_no2">✗ Priority search ranking</li>
+          <li style="color:var(--muted)" data-i18n="pkg_b_no3">✗ SEM boost</li>
+          <li style="color:var(--muted)" data-i18n="pkg_b_no4">✗ Analytics dashboard</li>
         </ul>
-        <button class="btn bo" style="width:100%;padding:12px;border-radius:10px;font-weight:600">เริ่มต้น Basic</button>
+        <button class="btn bo" style="width:100%;padding:12px;border-radius:10px;font-weight:600" data-i18n="btn_start_basic">เริ่มต้น Basic</button>
       </div>
 
       <!-- Pro (highlighted) -->
       <div class="pkgcard" style="border-color:var(--teal);background:linear-gradient(180deg,var(--teal-p) 0%,#fff 40%);position:relative;transform:translateY(-8px);box-shadow:0 8px 32px rgba(0,107,107,.15)">
-        <div style="position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--teal);color:#fff;padding:4px 16px;border-radius:20px;font-size:12px;font-weight:700;white-space:nowrap">⭐ Most Popular</div>
+        <div style="position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--teal);color:#fff;padding:4px 16px;border-radius:20px;font-size:12px;font-weight:700;white-space:nowrap" data-i18n="tag_most_popular">⭐ Most Popular</div>
         <div style="font-size:13px;font-weight:600;color:var(--teal);margin-bottom:8px;text-transform:uppercase;letter-spacing:1px">Pro</div>
         <div style="font-size:36px;font-weight:800;color:var(--navy)">฿7,900</div>
-        <div style="font-size:12px;color:var(--muted);margin-bottom:20px">/เดือน · ต่อ listing</div>
+        <div style="font-size:12px;color:var(--muted);margin-bottom:20px" data-i18n="pkg_per_listing">/เดือน · ต่อ listing</div>
         <hr style="border:none;border-top:1px solid #e0f2f1;margin:0 0 20px">
         <ul style="list-style:none;padding:0;margin:0 0 28px;display:flex;flex-direction:column;gap:10px;font-size:14px">
-          <li>✅ ลง listing ได้ไม่จำกัด</li>
-          <li>✅ รูปสูงสุด 30 รูป + Video</li>
-          <li>✅ VR Tour (360°)</li>
-          <li>✅ <strong>Priority Search Ranking</strong></li>
-          <li>✅ Contact form + WhatsApp</li>
-          <li>✅ <strong>Search Top Placement ฿3K-10K</strong></li>
-          <li>✅ Analytics dashboard</li>
-          <li>✅ Developer brand page</li>
-          <li style="color:var(--muted)">✗ Homepage Spotlight</li>
+          <li data-i18n="pkg_p1">✅ ลง listing ได้ไม่จำกัด</li>
+          <li data-i18n="pkg_p2">✅ รูปสูงสุด 30 รูป + Video</li>
+          <li data-i18n="pkg_b3">✅ VR Tour (360°)</li>
+          <li data-i18n="pkg_p4">✅ Priority Search Ranking</li>
+          <li data-i18n="pkg_p5">✅ Contact form + WhatsApp</li>
+          <li data-i18n="pkg_p6">✅ Search Top Placement ฿3K-10K</li>
+          <li data-i18n="pkg_p7">✅ Analytics dashboard</li>
+          <li data-i18n="pkg_p8">✅ Developer brand page</li>
+          <li style="color:var(--muted)" data-i18n="pkg_p_no1">✗ Homepage Spotlight</li>
         </ul>
-        <button class="btn btn-green" style="width:100%;padding:12px;border-radius:10px;font-weight:700">เลือก Pro</button>
+        <button class="btn btn-green" style="width:100%;padding:12px;border-radius:10px;font-weight:700" data-i18n="btn_choose_pro">เลือก Pro</button>
       </div>
 
       <!-- Premium -->
       <div class="pkgcard" style="border-color:var(--gold);background:linear-gradient(180deg,var(--gold-p) 0%,#fff 40%)">
         <div style="font-size:13px;font-weight:600;color:var(--gold);margin-bottom:8px;text-transform:uppercase;letter-spacing:1px">Premium</div>
         <div style="font-size:36px;font-weight:800;color:var(--navy)">฿19,900</div>
-        <div style="font-size:12px;color:var(--muted);margin-bottom:20px">/เดือน · ต่อ project</div>
+        <div style="font-size:12px;color:var(--muted);margin-bottom:20px" data-i18n="pkg_per_project">/เดือน · ต่อ project</div>
         <hr style="border:none;border-top:1px solid #fff8e1;margin:0 0 20px">
         <ul style="list-style:none;padding:0;margin:0 0 28px;display:flex;flex-direction:column;gap:10px;font-size:14px">
-          <li>✅ ลง listing ทุก unit ไม่จำกัด</li>
-          <li>✅ รูป + Video + VR ไม่จำกัด</li>
-          <li>✅ <strong>Homepage Spotlight ฿15K-30K/mo</strong></li>
-          <li>✅ <strong>Google Ads SEM Boost</strong></li>
-          <li>✅ Dedicated account manager</li>
-          <li>✅ Analytics + Lead reports</li>
-          <li>✅ Developer brand page (Premium)</li>
-          <li>✅ WeChat / LINE / WhatsApp leads</li>
-          <li>✅ Featured in Articles & Email blast</li>
+          <li data-i18n="pkg_pm1">✅ ลง listing ทุก unit ไม่จำกัด</li>
+          <li data-i18n="pkg_pm2">✅ รูป + Video + VR ไม่จำกัด</li>
+          <li data-i18n="pkg_pm3">✅ Homepage Spotlight ฿15K-30K/mo</li>
+          <li data-i18n="pkg_pm4">✅ Google Ads SEM Boost</li>
+          <li data-i18n="pkg_pm5">✅ Dedicated account manager</li>
+          <li data-i18n="pkg_pm6">✅ Analytics + Lead reports</li>
+          <li data-i18n="pkg_pm7">✅ Developer brand page (Premium)</li>
+          <li data-i18n="pkg_pm8">✅ WeChat / LINE / WhatsApp leads</li>
+          <li data-i18n="pkg_pm9">✅ Featured in Articles & Email blast</li>
         </ul>
-        <button class="btn" style="width:100%;padding:12px;border-radius:10px;font-weight:700;background:linear-gradient(135deg,#B8860B,#ffd54f);color:#fff;border:none">เลือก Premium</button>
+        <button class="btn" style="width:100%;padding:12px;border-radius:10px;font-weight:700;background:linear-gradient(135deg,#B8860B,#ffd54f);color:#fff;border:none" data-i18n="btn_choose_premium">เลือก Premium</button>
       </div>
     </div><!-- /pkg-grid -->
 
     <!-- Paid placement info -->
     <div style="background:var(--navy-p);border-radius:16px;padding:24px;margin-bottom:32px">
-      <h3 style="font-size:16px;font-weight:700;color:var(--navy);margin:0 0 16px">📊 Paid Placement — เพิ่ม Visibility</h3>
+      <h3 style="font-size:16px;font-weight:700;color:var(--navy);margin:0 0 16px" data-i18n="paid_title">📊 Paid Placement — เพิ่ม Visibility</h3>
       <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
         <div style="background:#fff;border-radius:12px;padding:16px;text-align:center">
           <div style="font-size:20px;margin-bottom:6px">🏆</div>
           <div style="font-weight:700;color:var(--gold);margin-bottom:4px">Homepage Spotlight</div>
           <div style="font-size:20px;font-weight:800;color:var(--navy);margin-bottom:4px">฿15K–30K</div>
-          <div style="font-size:11px;color:var(--muted)">/เดือน · แสดงหน้าแรก</div>
+          <div style="font-size:11px;color:var(--muted)" data-i18n="paid_hp_period">/เดือน · แสดงหน้าแรก</div>
         </div>
         <div style="background:#fff;border-radius:12px;padding:16px;text-align:center">
           <div style="font-size:20px;margin-bottom:6px">🔍</div>
           <div style="font-weight:700;color:var(--teal);margin-bottom:4px">Search Top</div>
           <div style="font-size:20px;font-weight:800;color:var(--navy);margin-bottom:4px">฿3K–10K</div>
-          <div style="font-size:11px;color:var(--muted)">/เดือน · ติด Top 3 ใน search</div>
+          <div style="font-size:11px;color:var(--muted)" data-i18n="paid_search_period">/เดือน · ติด Top 3 ใน search</div>
         </div>
         <div style="background:#fff;border-radius:12px;padding:16px;text-align:center">
           <div style="font-size:20px;margin-bottom:6px">📢</div>
           <div style="font-weight:700;color:var(--red);margin-bottom:4px">Google Ads Boost</div>
           <div style="font-size:20px;font-weight:800;color:var(--navy);margin-bottom:4px">Custom</div>
-          <div style="font-size:11px;color:var(--muted)">SEM campaign จัดการให้</div>
+          <div style="font-size:11px;color:var(--muted)" data-i18n="paid_sem_label">SEM campaign จัดการให้</div>
         </div>
       </div>
     </div>
@@ -1655,11 +1666,11 @@ footer{background:var(--navy);color:#fff;padding:48px 0 24px;}
     <!-- Login gate message -->
     <div style="background:#fff;border:2px solid var(--teal);border-radius:16px;padding:28px;text-align:center">
       <div style="font-size:32px;margin-bottom:12px">🔐</div>
-      <h3 style="font-size:18px;font-weight:700;color:var(--navy);margin:0 0 8px">เริ่มต้น List Property</h3>
-      <p style="color:var(--muted);font-size:14px;margin:0 0 20px">สร้างบัญชีฟรี · ไม่มีค่าใช้จ่ายในการสมัคร · ยกเลิกได้ทุกเมื่อ</p>
+      <h3 style="font-size:18px;font-weight:700;color:var(--navy);margin:0 0 8px" data-i18n="listprop_gate_title">เริ่มต้น List Property</h3>
+      <p style="color:var(--muted);font-size:14px;margin:0 0 20px" data-i18n="listprop_gate_sub">สร้างบัญชีฟรี · ไม่มีค่าใช้จ่ายในการสมัคร · ยกเลิกได้ทุกเมื่อ</p>
       <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
-        <button class="btn btn-green" onclick="goTo('myhome')" style="padding:12px 28px;font-size:15px;font-weight:700;border-radius:12px">สมัครฟรี เพื่อเริ่มลง Listing</button>
-        <button class="btn bo" style="padding:12px 28px;font-size:15px;font-weight:600;border-radius:12px">ติดต่อ Sales</button>
+        <button class="btn btn-green" onclick="goTo('myhome')" style="padding:12px 28px;font-size:15px;font-weight:700;border-radius:12px" data-i18n="btn_register_listing">สมัครฟรี เพื่อเริ่มลง Listing</button>
+        <button class="btn bo" style="padding:12px 28px;font-size:15px;font-weight:600;border-radius:12px" data-i18n="btn_contact_sales">ติดต่อ Sales</button>
       </div>
     </div>
   </div>
@@ -1671,25 +1682,25 @@ footer{background:var(--navy);color:#fff;padding:48px 0 24px;}
     <div style="text-align:center;margin-bottom:40px">
       <div style="font-size:52px;margin-bottom:12px">🤝</div>
       <h1 style="font-size:32px;font-weight:800;color:var(--navy);margin:0 0 10px" data-i18n="aff_title">StayVerse Affiliate Program</h1>
-      <p style="color:var(--muted);font-size:16px;max-width:500px;margin:0 auto">แนะนำเพื่อน · แชร์ listing · รับ commission ทุกครั้งที่ปิดดีล</p>
+      <p style="color:var(--muted);font-size:16px;max-width:500px;margin:0 auto" data-i18n="aff_page_sub">แนะนำเพื่อน · แชร์ listing · รับ commission ทุกครั้งที่ปิดดีล</p>
     </div>
 
     <!-- How it works -->
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:40px">
       <div style="background:#fff;border:1px solid #e8e8e8;border-radius:14px;padding:24px;text-align:center">
         <div style="font-size:36px;margin-bottom:12px">1️⃣</div>
-        <div style="font-weight:700;color:var(--navy);margin-bottom:6px">สมัครฟรี</div>
-        <div style="font-size:13px;color:var(--muted)">สร้างบัญชี affiliate ไม่มีค่าสมัคร · อนุมัติทันที</div>
+        <div style="font-weight:700;color:var(--navy);margin-bottom:6px" data-i18n="aff_step1_title">สมัครฟรี</div>
+        <div style="font-size:13px;color:var(--muted)" data-i18n="aff_step1_body">สร้างบัญชี affiliate ไม่มีค่าสมัคร · อนุมัติทันที</div>
       </div>
       <div style="background:#fff;border:1px solid #e8e8e8;border-radius:14px;padding:24px;text-align:center">
         <div style="font-size:36px;margin-bottom:12px">2️⃣</div>
-        <div style="font-weight:700;color:var(--navy);margin-bottom:6px">รับ Link ของคุณ</div>
-        <div style="font-size:13px;color:var(--muted)">ทุก listing มี affiliate link เฉพาะของคุณ · share ได้ทุก platform</div>
+        <div style="font-weight:700;color:var(--navy);margin-bottom:6px" data-i18n="aff_step2_title">รับ Link ของคุณ</div>
+        <div style="font-size:13px;color:var(--muted)" data-i18n="aff_step2_body">ทุก listing มี affiliate link เฉพาะของคุณ · share ได้ทุก platform</div>
       </div>
       <div style="background:#fff;border:1px solid #e8e8e8;border-radius:14px;padding:24px;text-align:center">
         <div style="font-size:36px;margin-bottom:12px">3️⃣</div>
-        <div style="font-weight:700;color:var(--navy);margin-bottom:6px">รับ Commission</div>
-        <div style="font-size:13px;color:var(--muted)">ทุกดีลที่ปิดผ่าน link คุณ รับ commission อัตโนมัติ</div>
+        <div style="font-weight:700;color:var(--navy);margin-bottom:6px" data-i18n="aff_step3_title">รับ Commission</div>
+        <div style="font-size:13px;color:var(--muted)" data-i18n="aff_step3_body">ทุกดีลที่ปิดผ่าน link คุณ รับ commission อัตโนมัติ</div>
       </div>
     </div>
 
@@ -1700,28 +1711,28 @@ footer{background:var(--navy);color:#fff;padding:48px 0 24px;}
         <div style="background:#fff;border-radius:12px;padding:20px;text-align:center">
           <div style="font-size:13px;font-weight:600;color:var(--muted);margin-bottom:8px">Rental Deal</div>
           <div style="font-size:28px;font-weight:800;color:var(--teal)">50%</div>
-          <div style="font-size:12px;color:var(--muted);margin-top:4px">ของ 1 เดือนแรก</div>
+          <div style="font-size:12px;color:var(--muted);margin-top:4px" data-i18n="aff_comm_rental">ของ 1 เดือนแรก</div>
         </div>
         <div style="background:#fff;border-radius:12px;padding:20px;text-align:center">
           <div style="font-size:13px;font-weight:600;color:var(--muted);margin-bottom:8px">RTO Contract</div>
           <div style="font-size:28px;font-weight:800;color:var(--navy)">1%</div>
-          <div style="font-size:12px;color:var(--muted);margin-top:4px">ของ sale price</div>
+          <div style="font-size:12px;color:var(--muted);margin-top:4px" data-i18n="aff_comm_rto">ของ sale price</div>
         </div>
         <div style="background:#fff;border-radius:12px;padding:20px;text-align:center">
           <div style="font-size:13px;font-weight:600;color:var(--muted);margin-bottom:8px">Investor Sale</div>
           <div style="font-size:28px;font-weight:800;color:var(--gold)">2%</div>
-          <div style="font-size:12px;color:var(--muted);margin-top:4px">ของ transaction</div>
+          <div style="font-size:12px;color:var(--muted);margin-top:4px" data-i18n="aff_comm_inv">ของ transaction</div>
         </div>
       </div>
     </div>
 
     <!-- Signup CTA -->
     <div style="background:#fff;border:2px solid var(--navy);border-radius:16px;padding:28px;text-align:center">
-      <h3 style="font-size:20px;font-weight:700;color:var(--navy);margin:0 0 8px">เริ่มรับ Commission วันนี้</h3>
-      <p style="color:var(--muted);font-size:14px;margin:0 0 20px">สมัครฟรี · ไม่ต้องลงทุน · earn passive income จากเครือข่ายของคุณ</p>
+      <h3 style="font-size:20px;font-weight:700;color:var(--navy);margin:0 0 8px" data-i18n="aff_cta_title">เริ่มรับ Commission วันนี้</h3>
+      <p style="color:var(--muted);font-size:14px;margin:0 0 20px" data-i18n="aff_cta_sub">สมัครฟรี · ไม่ต้องลงทุน · earn passive income จากเครือข่ายของคุณ</p>
       <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
-        <button class="btn btn-green" onclick="goTo('myhome')" style="padding:12px 32px;font-size:15px;font-weight:700;border-radius:12px">สมัคร Affiliate ฟรี</button>
-        <button class="btn bo" style="padding:12px 28px;font-size:15px;font-weight:600;border-radius:12px">ดูตัวอย่าง Dashboard</button>
+        <button class="btn btn-green" onclick="goTo('myhome')" style="padding:12px 32px;font-size:15px;font-weight:700;border-radius:12px" data-i18n="btn_join_affiliate">สมัคร Affiliate ฟรี</button>
+        <button class="btn bo" style="padding:12px 28px;font-size:15px;font-weight:600;border-radius:12px" data-i18n="btn_view_dash_preview">ดูตัวอย่าง Dashboard</button>
       </div>
     </div>
   </div>
@@ -1765,15 +1776,15 @@ footer{background:var(--navy);color:#fff;padding:48px 0 24px;}
     <!-- Payment history -->
     <div style="background:#fff;border:1px solid #e8e8e8;border-radius:16px;padding:24px;margin-bottom:20px">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
-        <h3 style="font-size:16px;font-weight:700;color:var(--navy);margin:0">Payment History</h3>
-        <span style="font-size:12px;color:var(--teal);cursor:pointer">ดูทั้งหมด</span>
+        <h3 style="font-size:16px;font-weight:700;color:var(--navy);margin:0" data-i18n="tenant_payment_hist">Payment History</h3>
+        <span style="font-size:12px;color:var(--teal);cursor:pointer" data-i18n="tenant_viewall">ดูทั้งหมด</span>
       </div>
       <table style="width:100%;border-collapse:collapse;font-size:13px">
         <thead><tr style="background:var(--navy-p)">
-          <th style="padding:8px 12px;text-align:left;color:var(--navy);font-weight:600">เดือน</th>
-          <th style="padding:8px 12px;text-align:right;color:var(--navy);font-weight:600">ยอดชำระ</th>
-          <th style="padding:8px 12px;text-align:right;color:var(--navy);font-weight:600">Equity This Mo.</th>
-          <th style="padding:8px 12px;text-align:center;color:var(--navy);font-weight:600">Status</th>
+          <th style="padding:8px 12px;text-align:left;color:var(--navy);font-weight:600" data-i18n="tenant_col_month">เดือน</th>
+          <th style="padding:8px 12px;text-align:right;color:var(--navy);font-weight:600" data-i18n="tenant_col_amount">ยอดชำระ</th>
+          <th style="padding:8px 12px;text-align:right;color:var(--navy);font-weight:600" data-i18n="tenant_col_equity_mo">Equity This Mo.</th>
+          <th style="padding:8px 12px;text-align:center;color:var(--navy);font-weight:600" data-i18n="tenant_col_status">Status</th>
         </tr></thead>
         <tbody>
           <tr style="border-bottom:1px solid #f5f5f5"><td style="padding:10px 12px">มี.ค. 2026</td><td style="padding:10px 12px;text-align:right">฿65,000</td><td style="padding:10px 12px;text-align:right;color:var(--green)">+฿77,637</td><td style="padding:10px 12px;text-align:center"><span style="background:var(--green-p);color:var(--green);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600">✓ ชำระแล้ว</span></td></tr>
@@ -1786,11 +1797,11 @@ footer{background:var(--navy);color:#fff;padding:48px 0 24px;}
     <!-- Next payment -->
     <div style="background:linear-gradient(135deg,var(--teal),#1B3A5C);border-radius:16px;padding:24px;color:#fff;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px">
       <div>
-        <div style="font-size:13px;opacity:.8;margin-bottom:4px">Next Payment Due</div>
+        <div style="font-size:13px;opacity:.8;margin-bottom:4px" data-i18n="tenant_next_payment">Next Payment Due</div>
         <div style="font-size:26px;font-weight:800">฿65,000</div>
         <div style="font-size:12px;opacity:.8;margin-top:4px">1 เม.ย. 2026 · Auto monthly deduction</div>
       </div>
-      <button class="btn" style="background:#fff;color:var(--navy);padding:12px 24px;font-weight:700;border-radius:12px;border:none">Pay Now</button>
+      <button class="btn" style="background:#fff;color:var(--navy);padding:12px 24px;font-weight:700;border-radius:12px;border:none" data-i18n="tenant_pay_now">Pay Now</button>
     </div>
   </div>
 </div><!-- /pg-tenant -->
@@ -1804,7 +1815,7 @@ footer{background:var(--navy);color:#fff;padding:48px 0 24px;}
         <p style="color:var(--muted);font-size:14px;margin:0">Blue Sky Group · Grand Florida</p>
       </div>
       <div style="display:flex;gap:8px">
-        <button class="btn bo bsm">+ เพิ่ม Listing</button>
+        <button class="btn bo bsm" data-i18n="dev_add_listing_btn">+ เพิ่ม Listing</button>
         <button class="btn btn-green bsm" onclick="goTo('listprop')">Upgrade Package</button>
       </div>
     </div>
@@ -1813,25 +1824,25 @@ footer{background:var(--navy);color:#fff;padding:48px 0 24px;}
     <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:24px">
       <div style="background:#fff;border:1px solid #e8e8e8;border-radius:14px;padding:18px;text-align:center">
         <div style="font-size:24px;font-weight:800;color:var(--navy)">12</div>
-        <div style="font-size:12px;color:var(--muted)">Active Listings</div>
+        <div style="font-size:12px;color:var(--muted)" data-i18n="dev_stat1">Active Listings</div>
       </div>
       <div style="background:#fff;border:1px solid #e8e8e8;border-radius:14px;padding:18px;text-align:center">
         <div style="font-size:24px;font-weight:800;color:var(--teal)">847</div>
-        <div style="font-size:12px;color:var(--muted)">Views This Month</div>
+        <div style="font-size:12px;color:var(--muted)" data-i18n="dev_stat2">Views This Month</div>
       </div>
       <div style="background:#fff;border:1px solid #e8e8e8;border-radius:14px;padding:18px;text-align:center">
         <div style="font-size:24px;font-weight:800;color:var(--green)">23</div>
-        <div style="font-size:12px;color:var(--muted)">Leads Generated</div>
+        <div style="font-size:12px;color:var(--muted)" data-i18n="dev_stat3">Leads Generated</div>
       </div>
       <div style="background:#fff;border:1px solid #e8e8e8;border-radius:14px;padding:18px;text-align:center">
         <div style="font-size:24px;font-weight:800;color:var(--gold)">3</div>
-        <div style="font-size:12px;color:var(--muted)">Closed Deals</div>
+        <div style="font-size:12px;color:var(--muted)" data-i18n="dev_stat4">Closed Deals</div>
       </div>
     </div>
 
     <!-- Listing table -->
     <div style="background:#fff;border:1px solid #e8e8e8;border-radius:16px;padding:24px">
-      <h3 style="font-size:16px;font-weight:700;color:var(--navy);margin:0 0 16px">Active Listings</h3>
+      <h3 style="font-size:16px;font-weight:700;color:var(--navy);margin:0 0 16px" data-i18n="dev_active_title">Active Listings</h3>
       <table style="width:100%;border-collapse:collapse;font-size:13px">
         <thead><tr style="background:var(--navy-p)">
           <th style="padding:8px 12px;text-align:left;color:var(--navy);font-weight:600">Project</th>
@@ -1899,10 +1910,23 @@ footer{background:var(--navy);color:#fff;padding:48px 0 24px;}
           <div style="background:var(--navy-p);border-radius:10px;padding:14px;font-size:13px;color:var(--navy)">
             ✅ ดาวน์ 5% = ฿459,500 · เช่า 3yr · Buy now ฿6,390,500 · Equity 30.46%
           </div>
+          <!-- PDPA Consent — required by Thai PDPA law -->
+          <div style="background:#f8faff;border:1.5px solid #dde3ea;border-radius:10px;padding:14px">
+            <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;font-size:13px;color:#444;line-height:1.6">
+              <input type="checkbox" id="pdpa-consent" name="pdpa_consent" required
+                style="margin-top:3px;width:16px;height:16px;accent-color:var(--teal);flex-shrink:0">
+              <span>
+                <span data-i18n="apply_consent_pre">ข้าพเจ้าได้อ่านและยินยอมตาม</span>
+                <a onclick="goTo('privacy')" style="color:var(--teal);font-weight:600;cursor:pointer;text-decoration:underline" data-i18n="apply_consent_link">นโยบายความเป็นส่วนตัว</a>
+                <span data-i18n="apply_consent_post">และยินยอมให้ StayVerse เก็บและใช้ข้อมูลส่วนบุคคลของข้าพเจ้า</span>
+                <span style="color:#e53935;font-weight:700"> *</span>
+              </span>
+            </label>
+          </div>
           <button type="submit" id="apply-submit-btn" class="btn btn-green" style="width:100%;padding:14px;font-size:15px;font-weight:700;border-radius:12px;margin-top:4px" data-i18n="apply_btn">
             ยื่นใบสมัคร →
           </button>
-          <p style="text-align:center;font-size:11px;color:var(--muted);margin:0">
+          <p style="text-align:center;font-size:11px;color:var(--muted);margin:0" data-i18n="apply_privacy">
             🔒 ข้อมูลของคุณปลอดภัย — ไม่มีการแชร์ให้บุคคลที่สาม
           </p>
         </div>
@@ -1917,7 +1941,7 @@ footer{background:var(--navy);color:#fff;padding:48px 0 24px;}
     <h1 style="font-size:28px;font-weight:800;color:var(--green);margin:0 0 10px" data-i18n="success_title">ยื่นใบสมัครสำเร็จ!</h1>
     <p style="color:var(--muted);font-size:15px;margin:0 0 32px" data-i18n="success_sub">ทีมงาน StayVerse จะติดต่อกลับภายใน 24 ชั่วโมง · ตรวจสอบอีเมลของคุณ</p>
     <div style="background:var(--green-p);border-radius:16px;padding:24px;margin-bottom:24px;text-align:left">
-      <div style="font-weight:700;color:var(--green);margin-bottom:12px">ขั้นตอนต่อไป</div>
+      <div style="font-weight:700;color:var(--green);margin-bottom:12px" data-i18n="suc_next_title">ขั้นตอนต่อไป</div>
       <div style="font-size:14px;color:#444;display:flex;flex-direction:column;gap:8px">
         <div data-i18n="suc_step1">1️⃣ ทีมงานตรวจสอบข้อมูลภายใน 24 ชม.</div>
         <div data-i18n="suc_step2">2️⃣ นัด Video Call เพื่อ KYC</div>
@@ -1926,14 +1950,68 @@ footer{background:var(--navy);color:#fff;padding:48px 0 24px;}
         <div data-i18n="suc_step5">5️⃣ รับกุญแจ & เข้าอยู่!</div>
       </div>
     </div>
-    <button class="btn btn-green" onclick="goTo('tenant')" style="width:100%;padding:14px;font-size:15px;font-weight:700;border-radius:12px;margin-bottom:10px">
+    <button class="btn btn-green" onclick="goTo('tenant')" style="width:100%;padding:14px;font-size:15px;font-weight:700;border-radius:12px;margin-bottom:10px" data-i18n="btn_go_tenant_dashboard">
       ไปที่ Tenant Dashboard
     </button>
-    <button class="btn bo" onclick="goTo('home')" style="width:100%;padding:12px;font-size:14px;font-weight:600;border-radius:12px">
+    <button class="btn bo" onclick="goTo('home')" style="width:100%;padding:12px;font-size:14px;font-weight:600;border-radius:12px" data-i18n="btn_return_home">
       กลับหน้าหลัก
     </button>
   </div>
 </div><!-- /pg-success -->
+
+<!-- ═══════════════════════════════════════════════════════ PRIVACY POLICY PAGE -->
+<div id="pg-privacy" class="pg" style="display:none">
+  <div style="max-width:720px;margin:60px auto;padding:0 20px 80px">
+    <!-- Back button -->
+    <button onclick="history.back ? history.back() : goTo('home')" style="background:none;border:none;color:var(--teal);font-size:14px;font-weight:600;cursor:pointer;margin-bottom:24px;padding:0" data-i18n="priv_back">← กลับ</button>
+    <!-- Header -->
+    <div style="margin-bottom:32px">
+      <div style="font-size:36px;margin-bottom:10px">🔒</div>
+      <h1 style="font-size:28px;font-weight:800;color:var(--navy);margin:0 0 6px" data-i18n="priv_title">นโยบายความเป็นส่วนตัว</h1>
+      <p style="color:var(--muted);font-size:13px;margin:0" data-i18n="priv_effective">มีผลบังคับใช้: 24 มีนาคม 2569</p>
+    </div>
+    <!-- Content card -->
+    <div style="background:#fff;border:1px solid #e8e8e8;border-radius:20px;padding:32px;display:flex;flex-direction:column;gap:28px">
+      <!-- Intro -->
+      <p style="font-size:14px;color:#444;line-height:1.8;margin:0" data-i18n="priv_intro">บริษัท StayVerse จำกัด ให้ความสำคัญกับความเป็นส่วนตัวของท่าน และมุ่งมั่นปกป้องข้อมูลส่วนบุคคลตาม พ.ร.บ. คุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562 (PDPA)</p>
+      <!-- Section 1 -->
+      <div>
+        <h2 style="font-size:16px;font-weight:700;color:var(--navy);margin:0 0 10px" data-i18n="priv_s1_title">1. ข้อมูลที่เราเก็บรวบรวม</h2>
+        <p style="font-size:13px;color:#555;line-height:1.8;margin:0" data-i18n="priv_s1_body">ชื่อ-นามสกุล เบอร์โทรศัพท์ อีเมล สัญชาติ รายได้ และความพร้อมด้านเงินดาวน์ — เก็บเมื่อท่านยื่นใบสมัคร พฤติกรรมการใช้งานและข้อมูลอุปกรณ์ — เก็บผ่านคุกกี้วิเคราะห์ (เฉพาะเมื่อท่านให้ความยินยอมเท่านั้น)</p>
+      </div>
+      <!-- Section 2 -->
+      <div>
+        <h2 style="font-size:16px;font-weight:700;color:var(--navy);margin:0 0 10px" data-i18n="priv_s2_title">2. วัตถุประสงค์การใช้ข้อมูล</h2>
+        <p style="font-size:13px;color:#555;line-height:1.8;margin:0" data-i18n="priv_s2_body">เพื่อประมวลผลใบสมัครและจับคู่ท่านกับอสังหาริมทรัพย์ที่เหมาะสม เพื่อติดต่อท่านเกี่ยวกับสถานะใบสมัคร เพื่อพัฒนาแพลตฟอร์ม (เฉพาะด้าน analytics เมื่อมีการยินยอม) และเพื่อปฏิบัติตามกฎหมายที่บังคับใช้</p>
+      </div>
+      <!-- Section 3 — Rights -->
+      <div style="background:var(--teal-p,#f0fafa);border-radius:12px;padding:20px">
+        <h2 style="font-size:16px;font-weight:700;color:var(--navy);margin:0 0 10px" data-i18n="priv_s3_title">3. สิทธิ์ของท่านตาม PDPA</h2>
+        <p style="font-size:13px;color:#555;line-height:1.8;margin:0 0 12px" data-i18n="priv_s3_body">ท่านมีสิทธิ์: เข้าถึงข้อมูล · แก้ไขข้อมูล · ลบข้อมูล · คัดค้านการประมวลผล · จำกัดการประมวลผล · โอนย้ายข้อมูล · ถอนความยินยอมได้ทุกเมื่อ ติดต่อ: privacy@stayverse.io — เราจะตอบกลับภายใน 30 วัน</p>
+        <a href="mailto:privacy@stayverse.io" style="display:inline-block;background:var(--teal);color:#fff;padding:8px 18px;border-radius:8px;font-size:13px;font-weight:600;text-decoration:none">📧 privacy@stayverse.io</a>
+      </div>
+      <!-- Section 4 -->
+      <div>
+        <h2 style="font-size:16px;font-weight:700;color:var(--navy);margin:0 0 10px" data-i18n="priv_s4_title">4. ระยะเวลาการเก็บข้อมูล</h2>
+        <p style="font-size:13px;color:#555;line-height:1.8;margin:0" data-i18n="priv_s4_body">เราเก็บข้อมูลของท่านตลอดระยะเวลาที่เป็นสมาชิกบวก 1 ปีหลังจากสัญญาสิ้นสุด หรือตามที่กฎหมายกำหนด</p>
+      </div>
+      <!-- Section 5 -->
+      <div>
+        <h2 style="font-size:16px;font-weight:700;color:var(--navy);margin:0 0 10px" data-i18n="priv_s5_title">5. ความปลอดภัยของข้อมูล</h2>
+        <p style="font-size:13px;color:#555;line-height:1.8;margin:0" data-i18n="priv_s5_body">เราใช้การเข้ารหัสและการควบคุมการเข้าถึงตามมาตรฐานอุตสาหกรรม ข้อมูลของท่านจะไม่ถูกขายให้บุคคลที่สามไม่ว่าในกรณีใด</p>
+      </div>
+      <!-- Section 6 -->
+      <div style="background:var(--navy-p,#f0f4fa);border-radius:12px;padding:20px">
+        <h2 style="font-size:16px;font-weight:700;color:var(--navy);margin:0 0 10px" data-i18n="priv_s6_title">6. ติดต่อเจ้าหน้าที่คุ้มครองข้อมูล</h2>
+        <p style="font-size:13px;color:#555;line-height:1.8;margin:0" data-i18n="priv_s6_body">อีเมล: privacy@stayverse.io · ตอบกลับภายใน 30 วัน</p>
+      </div>
+      <!-- Divider + Company info -->
+      <div style="border-top:1px solid #eee;padding-top:18px;font-size:12px;color:var(--muted)">
+        บริษัท StayVerse จำกัด · stayverse.io · © 2026 All rights reserved.
+      </div>
+    </div>
+  </div>
+</div><!-- /pg-privacy -->
 
 </div><!-- /#app -->
 
@@ -1952,7 +2030,8 @@ const pageMap = {
   tenant:    'pg-tenant',
   dev:       'pg-dev',
   apply:     'pg-apply',
-  success:   'pg-success'
+  success:   'pg-success',
+  privacy:   'pg-privacy'
       };
 
 const navMap = {
@@ -2175,7 +2254,172 @@ const T = {
     suc_step2:     '2️⃣ Video Call KYC scheduled',
     suc_step3:     '3️⃣ Sign Rent-to-Own Agreement',
     suc_step4:     '4️⃣ Transfer down payment via StayVerse',
-    suc_step5:     '5️⃣ Get keys & move in!'
+    suc_step5:     '5️⃣ Get keys & move in!',
+    // — extended i18n —
+    why_sub:        'More than regular renting. No bank loan needed. Start owning today.',
+    how_sub:        '3 simple steps to ownership — no bank loan required.',
+    prob_title:     'The Problem StayVerse Was Built to Solve',
+    prob_sub:       'Rising prices, strict lending, and zero equity — millions are locked out of homeownership',
+    prob1_label:    'Mortgage Rejection Rate',
+    prob1_body:     'Most applicants rejected by Thai banks due to insufficient income documents, informal employment, or weak credit history.',
+    prob2_label:    'Average Down Payment Required',
+    prob2_body:     'Equivalent to 3+ years of household savings for most Thai families — an insurmountable upfront barrier.',
+    prob3_label:    'Lifetime Rent · Zero Equity',
+    prob3_body:     'The average Thai renter pays ฿2.16M over a lifetime with no asset accumulation. Every payment disappears.',
+    prob_tagline:   'StayVerse transforms every monthly payment into real property equity — automatically, transparently, digitally.',
+    mod_title:      'Complete Platform in One Place',
+    mod_sub:        'A digital platform built for developers, investors, and tenants — all in one.',
+    mod1_title:     'Front-End Listing',
+    mod1_body:      'Dynamic listing with search engine — filter by location, price, and equity rate.',
+    mod2_title:     'Back-End Reports & Docs',
+    mod2_body:      'Hire Purchase Contract, Invoice & Receipt, Payment Calculator, Statement — Document Exchange Hub for Banking.',
+    mod3_title:     'Fire Sale Price Listing',
+    mod3_body:      'End-of-contract unit listing with fire sale price — guaranteed exit strategy for developers.',
+    mod4_title:     'Investor Hub',
+    mod4_body:      'Portal for investors who want to buy units for investment, with real-time equity tracking dashboard.',
+    mod5_title:     'Payment Gateway & Wallet',
+    mod5_body:      'Integrated with One Wallet — auto monthly deduction, no Thai bank account needed, cross-border supported.',
+    mod6_title:     'Value Added Services',
+    mod6_body:      'Housekeeping, Laundry, Relocation service — keeps units move-in ready and adds value for tenants.',
+    dev_price_title:'List Your Properties. Close More Deals.',
+    dev_price_sub:  'SaaS + Transaction Commission — sustainable, scalable, not cash-burning.',
+    stats_units:    'Verified Units',
+    stats_cities:   'Cities · BKK, Pattaya, Phuket, CNX',
+    stats_interest: 'Interest · First 6 Months',
+    stats_langs:    'Languages',
+    btn_calc:       'Calculate',
+    btn_book:       'Book Instantly',
+    btn_details:    'Details',
+    btn_viewall136: 'View All 136 Units →',
+    btn_getstarted: 'Get Started →',
+    btn_listunits:  'List Your Units →',
+    btn_contact:    'Contact Us →',
+    tag_available:  'Available',
+    tag_popular:    'Popular',
+    art_filter_all: 'All',
+    art_filter_sv:  'StayVerse',
+    art_filter_living: 'Living',
+    art_filter_sponsored: 'Sponsored',
+    inv_what_title: "What is Investor\'s Choice?",
+    inv_what_body:  'Units where Rent-to-Own owners want to exit — with an active tenant inside. Investors can buy below market and receive immediate cashflow.',
+    investor_hero_sub: 'Units with active tenants · Below market price · Ready for immediate transfer',
+    // ── page-level new keys ──
+    listprop_page_sub:     'Choose the right package · Reach tenants & investors who matter · Get started today',
+    tag_most_popular:      '⭐ Most Popular',
+    pkg_per_listing:       '/mo · per listing',
+    pkg_per_project:       '/mo · per project',
+    pkg_b1:                '✅ 1 listing',
+    pkg_b2:                '✅ Up to 10 photos',
+    pkg_b3:                '✅ VR Tour (360°)',
+    pkg_b4:                '✅ Shown on Search Results',
+    pkg_b5:                '✅ Contact form',
+    pkg_b_no1:             '✗ Homepage Spotlight',
+    pkg_b_no2:             '✗ Priority search ranking',
+    pkg_b_no3:             '✗ SEM boost',
+    pkg_b_no4:             '✗ Analytics dashboard',
+    btn_start_basic:       'Start Basic',
+    pkg_p1:                '✅ Unlimited listings',
+    pkg_p2:                '✅ Up to 30 photos + Video',
+    pkg_p4:                '✅ Priority Search Ranking',
+    pkg_p5:                '✅ Contact form + WhatsApp',
+    pkg_p6:                '✅ Search Top Placement ฿3K-10K',
+    pkg_p7:                '✅ Analytics dashboard',
+    pkg_p8:                '✅ Developer brand page',
+    pkg_p_no1:             '✗ Homepage Spotlight',
+    btn_choose_pro:        'Choose Pro',
+    pkg_pm1:               '✅ All units, unlimited listings',
+    pkg_pm2:               '✅ Photos + Video + VR unlimited',
+    pkg_pm3:               '✅ Homepage Spotlight ฿15K-30K/mo',
+    pkg_pm4:               '✅ Google Ads SEM Boost',
+    pkg_pm5:               '✅ Dedicated account manager',
+    pkg_pm6:               '✅ Analytics + Lead reports',
+    pkg_pm7:               '✅ Developer brand page (Premium)',
+    pkg_pm8:               '✅ WeChat / LINE / WhatsApp leads',
+    pkg_pm9:               '✅ Featured in Articles & Email blast',
+    btn_choose_premium:    'Choose Premium',
+    paid_title:            '📊 Paid Placement — Boost Visibility',
+    paid_hp_period:        '/mo · homepage featured',
+    paid_search_period:    '/mo · Top 3 in search',
+    paid_sem_label:        'SEM campaign managed for you',
+    listprop_gate_title:   'Start Listing Your Property',
+    listprop_gate_sub:     'Free account · No signup fee · Cancel anytime',
+    btn_register_listing:  'Sign up free & start listing',
+    btn_contact_sales:     'Contact Sales',
+    aff_page_sub:          'Refer friends · Share listings · Earn commission on every deal closed',
+    aff_step1_title:       'Sign up free',
+    aff_step1_body:        'Create affiliate account — free to join, instant approval',
+    aff_step2_title:       'Get your link',
+    aff_step2_body:        'Every listing has your unique affiliate link — share on any platform',
+    aff_step3_title:       'Earn commission',
+    aff_step3_body:        'Every deal closed through your link earns commission automatically',
+    aff_comm_rental:       'of first month',
+    aff_comm_rto:          'of sale price',
+    aff_comm_inv:          'of transaction',
+    aff_cta_title:         'Start Earning Commission Today',
+    aff_cta_sub:           'Free signup · No investment · Earn passive income from your network',
+    btn_join_affiliate:    'Join Affiliate Free',
+    btn_view_dash_preview: 'View Dashboard Preview',
+    calc_monthly_lbl:      'Monthly rent',
+    calc_commit_lbl:       'Total commitment',
+    calc_equity_yr:        'Equity rate/yr',
+    btn_rent_this_unit:    '🏠 Interested in renting',
+    btn_buy_with_tenant_unit: '💼 Buy with active tenant',
+    calc_est_note:         'Calculations are estimates only · Actual price depends on contract terms',
+    myhome_page_sub:       'Track credit score · Monitor equity progress · Manage your property',
+    myhome_f1_title:       'Build Your Credit Score',
+    myhome_f1_body:        'Every on-time payment raises your credit score — ready for future loans',
+    myhome_f2_title:       'Real-Time Property Dashboard',
+    myhome_f2_body:        'Monitor rental payment history · equity accumulated · estimated value · days to ownership',
+    myhome_f3_title:       'Auto Monthly Deduction',
+    myhome_f3_body:        'Automatic payments · no transfer fees · instant receipt',
+    myhome_login_title:    'Sign in to Dashboard',
+    myhome_or:             'or',
+    myhome_no_account:     'No account yet?',
+    myhome_signup_link:    'Register free',
+    myhome_lock_msg:       '🔒 Login to view your dashboard',
+    suc_next_title:        'Next Steps',
+    btn_go_tenant_dashboard: 'Go to Tenant Dashboard',
+    btn_return_home:       'Back to Home',
+    tenant_payment_hist:   'Payment History',
+    tenant_viewall:        'View all',
+    tenant_col_month:      'Month',
+    tenant_col_amount:     'Amount Paid',
+    tenant_col_equity_mo:  'Equity This Mo.',
+    tenant_col_status:     'Status',
+    tenant_status_paid:    '✓ Paid',
+    tenant_next_payment:   'Next Payment Due',
+    tenant_pay_now:        'Pay Now',
+    dev_add_listing_btn:   '+ Add Listing',
+    dev_stat1:             'Active Listings',
+    dev_stat2:             'Views This Month',
+    dev_stat3:             'Leads Generated',
+    dev_stat4:             'Closed Deals',
+    dev_active_title:      'Active Listings',
+    apply_privacy:         '🔒 Your data is secure — never shared with third parties',
+    // — PDPA / Cookie / Privacy —
+    cookie_title:          '🍪 We use cookies',
+    cookie_text:           'We use cookies and analytics to improve your experience. You can accept all or choose essential only.',
+    cookie_accept:         'Accept All',
+    cookie_essential:      'Essential Only',
+    apply_consent_pre:     'I have read and agree to the',
+    apply_consent_link:    'Privacy Policy',
+    apply_consent_post:    'and consent to StayVerse collecting my personal data.',
+    priv_title:            'Privacy Policy',
+    priv_effective:        'Effective: 24 March 2026',
+    priv_intro:            'StayVerse Co., Ltd. respects your privacy and is committed to protecting your personal data in accordance with the Personal Data Protection Act B.E. 2562 (PDPA). This policy explains how we collect, use, and protect your information.',
+    priv_s1_title:         '1. Data We Collect',
+    priv_s1_body:          'Name, phone, email, nationality, income level, and down-payment readiness — collected when you apply. Browsing behaviour and device data — collected via analytics cookies (with your consent only).',
+    priv_s2_title:         '2. Purpose of Processing',
+    priv_s2_body:          'To process your application and match you with suitable properties. To contact you about your application status. To improve our platform (analytics — with consent only). To comply with legal obligations.',
+    priv_s3_title:         '3. Your Rights (PDPA)',
+    priv_s3_body:          'You have the right to: Access · Correct · Delete · Object to processing · Restrict processing · Data portability · Withdraw consent at any time. Contact: privacy@stayverse.io — we will respond within 30 days.',
+    priv_s4_title:         '4. Data Retention',
+    priv_s4_body:          'We retain your data for the duration of your membership plus 1 year after the contract ends, or as required by applicable law.',
+    priv_s5_title:         '5. Data Security',
+    priv_s5_body:          'We use industry-standard encryption and access controls. Your data is never sold to third parties.',
+    priv_s6_title:         '6. Contact Our Data Officer',
+    priv_s6_body:          'Email: privacy@stayverse.io · Response within 30 days.',
+    priv_back:             '← Back'
       },
   th: {
     nav_rto:       'เช่าซื้อ (RTO)',
@@ -2267,7 +2511,171 @@ const T = {
     suc_step2:     '2️⃣ นัด Video Call เพื่อ KYC',
     suc_step3:     '3️⃣ เซ็นสัญญา Rent-to-Own',
     suc_step4:     '4️⃣ โอนเงินดาวน์ผ่าน StayVerse',
-    suc_step5:     '5️⃣ รับกุญแจ & เข้าอยู่!'
+    suc_step5:     '5️⃣ รับกุญแจ & เข้าอยู่!',
+    // — extended i18n —
+    why_sub:        'เหนือกว่าการเช่าธรรมดา ไม่ต้องกู้แบงก์ เริ่มเป็นเจ้าของได้วันนี้',
+    how_sub:        '3 ขั้นตอนง่ายๆ สู่การเป็นเจ้าของ ไม่ต้องกู้แบงก์',
+    prob_title:     'ปัญหาที่ StayVerse เกิดมาเพื่อแก้ไข',
+    prob_sub:       'ราคาพุ่ง สินเชื่อเข้มงวด และไม่มี Equity — คนไทยล้านคนถูกกีดกันออกจากการเป็นเจ้าของบ้าน',
+    prob1_label:    'อัตราปฏิเสธสินเชื่อ',
+    prob1_body:     'ผู้สมัครส่วนใหญ่ถูกปฏิเสธโดยธนาคารไทยเพราะเอกสารรายได้ไม่ครบ งานอิสระ หรือเครดิตไม่พอ',
+    prob2_label:    'เงินดาวน์เฉลี่ยที่ต้องใช้',
+    prob2_body:     'เทียบเท่าออมเงิน 3 ปีขึ้นไปสำหรับครอบครัวไทยส่วนใหญ่ — เป็นอุปสรรคที่แทบเป็นไปไม่ได้',
+    prob3_label:    'ค่าเช่าตลอดชีพ · ไม่มี Equity',
+    prob3_body:     'ผู้เช่าชาวไทยโดยเฉลี่ยจ่ายค่าเช่า ฿2.16M ตลอดชีวิตโดยไม่ได้เป็นเจ้าของทรัพย์สินเลย ทุกงวดหายไปเปล่า',
+    prob_tagline:   'StayVerse เปลี่ยนทุกการจ่ายรายเดือนให้กลายเป็น Equity ในทรัพย์สินจริง — อัตโนมัติ โปร่งใส ดิจิทัล',
+    mod_title:      'ครบทุก Module ในที่เดียว',
+    mod_sub:        'StayVerse digital platform ที่ developer, investor, และ tenant ใช้งานได้พร้อมกัน',
+    mod1_title:     'Front-End Listing',
+    mod1_body:      'Dynamic listing พร้อม search engine กรองตามทำเล ราคา และ equity rate',
+    mod2_title:     'Back-End Reports & Docs',
+    mod2_body:      'Hire Purchase Contract, Invoice & Receipt, Payment Calculator, Statement — Document Exchange Hub for Banking',
+    mod3_title:     'Fire Sale Price Listing',
+    mod3_body:      'End-of-contract unit listing with fire sale price — ทางออกที่การันตีสำหรับ developer',
+    mod4_title:     'Investor Hub',
+    mod4_body:      'Portal สำหรับนักลงทุนที่ต้องการซื้อ unit เพื่อลงทุน พร้อม real-time equity tracking dashboard',
+    mod5_title:     'Payment Gateway & Wallet',
+    mod5_body:      'Integrated กับ One Wallet — ตัดอัตโนมัติทุกเดือน ไม่ต้องมีบัญชีธนาคารไทย รองรับ cross-border',
+    mod6_title:     'Value Added Services',
+    mod6_body:      'Housekeeping, Laundry, Relocation service — ทำให้ห้องพร้อม move-in และเพิ่มมูลค่าให้ผู้เช่า',
+    dev_price_title:'ลงทรัพย์สิน ปิดดีลได้มากขึ้น',
+    dev_price_sub:  'SaaS + ค่าคอมมิชชั่น — ยั่งยืน ขยายได้ ไม่เผาเงิน',
+    stats_units:    'ยูนิตที่ผ่านการตรวจสอบ',
+    stats_cities:   'เมือง · กทม, พัทยา, ภูเก็ต, เชียงใหม่',
+    stats_interest: 'ดอกเบี้ย · 6 เดือนแรก',
+    stats_langs:    'ภาษา',
+    btn_calc:       'คำนวณ',
+    btn_book:       'จองทันที',
+    btn_details:    'รายละเอียด',
+    btn_viewall136: 'ดูทั้ง 136 ยูนิต →',
+    btn_getstarted: 'เริ่มต้น →',
+    btn_listunits:  'ลงยูนิต →',
+    btn_contact:    'ติดต่อเรา →',
+    tag_available:  'ว่าง',
+    tag_popular:    'ยอดนิยม',
+    art_filter_all: 'ทั้งหมด',
+    art_filter_sv:  'StayVerse',
+    art_filter_living: 'Living',
+    art_filter_sponsored: 'Sponsored',
+    inv_what_title: 'Investor\'s Choice คืออะไร?',
+    inv_what_body:  'ยูนิตที่เจ้าของ Rent-to-Own ต้องการขายออก พร้อม Active Tenant อยู่ → นักลงทุนซื้อได้ในราคา below market และรับ cashflow ทันที',
+    investor_hero_sub: 'เจ้าของต้องการสภาพคล่อง · ราคาเจรจาได้ · พร้อมทำสัญญาโอนทันที',
+    listprop_page_sub:     'เลือก package ที่เหมาะกับคุณ · Reach ผู้เช่าและนักลงทุนที่ใช่ · เริ่มต้นได้เลยวันนี้',
+    tag_most_popular:      '⭐ ยอดนิยม',
+    pkg_per_listing:       '/เดือน · ต่อ listing',
+    pkg_per_project:       '/เดือน · ต่อ project',
+    pkg_b1:                '✅ ลง listing 1 ห้อง',
+    pkg_b2:                '✅ รูปสูงสุด 10 รูป',
+    pkg_b3:                '✅ VR Tour (360°)',
+    pkg_b4:                '✅ แสดงบน Search Results',
+    pkg_b5:                '✅ Contact form',
+    pkg_b_no1:             '✗ Homepage Spotlight',
+    pkg_b_no2:             '✗ Priority search ranking',
+    pkg_b_no3:             '✗ SEM boost',
+    pkg_b_no4:             '✗ Analytics dashboard',
+    btn_start_basic:       'เริ่มต้น Basic',
+    pkg_p1:                '✅ ลง listing ได้ไม่จำกัด',
+    pkg_p2:                '✅ รูปสูงสุด 30 รูป + Video',
+    pkg_p4:                '✅ Priority Search Ranking',
+    pkg_p5:                '✅ Contact form + WhatsApp',
+    pkg_p6:                '✅ Search Top Placement ฿3K-10K',
+    pkg_p7:                '✅ Analytics dashboard',
+    pkg_p8:                '✅ Developer brand page',
+    pkg_p_no1:             '✗ Homepage Spotlight',
+    btn_choose_pro:        'เลือก Pro',
+    pkg_pm1:               '✅ ลง listing ทุก unit ไม่จำกัด',
+    pkg_pm2:               '✅ รูป + Video + VR ไม่จำกัด',
+    pkg_pm3:               '✅ Homepage Spotlight ฿15K-30K/mo',
+    pkg_pm4:               '✅ Google Ads SEM Boost',
+    pkg_pm5:               '✅ Dedicated account manager',
+    pkg_pm6:               '✅ Analytics + Lead reports',
+    pkg_pm7:               '✅ Developer brand page (Premium)',
+    pkg_pm8:               '✅ WeChat / LINE / WhatsApp leads',
+    pkg_pm9:               '✅ Featured in Articles & Email blast',
+    btn_choose_premium:    'เลือก Premium',
+    paid_title:            '📊 Paid Placement — เพิ่ม Visibility',
+    paid_hp_period:        '/เดือน · แสดงหน้าแรก',
+    paid_search_period:    '/เดือน · ติด Top 3 ใน search',
+    paid_sem_label:        'SEM campaign จัดการให้',
+    listprop_gate_title:   'เริ่มต้น List Property',
+    listprop_gate_sub:     'สร้างบัญชีฟรี · ไม่มีค่าใช้จ่ายในการสมัคร · ยกเลิกได้ทุกเมื่อ',
+    btn_register_listing:  'สมัครฟรี เพื่อเริ่มลง Listing',
+    btn_contact_sales:     'ติดต่อ Sales',
+    aff_page_sub:          'แนะนำเพื่อน · แชร์ listing · รับ commission ทุกครั้งที่ปิดดีล',
+    aff_step1_title:       'สมัครฟรี',
+    aff_step1_body:        'สร้างบัญชี affiliate ไม่มีค่าสมัคร · อนุมัติทันที',
+    aff_step2_title:       'รับ Link ของคุณ',
+    aff_step2_body:        'ทุก listing มี affiliate link เฉพาะของคุณ · share ได้ทุก platform',
+    aff_step3_title:       'รับ Commission',
+    aff_step3_body:        'ทุกดีลที่ปิดผ่าน link คุณ รับ commission อัตโนมัติ',
+    aff_comm_rental:       'ของ 1 เดือนแรก',
+    aff_comm_rto:          'ของ sale price',
+    aff_comm_inv:          'ของ transaction',
+    aff_cta_title:         'เริ่มรับ Commission วันนี้',
+    aff_cta_sub:           'สมัครฟรี · ไม่ต้องลงทุน · earn passive income จากเครือข่ายของคุณ',
+    btn_join_affiliate:    'สมัคร Affiliate ฟรี',
+    btn_view_dash_preview: 'ดูตัวอย่าง Dashboard',
+    calc_monthly_lbl:      'ค่าเช่าต่อเดือน',
+    calc_commit_lbl:       'ยอดรวมทั้งหมด',
+    calc_equity_yr:        'อัตรา Equity/ปี',
+    btn_rent_this_unit:    '🏠 สนใจเช่าห้องนี้',
+    btn_buy_with_tenant_unit: '💼 สนใจซื้อห้องนี้ พร้อมผู้เช่า',
+    calc_est_note:         'ค่าคำนวณเป็นการประมาณการเท่านั้น · ราคาจริงขึ้นอยู่กับเงื่อนไขสัญญา',
+    myhome_page_sub:       'ติดตาม credit score · ดูความคืบหน้า equity · บริหาร property ของคุณ',
+    myhome_f1_title:       'สร้าง Credit Score ของคุณ',
+    myhome_f1_body:        'ทุกๆ การจ่ายเช่าตรงเวลา = credit score ที่สูงขึ้น พร้อมสำหรับการขอสินเชื่อในอนาคต',
+    myhome_f2_title:       'แดชบอร์ดอสังหาฯ แบบ Real-Time',
+    myhome_f2_body:        'Monitor rental payment history · equity accumulated · estimated property value · days to ownership',
+    myhome_f3_title:       'ตัดจ่ายรายเดือนอัตโนมัติ',
+    myhome_f3_body:        'ตัดจ่ายอัตโนมัติ · ไม่มีค่าธรรมเนียมการโอน · รับใบเสร็จทันที',
+    myhome_login_title:    'เข้าสู่ระบบ Dashboard',
+    myhome_or:             'หรือ',
+    myhome_no_account:     'ยังไม่มีบัญชี?',
+    myhome_signup_link:    'สมัครสมาชิกฟรี',
+    myhome_lock_msg:       '🔒 เข้าสู่ระบบเพื่อดู Dashboard',
+    suc_next_title:        'ขั้นตอนต่อไป',
+    btn_go_tenant_dashboard: 'ไปที่ Tenant Dashboard',
+    btn_return_home:       'กลับหน้าหลัก',
+    tenant_payment_hist:   'ประวัติการชำระเงิน',
+    tenant_viewall:        'ดูทั้งหมด',
+    tenant_col_month:      'เดือน',
+    tenant_col_amount:     'ยอดชำระ',
+    tenant_col_equity_mo:  'Equity เดือนนี้',
+    tenant_col_status:     'สถานะ',
+    tenant_status_paid:    '✓ ชำระแล้ว',
+    tenant_next_payment:   'การชำระเงินถัดไป',
+    tenant_pay_now:        'ชำระเงินเลย',
+    dev_add_listing_btn:   '+ เพิ่ม Listing',
+    dev_stat1:             'Listing ที่ใช้งาน',
+    dev_stat2:             'ยอดชม เดือนนี้',
+    dev_stat3:             'Lead ที่ได้รับ',
+    dev_stat4:             'ดีลที่ปิดแล้ว',
+    dev_active_title:      'Listing ที่ใช้งานอยู่',
+    apply_privacy:         '🔒 ข้อมูลของคุณปลอดภัย — ไม่มีการแชร์ให้บุคคลที่สาม',
+    // — PDPA / Cookie / Privacy —
+    cookie_title:          '🍪 เราใช้คุกกี้',
+    cookie_text:           'เราใช้คุกกี้และเครื่องมือวิเคราะห์เพื่อปรับปรุงประสบการณ์ของคุณ คุณสามารถยอมรับทั้งหมดหรือเลือกเฉพาะที่จำเป็นเท่านั้น',
+    cookie_accept:         'ยอมรับทั้งหมด',
+    cookie_essential:      'เฉพาะที่จำเป็น',
+    apply_consent_pre:     'ข้าพเจ้าได้อ่านและยินยอมตาม',
+    apply_consent_link:    'นโยบายความเป็นส่วนตัว',
+    apply_consent_post:    'และยินยอมให้ StayVerse เก็บและใช้ข้อมูลส่วนบุคคลของข้าพเจ้า',
+    priv_title:            'นโยบายความเป็นส่วนตัว',
+    priv_effective:        'มีผลบังคับใช้: 24 มีนาคม 2569',
+    priv_intro:            'บริษัท StayVerse จำกัด ให้ความสำคัญกับความเป็นส่วนตัวของท่าน และมุ่งมั่นปกป้องข้อมูลส่วนบุคคลตาม พ.ร.บ. คุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562 (PDPA) นโยบายนี้อธิบายวิธีที่เราเก็บ ใช้ และปกป้องข้อมูลของท่าน',
+    priv_s1_title:         '1. ข้อมูลที่เราเก็บรวบรวม',
+    priv_s1_body:          'ชื่อ-นามสกุล เบอร์โทรศัพท์ อีเมล สัญชาติ รายได้ และความพร้อมด้านเงินดาวน์ — เก็บเมื่อท่านยื่นใบสมัคร พฤติกรรมการใช้งานและข้อมูลอุปกรณ์ — เก็บผ่านคุกกี้วิเคราะห์ (เฉพาะเมื่อท่านให้ความยินยอมเท่านั้น)',
+    priv_s2_title:         '2. วัตถุประสงค์การใช้ข้อมูล',
+    priv_s2_body:          'เพื่อประมวลผลใบสมัครและจับคู่ท่านกับอสังหาริมทรัพย์ที่เหมาะสม เพื่อติดต่อท่านเกี่ยวกับสถานะใบสมัคร เพื่อพัฒนาแพลตฟอร์ม (เฉพาะด้าน analytics เมื่อมีการยินยอม) และเพื่อปฏิบัติตามกฎหมายที่บังคับใช้',
+    priv_s3_title:         '3. สิทธิ์ของท่านตาม PDPA',
+    priv_s3_body:          'ท่านมีสิทธิ์: เข้าถึงข้อมูล · แก้ไขข้อมูล · ลบข้อมูล · คัดค้านการประมวลผล · จำกัดการประมวลผล · โอนย้ายข้อมูล · ถอนความยินยอมได้ทุกเมื่อ ติดต่อ: privacy@stayverse.io — เราจะตอบกลับภายใน 30 วัน',
+    priv_s4_title:         '4. ระยะเวลาการเก็บข้อมูล',
+    priv_s4_body:          'เราเก็บข้อมูลของท่านตลอดระยะเวลาที่เป็นสมาชิกบวก 1 ปีหลังจากสัญญาสิ้นสุด หรือตามที่กฎหมายกำหนด',
+    priv_s5_title:         '5. ความปลอดภัยของข้อมูล',
+    priv_s5_body:          'เราใช้การเข้ารหัสและการควบคุมการเข้าถึงตามมาตรฐานอุตสาหกรรม ข้อมูลของท่านจะไม่ถูกขายให้บุคคลที่สามไม่ว่าในกรณีใด',
+    priv_s6_title:         '6. ติดต่อเจ้าหน้าที่คุ้มครองข้อมูล',
+    priv_s6_body:          'อีเมล: privacy@stayverse.io · ตอบกลับภายใน 30 วัน',
+    priv_back:             '← กลับ'
       },
   zh: {
     nav_rto:       '租购并举',
@@ -2359,7 +2767,171 @@ const T = {
     suc_step2:     '2️⃣ 预约视频KYC认证',
     suc_step3:     '3️⃣ 签署租转购协议',
     suc_step4:     '4️⃣ 通过StayVerse转账首付款',
-    suc_step5:     '5️⃣ 领取钥匙，入住！'
+    suc_step5:     '5️⃣ 领取钥匙，入住！',
+    // — extended i18n —
+    why_sub:        '超越普通租房。无需银行贷款。今天就开始拥有。',
+    how_sub:        '3个简单步骤实现房产所有权 — 无需银行贷款。',
+    prob_title:     'StayVerse 致力解决的问题',
+    prob_sub:       '房价上涨、贷款严格、零权益 — 数百万人被拒于购房门外',
+    prob1_label:    '贷款拒批率',
+    prob1_body:     '大多数申请人因收入证明不足、非正规就业或信用记录薄弱而被泰国银行拒绝。',
+    prob2_label:    '所需平均首付',
+    prob2_body:     '相当于泰国大多数家庭3年以上的储蓄 — 一道难以逾越的门槛。',
+    prob3_label:    '终身租金 · 零权益',
+    prob3_body:     '泰国普通租户一生缴纳租金高达฿2.16M，却无任何资产积累，每笔付款都消失了。',
+    prob_tagline:   'StayVerse 将每月还款转化为真实的房产权益 — 自动、透明、数字化。',
+    mod_title:      '一站式完整平台',
+    mod_sub:        '专为开发商、投资者和租户设计的数字平台，一体化运营。',
+    mod1_title:     '前端房源列表',
+    mod1_body:      '动态房源搜索引擎，支持按地区、价格和权益率筛选。',
+    mod2_title:     '后台报告与文档',
+    mod2_body:      '分期购买合同、发票收据、付款计算器、账单 — 银行文件交换中心。',
+    mod3_title:     '甩卖价格房源',
+    mod3_body:      '合同到期后的房源以甩卖价上市 — 为开发商提供有保障的退出策略。',
+    mod4_title:     '投资者中心',
+    mod4_body:      '为投资购房的投资者提供门户，配备实时权益追踪仪表盘。',
+    mod5_title:     '支付网关与钱包',
+    mod5_body:      '与One Wallet集成 — 每月自动扣款，无需泰国银行账户，支持跨境。',
+    mod6_title:     '增值服务',
+    mod6_body:      '家政、洗衣、搬迁服务 — 保持房间随时入住，为租户增加价值。',
+    dev_price_title:'发布房产，促成更多交易。',
+    dev_price_sub:  'SaaS + 交易佣金 — 可持续、可扩展，不烧钱。',
+    stats_units:    '认证房源',
+    stats_cities:   '城市 · 曼谷, 芭提雅, 普吉岛, 清迈',
+    stats_interest: '利息 · 前6个月',
+    stats_langs:    '语言',
+    btn_calc:       '计算',
+    btn_book:       '立即预订',
+    btn_details:    '详情',
+    btn_viewall136: '查看全部136套 →',
+    btn_getstarted: '立即开始 →',
+    btn_listunits:  '上架房源 →',
+    btn_contact:    '联系我们 →',
+    tag_available:  '可租',
+    tag_popular:    '热门',
+    art_filter_all: '全部',
+    art_filter_sv:  'StayVerse',
+    art_filter_living: '生活',
+    art_filter_sponsored: '赞助',
+    inv_what_title: 'Investor\'s Choice 是什么？',
+    inv_what_body:  '希望退出的Rent-to-Own业主的房源 — 内有活跃租客。投资者可以低于市场价购买并立即获得现金流。',
+    investor_hero_sub: '带租约购买 · 低于市场价 · 随时可转让',
+    listprop_page_sub:     '选择适合您的套餐 · 触达目标租客与投资者 · 今天即可开始',
+    tag_most_popular:      '⭐ 最热门',
+    pkg_per_listing:       '/月 · 每房源',
+    pkg_per_project:       '/月 · 每项目',
+    pkg_b1:                '✅ 1个房源',
+    pkg_b2:                '✅ 最多10张照片',
+    pkg_b3:                '✅ VR全景游览 (360°)',
+    pkg_b4:                '✅ 显示在搜索结果中',
+    pkg_b5:                '✅ 联系表单',
+    pkg_b_no1:             '✗ 首页精选展示',
+    pkg_b_no2:             '✗ 优先搜索排名',
+    pkg_b_no3:             '✗ SEM推广',
+    pkg_b_no4:             '✗ 数据分析面板',
+    btn_start_basic:       '开始Basic套餐',
+    pkg_p1:                '✅ 无限房源发布',
+    pkg_p2:                '✅ 最多30张照片 + 视频',
+    pkg_p4:                '✅ 优先搜索排名',
+    pkg_p5:                '✅ 联系表单 + WhatsApp',
+    pkg_p6:                '✅ 搜索顶端展位 ฿3K-10K',
+    pkg_p7:                '✅ 数据分析面板',
+    pkg_p8:                '✅ 开发商品牌页面',
+    pkg_p_no1:             '✗ 首页精选展示',
+    btn_choose_pro:        '选择Pro',
+    pkg_pm1:               '✅ 所有户型，无限发布',
+    pkg_pm2:               '✅ 照片+视频+VR无限量',
+    pkg_pm3:               '✅ 首页精选 ฿15K-30K/月',
+    pkg_pm4:               '✅ Google Ads SEM推广',
+    pkg_pm5:               '✅ 专属客户经理',
+    pkg_pm6:               '✅ 分析+潜客报告',
+    pkg_pm7:               '✅ 开发商品牌页面（Premium）',
+    pkg_pm8:               '✅ WeChat / LINE / WhatsApp leads',
+    pkg_pm9:               '✅ 精选文章 + 电子邮件推广',
+    btn_choose_premium:    '选择Premium',
+    paid_title:            '📊 付费推广 — 提升曝光率',
+    paid_hp_period:        '/月 · 首页展示',
+    paid_search_period:    '/月 · 搜索前三',
+    paid_sem_label:        'SEM广告托管服务',
+    listprop_gate_title:   '开始发布您的房产',
+    listprop_gate_sub:     '免费账户 · 无注册费 · 随时取消',
+    btn_register_listing:  '免费注册并开始发布',
+    btn_contact_sales:     '联系销售',
+    aff_page_sub:          '推荐好友 · 分享房源 · 每笔成交赚取佣金',
+    aff_step1_title:       '免费注册',
+    aff_step1_body:        '创建代理账户 — 免费加入，即时批准',
+    aff_step2_title:       '获取您的链接',
+    aff_step2_body:        '每个房源都有您专属的代理链接 — 可在任何平台分享',
+    aff_step3_title:       '赚取佣金',
+    aff_step3_body:        '每笔通过您链接成交的交易自动产生佣金',
+    aff_comm_rental:       '首月佣金',
+    aff_comm_rto:          '售价百分比',
+    aff_comm_inv:          '交易额百分比',
+    aff_cta_title:         '今天开始赚取佣金',
+    aff_cta_sub:           '免费注册 · 无需投资 · 从您的人脉中赚取被动收入',
+    btn_join_affiliate:    '免费加入代理计划',
+    btn_view_dash_preview: '查看Dashboard预览',
+    calc_monthly_lbl:      '月租金',
+    calc_commit_lbl:       '总支付额',
+    calc_equity_yr:        '年权益增长率',
+    btn_rent_this_unit:    '🏠 我想租这套房',
+    btn_buy_with_tenant_unit: '💼 含租户购买',
+    calc_est_note:         '所有计算仅供参考 · 实际价格取决于合同条款',
+    myhome_page_sub:       '追踪信用评分 · 监控权益进度 · 管理您的房产',
+    myhome_f1_title:       '提升您的信用评分',
+    myhome_f1_body:        '每次按时付款 = 信用评分提升，为未来贷款做好准备',
+    myhome_f2_title:       '实时房产仪表盘',
+    myhome_f2_body:        '监控租金记录 · 权益积累 · 预估房产价值 · 距完全拥有的天数',
+    myhome_f3_title:       '自动月扣款',
+    myhome_f3_body:        '自动扣款 · 无转账费用 · 即时收据',
+    myhome_login_title:    '登录仪表盘',
+    myhome_or:             '或',
+    myhome_no_account:     '还没有账户？',
+    myhome_signup_link:    '免费注册',
+    myhome_lock_msg:       '🔒 登录查看您的仪表盘',
+    suc_next_title:        '接下来',
+    btn_go_tenant_dashboard: '前往租户仪表盘',
+    btn_return_home:       '返回首页',
+    tenant_payment_hist:   '付款历史',
+    tenant_viewall:        '查看全部',
+    tenant_col_month:      '月份',
+    tenant_col_amount:     '支付金额',
+    tenant_col_equity_mo:  '本月权益',
+    tenant_col_status:     '状态',
+    tenant_status_paid:    '✓ 已付款',
+    tenant_next_payment:   '下次还款日',
+    tenant_pay_now:        '立即支付',
+    dev_add_listing_btn:   '+ 添加房源',
+    dev_stat1:             '活跃房源',
+    dev_stat2:             '本月浏览量',
+    dev_stat3:             '产生的潜在客户',
+    dev_stat4:             '已成交',
+    dev_active_title:      '活跃房源',
+    apply_privacy:         '🔒 您的数据安全 — 从不与第三方共享',
+    // — PDPA / Cookie / Privacy —
+    cookie_title:          '🍪 我们使用Cookie',
+    cookie_text:           '我们使用Cookie和分析工具改善您的体验。您可以全部接受或仅接受必要Cookie。',
+    cookie_accept:         '全部接受',
+    cookie_essential:      '仅限必要',
+    apply_consent_pre:     '我已阅读并同意',
+    apply_consent_link:    '隐私政策',
+    apply_consent_post:    '，并同意StayVerse收集和使用我的个人数据。',
+    priv_title:            '隐私政策',
+    priv_effective:        '生效日期：2026年3月24日',
+    priv_intro:            'StayVerse有限公司重视您的隐私，并致力于根据泰国个人数据保护法(PDPA)保护您的个人数据。',
+    priv_s1_title:         '1. 我们收集的数据',
+    priv_s1_body:          '姓名、电话、邮箱、国籍、收入水平及首付准备情况——在您申请时收集。浏览行为和设备数据——仅在您同意后通过分析Cookie收集。',
+    priv_s2_title:         '2. 处理目的',
+    priv_s2_body:          '处理您的申请并为您匹配合适的房产。就申请状态与您联系。改善平台（仅在同意后进行分析）。履行法律义务。',
+    priv_s3_title:         '3. 您的权利(PDPA)',
+    priv_s3_body:          '您有权：访问 · 更正 · 删除 · 反对处理 · 限制处理 · 数据可携带 · 随时撤回同意。联系：privacy@stayverse.io — 30天内回复。',
+    priv_s4_title:         '4. 数据保留',
+    priv_s4_body:          '我们在您会员资格期间及合同结束后1年内保留您的数据，或按法律要求保留。',
+    priv_s5_title:         '5. 数据安全',
+    priv_s5_body:          '我们使用行业标准加密和访问控制。您的数据绝不出售给第三方。',
+    priv_s6_title:         '6. 联系数据保护专员',
+    priv_s6_body:          '邮箱：privacy@stayverse.io · 30天内回复。',
+    priv_back:             '← 返回'
       },
   ru: {
     nav_rto:       'Аренда с выкупом',
@@ -2451,7 +3023,171 @@ const T = {
     suc_step2:     '2️⃣ Видеозвонок для KYC',
     suc_step3:     '3️⃣ Подписание договора аренды с правом выкупа',
     suc_step4:     '4️⃣ Перевод первоначального взноса через StayVerse',
-    suc_step5:     '5️⃣ Получение ключей и въезд!'
+    suc_step5:     '5️⃣ Получение ключей и въезд!',
+    // — extended i18n —
+    why_sub:        'Лучше обычной аренды. Без банковского кредита. Начните владеть сегодня.',
+    how_sub:        '3 простых шага к владению недвижимостью — без банковского кредита.',
+    prob_title:     'Проблема, которую решает StayVerse',
+    prob_sub:       'Рост цен, жёсткое кредитование и нулевая доля — миллионы не могут купить жильё',
+    prob1_label:    'Процент отказов в ипотеке',
+    prob1_body:     'Большинство заявителей отклоняются тайскими банками из-за недостаточных документов о доходах, неформальной занятости или слабой кредитной истории.',
+    prob2_label:    'Средний требуемый первоначальный взнос',
+    prob2_body:     'Эквивалент 3+ лет накоплений для большинства тайских семей — непреодолимый барьер.',
+    prob3_label:    'Аренда на всю жизнь · Нулевая доля',
+    prob3_body:     'Средний тайский арендатор платит ฿2.16M за всю жизнь без накопления активов. Каждый платёж исчезает.',
+    prob_tagline:   'StayVerse превращает каждый ежемесячный платёж в реальную долю недвижимости — автоматически, прозрачно, цифровым способом.',
+    mod_title:      'Полная платформа в одном месте',
+    mod_sub:        'Цифровая платформа для застройщиков, инвесторов и арендаторов — всё в одном.',
+    mod1_title:     'Фронтенд Листинг',
+    mod1_body:      'Динамический листинг с поисковой системой — фильтрация по расположению, цене и ставке доли.',
+    mod2_title:     'Бэкенд Отчёты и Документы',
+    mod2_body:      'Договор аренды с правом выкупа, счета и квитанции, калькулятор платежей, выписки — документооборот для банка.',
+    mod3_title:     'Листинг по цене Fire Sale',
+    mod3_body:      'Листинг юнитов по окончании контракта по сниженной цене — гарантированная стратегия выхода для застройщиков.',
+    mod4_title:     'Хаб для инвесторов',
+    mod4_body:      'Портал для инвесторов с дашбордом отслеживания доли в режиме реального времени.',
+    mod5_title:     'Платёжный шлюз и кошелёк',
+    mod5_body:      'Интегрирован с One Wallet — автосписание каждый месяц, тайский счёт не нужен, поддержка трансграничных платежей.',
+    mod6_title:     'Дополнительные услуги',
+    mod6_body:      'Уборка, прачечная, помощь с переездом — юнит всегда готов к заселению.',
+    dev_price_title:'Размещайте объекты. Заключайте больше сделок.',
+    dev_price_sub:  'SaaS + комиссия за транзакции — устойчиво, масштабируемо, без «сжигания» денег.',
+    stats_units:    'Проверенных юнитов',
+    stats_cities:   'Города · БКК, Паттайя, Пхукет, ЧМ',
+    stats_interest: 'Процентов · Первые 6 месяцев',
+    stats_langs:    'Языков',
+    btn_calc:       'Рассчитать',
+    btn_book:       'Забронировать',
+    btn_details:    'Подробнее',
+    btn_viewall136: 'Посмотреть все 136 юнитов →',
+    btn_getstarted: 'Начать →',
+    btn_listunits:  'Разместить юниты →',
+    btn_contact:    'Связаться →',
+    tag_available:  'Доступно',
+    tag_popular:    'Популярно',
+    art_filter_all: 'Все',
+    art_filter_sv:  'StayVerse',
+    art_filter_living: 'Жизнь',
+    art_filter_sponsored: 'Спонсор',
+    inv_what_title: 'Что такое Investor\'s Choice?',
+    inv_what_body:  'Юниты, где владельцы Rent-to-Own хотят выйти из сделки — с действующим арендатором. Инвесторы покупают ниже рынка и сразу получают денежный поток.',
+    investor_hero_sub: 'Собственник ищет ликвидность · Цена переговорная · Готов к немедленному переводу',
+    listprop_page_sub:     'Выберите подходящий пакет · Привлекайте нужных арендаторов и инвесторов · Начните сегодня',
+    tag_most_popular:      '⭐ Популярный',
+    pkg_per_listing:       '/мес · за объявление',
+    pkg_per_project:       '/мес · за проект',
+    pkg_b1:                '✅ 1 объявление',
+    pkg_b2:                '✅ До 10 фото',
+    pkg_b3:                '✅ VR-тур (360°)',
+    pkg_b4:                '✅ Показ в результатах поиска',
+    pkg_b5:                '✅ Форма обратной связи',
+    pkg_b_no1:             '✗ Продвижение на главной',
+    pkg_b_no2:             '✗ Приоритет в поиске',
+    pkg_b_no3:             '✗ SEM продвижение',
+    pkg_b_no4:             '✗ Аналитический дашборд',
+    btn_start_basic:       'Начать Basic',
+    pkg_p1:                '✅ Неограниченное число объявлений',
+    pkg_p2:                '✅ До 30 фото + видео',
+    pkg_p4:                '✅ Приоритет в поиске',
+    pkg_p5:                '✅ Форма + WhatsApp',
+    pkg_p6:                '✅ Топ поиска ฿3K-10K',
+    pkg_p7:                '✅ Аналитический дашборд',
+    pkg_p8:                '✅ Брендинговая страница застройщика',
+    pkg_p_no1:             '✗ Продвижение на главной',
+    btn_choose_pro:        'Выбрать Pro',
+    pkg_pm1:               '✅ Все юниты, без ограничений',
+    pkg_pm2:               '✅ Фото + видео + VR без ограничений',
+    pkg_pm3:               '✅ Главная страница ฿15K-30K/мес',
+    pkg_pm4:               '✅ Google Ads SEM Boost',
+    pkg_pm5:               '✅ Персональный менеджер',
+    pkg_pm6:               '✅ Аналитика + отчёты по лидам',
+    pkg_pm7:               '✅ Премиум брендинговая страница',
+    pkg_pm8:               '✅ WeChat / LINE / WhatsApp leads',
+    pkg_pm9:               '✅ В статьях + email рассылка',
+    btn_choose_premium:    'Выбрать Premium',
+    paid_title:            '📊 Платное размещение — повысить видимость',
+    paid_hp_period:        '/мес · на главной странице',
+    paid_search_period:    '/мес · Топ-3 в поиске',
+    paid_sem_label:        'Ведение SEM-кампании',
+    listprop_gate_title:   'Начните размещать объявления',
+    listprop_gate_sub:     'Бесплатный аккаунт · Без комиссии за регистрацию · Отмена в любое время',
+    btn_register_listing:  'Зарегистрироваться бесплатно',
+    btn_contact_sales:     'Связаться с продажами',
+    aff_page_sub:          'Рекомендуйте друзьям · Делитесь объявлениями · Зарабатывайте комиссию',
+    aff_step1_title:       'Зарегистрируйтесь бесплатно',
+    aff_step1_body:        'Создайте аккаунт — вход бесплатный, одобрение мгновенно',
+    aff_step2_title:       'Получите свою ссылку',
+    aff_step2_body:        'Каждое объявление имеет вашу уникальную ссылку — делитесь на любой платформе',
+    aff_step3_title:       'Зарабатывайте комиссию',
+    aff_step3_body:        'Комиссия начисляется автоматически за каждую сделку',
+    aff_comm_rental:       'от первого месяца',
+    aff_comm_rto:          'от цены продажи',
+    aff_comm_inv:          'от суммы сделки',
+    aff_cta_title:         'Начните зарабатывать комиссию сегодня',
+    aff_cta_sub:           'Бесплатная регистрация · Без вложений · Пассивный доход от вашей сети',
+    btn_join_affiliate:    'Вступить в партнёрскую программу',
+    btn_view_dash_preview: 'Предпросмотр дашборда',
+    calc_monthly_lbl:      'Ежемесячная аренда',
+    calc_commit_lbl:       'Общая сумма платежей',
+    calc_equity_yr:        'Ставка накопления/год',
+    btn_rent_this_unit:    '🏠 Хочу арендовать',
+    btn_buy_with_tenant_unit: '💼 Купить с арендатором',
+    calc_est_note:         'Расчёты являются оценочными · Реальная цена зависит от условий договора',
+    myhome_page_sub:       'Отслеживайте кредитный рейтинг · Контролируйте накопление капитала · Управляйте недвижимостью',
+    myhome_f1_title:       'Повышайте кредитный рейтинг',
+    myhome_f1_body:        'Каждый своевременный платёж = выше кредитный рейтинг, готовность к будущим кредитам',
+    myhome_f2_title:       'Дашборд в реальном времени',
+    myhome_f2_body:        'История платежей · накопленный капитал · оценочная стоимость · дни до полного владения',
+    myhome_f3_title:       'Автоматическое ежемесячное списание',
+    myhome_f3_body:        'Автоматические платежи · без комиссий за перевод · мгновенный чек',
+    myhome_login_title:    'Войти в дашборд',
+    myhome_or:             'или',
+    myhome_no_account:     'Нет аккаунта?',
+    myhome_signup_link:    'Зарегистрироваться бесплатно',
+    myhome_lock_msg:       '🔒 Войдите, чтобы увидеть дашборд',
+    suc_next_title:        'Следующие шаги',
+    btn_go_tenant_dashboard: 'Перейти в дашборд арендатора',
+    btn_return_home:       'Вернуться на главную',
+    tenant_payment_hist:   'История платежей',
+    tenant_viewall:        'Посмотреть все',
+    tenant_col_month:      'Месяц',
+    tenant_col_amount:     'Сумма платежа',
+    tenant_col_equity_mo:  'Капитал за месяц',
+    tenant_col_status:     'Статус',
+    tenant_status_paid:    '✓ Оплачено',
+    tenant_next_payment:   'Следующий платёж',
+    tenant_pay_now:        'Оплатить сейчас',
+    dev_add_listing_btn:   '+ Добавить объявление',
+    dev_stat1:             'Активные объявления',
+    dev_stat2:             'Просмотры за месяц',
+    dev_stat3:             'Входящих лидов',
+    dev_stat4:             'Закрытых сделок',
+    dev_active_title:      'Активные объявления',
+    apply_privacy:         '🔒 Ваши данные защищены — никогда не передаются третьим лицам',
+    // — PDPA / Cookie / Privacy —
+    cookie_title:          '🍪 Мы используем файлы cookie',
+    cookie_text:           'Мы используем cookies и аналитику для улучшения вашего опыта. Вы можете принять все или только необходимые.',
+    cookie_accept:         'Принять все',
+    cookie_essential:      'Только необходимые',
+    apply_consent_pre:     'Я ознакомился и согласен с',
+    apply_consent_link:    'Политикой конфиденциальности',
+    apply_consent_post:    'и даю согласие StayVerse на сбор и использование моих персональных данных.',
+    priv_title:            'Политика конфиденциальности',
+    priv_effective:        'Дата вступления в силу: 24 марта 2026 г.',
+    priv_intro:            'ООО StayVerse уважает вашу конфиденциальность и обязуется защищать ваши персональные данные в соответствии с Законом о защите персональных данных Таиланда (PDPA).',
+    priv_s1_title:         '1. Данные, которые мы собираем',
+    priv_s1_body:          'Имя, телефон, email, гражданство, доход и готовность к первоначальному взносу — при подаче заявки. Поведение в браузере и данные устройства — только с вашего согласия через аналитические cookies.',
+    priv_s2_title:         '2. Цели обработки',
+    priv_s2_body:          'Обработка заявки и подбор подходящих объектов. Связь по статусу заявки. Улучшение платформы (аналитика — только с согласия). Соблюдение правовых обязательств.',
+    priv_s3_title:         '3. Ваши права (PDPA)',
+    priv_s3_body:          'Вы имеете право: Доступ · Исправление · Удаление · Возражение · Ограничение обработки · Переносимость данных · Отзыв согласия в любое время. Контакт: privacy@stayverse.io — ответ в течение 30 дней.',
+    priv_s4_title:         '4. Сроки хранения',
+    priv_s4_body:          'Мы храним данные в течение срока членства плюс 1 год после окончания договора или согласно требованиям законодательства.',
+    priv_s5_title:         '5. Безопасность данных',
+    priv_s5_body:          'Мы используем стандартное отраслевое шифрование и контроль доступа. Ваши данные никогда не продаются третьим лицам.',
+    priv_s6_title:         '6. Связь с сотрудником по защите данных',
+    priv_s6_body:          'Email: privacy@stayverse.io · Ответ в течение 30 дней.',
+    priv_back:             '← Назад'
       },
   ja: {
     nav_rto:       '賃貸購入',
@@ -2543,7 +3279,171 @@ const T = {
     suc_step2:     '2️⃣ ビデオ通話KYCの予約',
     suc_step3:     '3️⃣ レント・トゥ・オウン契約に署名',
     suc_step4:     '4️⃣ StayVerseを通じて頭金を送金',
-    suc_step5:     '5️⃣ 鍵を受け取り、入居！'
+    suc_step5:     '5️⃣ 鍵を受け取り、入居！',
+    // — extended i18n —
+    why_sub:        '普通の賃貸を超えた選択肢。銀行ローン不要。今日から所有を始めよう。',
+    how_sub:        '3ステップで物件所有へ — 銀行ローン不要。',
+    prob_title:     'StayVerseが解決する問題',
+    prob_sub:       '価格上昇・厳格な融資・ゼロエクイティ — 何百万人もが住宅購入から排除されている',
+    prob1_label:    '住宅ローン拒否率',
+    prob1_body:     '収入証明書の不足、非正規雇用、または薄い信用履歴により、ほとんどの申請者がタイの銀行に拒否されています。',
+    prob2_label:    '必要な平均頭金',
+    prob2_body:     'タイの多くの家庭にとって3年以上の貯蓄に相当 — 乗り越えがたい初期費用の壁。',
+    prob3_label:    '生涯賃料 · ゼロエクイティ',
+    prob3_body:     '平均的なタイの賃借人は生涯で฿2.16Mを支払うが、資産形成はゼロ。支払いはすべて消えていく。',
+    prob_tagline:   'StayVerseはすべての月払いを実際の不動産エクイティに変換します — 自動的に、透明に、デジタルで。',
+    mod_title:      '全機能を一か所に',
+    mod_sub:        'デベロッパー、投資家、テナントが同時に利用できるデジタルプラットフォーム。',
+    mod1_title:     'フロントエンド物件一覧',
+    mod1_body:      'ダイナミック物件一覧 — 場所・価格・エクイティ率でフィルタリング可能。',
+    mod2_title:     'バックエンドレポート＆書類',
+    mod2_body:      '割賦購入契約、請求書・領収書、支払いカリキュレーター、明細書 — 銀行向け文書交換ハブ。',
+    mod3_title:     'ファイアセール物件一覧',
+    mod3_body:      '契約終了時にファイアセール価格で物件を公開 — デベロッパーに確実な出口戦略を提供。',
+    mod4_title:     '投資家ハブ',
+    mod4_body:      '投資目的でユニットを購入したい投資家向けのポータル。リアルタイムエクイティ追跡ダッシュボード付き。',
+    mod5_title:     '決済ゲートウェイ＆ウォレット',
+    mod5_body:      'One Walletと統合 — 毎月自動引き落とし、タイの銀行口座不要、クロスボーダー対応。',
+    mod6_title:     '付加価値サービス',
+    mod6_body:      'ハウスキーピング・ランドリー・引越しサービス — 入居準備を整え、テナントへの価値を高めます。',
+    dev_price_title:'物件を掲載。より多くの成約を。',
+    dev_price_sub:  'SaaS + 取引手数料 — 持続可能、スケーラブル、キャッシュバーン不要。',
+    stats_units:    '認定済みユニット',
+    stats_cities:   '都市 · BKK, パタヤ, プーケット, CNX',
+    stats_interest: '利息 · 最初の6ヶ月',
+    stats_langs:    '言語',
+    btn_calc:       '計算する',
+    btn_book:       '今すぐ予約',
+    btn_details:    '詳細',
+    btn_viewall136: '全136ユニットを見る →',
+    btn_getstarted: '開始する →',
+    btn_listunits:  'ユニットを掲載 →',
+    btn_contact:    'お問い合わせ →',
+    tag_available:  '空室',
+    tag_popular:    '人気',
+    art_filter_all: 'すべて',
+    art_filter_sv:  'StayVerse',
+    art_filter_living: 'リビング',
+    art_filter_sponsored: 'スポンサー',
+    inv_what_title: 'Investor\'s Choiceとは？',
+    inv_what_body:  'Rent-to-Ownのオーナーが退出を希望するユニット — アクティブなテナントが入居中。投資家は市場価格以下で購入し、即日キャッシュフローを得られます。',
+    investor_hero_sub: 'テナント付き物件 · 市場以下の価格 · 即時譲渡可能',
+    listprop_page_sub:     '最適なプランを選択 · 適切なテナントと投資家にリーチ · 今日から始めましょう',
+    tag_most_popular:      '⭐ 人気No.1',
+    pkg_per_listing:       '/月 · 物件ごと',
+    pkg_per_project:       '/月 · プロジェクトごと',
+    pkg_b1:                '✅ 1物件掲載',
+    pkg_b2:                '✅ 写真最大10枚',
+    pkg_b3:                '✅ VRツアー (360°)',
+    pkg_b4:                '✅ 検索結果に表示',
+    pkg_b5:                '✅ 問い合わせフォーム',
+    pkg_b_no1:             '✗ ホームページスポットライト',
+    pkg_b_no2:             '✗ 優先検索順位',
+    pkg_b_no3:             '✗ SEM強化',
+    pkg_b_no4:             '✗ 分析ダッシュボード',
+    btn_start_basic:       'Basicを始める',
+    pkg_p1:                '✅ 掲載数無制限',
+    pkg_p2:                '✅ 写真最大30枚 + 動画',
+    pkg_p4:                '✅ 優先検索順位',
+    pkg_p5:                '✅ フォーム + WhatsApp',
+    pkg_p6:                '✅ 検索トップ掲載 ฿3K-10K',
+    pkg_p7:                '✅ 分析ダッシュボード',
+    pkg_p8:                '✅ デベロッパーブランドページ',
+    pkg_p_no1:             '✗ ホームページスポットライト',
+    btn_choose_pro:        'Proを選ぶ',
+    pkg_pm1:               '✅ 全ユニット、掲載数無制限',
+    pkg_pm2:               '✅ 写真+動画+VR無制限',
+    pkg_pm3:               '✅ ホームページスポットライト ฿15K-30K/月',
+    pkg_pm4:               '✅ Google Ads SEM Boost',
+    pkg_pm5:               '✅ 専任アカウントマネージャー',
+    pkg_pm6:               '✅ 分析 + リードレポート',
+    pkg_pm7:               '✅ デベロッパーブランドページ（プレミアム）',
+    pkg_pm8:               '✅ WeChat / LINE / WhatsApp leads',
+    pkg_pm9:               '✅ 記事掲載 + メール配信',
+    btn_choose_premium:    'Premiumを選ぶ',
+    paid_title:            '📊 有料プレースメント — 視認性を高める',
+    paid_hp_period:        '/月 · トップページ掲載',
+    paid_search_period:    '/月 · 検索トップ3',
+    paid_sem_label:        'SEMキャンペーン代理運用',
+    listprop_gate_title:   '物件掲載を始める',
+    listprop_gate_sub:     '無料アカウント · 登録費不要 · いつでも解約可能',
+    btn_register_listing:  '無料登録して掲載を始める',
+    btn_contact_sales:     '営業に問い合わせ',
+    aff_page_sub:          '友人を紹介 · 物件をシェア · 成約ごとにコミッションを獲得',
+    aff_step1_title:       '無料登録',
+    aff_step1_body:        'アフィリエイトアカウント作成 — 無料参加、即承認',
+    aff_step2_title:       'リンクを取得',
+    aff_step2_body:        '全物件にあなた専用のアフィリエイトリンク — どのプラットフォームでも共有可能',
+    aff_step3_title:       'コミッションを獲得',
+    aff_step3_body:        'あなたのリンク経由の全成約でコミッションが自動入金',
+    aff_comm_rental:       '初月分より',
+    aff_comm_rto:          '販売価格より',
+    aff_comm_inv:          '取引額より',
+    aff_cta_title:         '今日からコミッションを稼ぎましょう',
+    aff_cta_sub:           '無料登録 · 投資不要 · あなたのネットワークで受動的収入を得る',
+    btn_join_affiliate:    '無料でアフィリエイトに参加',
+    btn_view_dash_preview: 'ダッシュボードプレビューを見る',
+    calc_monthly_lbl:      '月額家賃',
+    calc_commit_lbl:       '総支払額',
+    calc_equity_yr:        'エクイティ利率/年',
+    btn_rent_this_unit:    '🏠 この部屋を借りたい',
+    btn_buy_with_tenant_unit: '💼 テナント付きで購入',
+    calc_est_note:         '計算結果はあくまで概算です · 実際の価格は契約条件によります',
+    myhome_page_sub:       'クレジットスコアを追跡 · エクイティの進捗を確認 · 物件を管理',
+    myhome_f1_title:       'クレジットスコアを積み上げる',
+    myhome_f1_body:        '時間通りの支払いのたびにクレジットスコアが向上し、将来のローンに備えられます',
+    myhome_f2_title:       'リアルタイム物件ダッシュボード',
+    myhome_f2_body:        '賃料支払い履歴 · 積み上げエクイティ · 推定物件価値 · 完全所有まで日数',
+    myhome_f3_title:       '月次自動引き落とし',
+    myhome_f3_body:        '自動支払い · 振込手数料無料 · 即時領収書',
+    myhome_login_title:    'ダッシュボードにサインイン',
+    myhome_or:             'または',
+    myhome_no_account:     'アカウントをお持ちでない方',
+    myhome_signup_link:    '無料で登録',
+    myhome_lock_msg:       '🔒 ログインしてダッシュボードを見る',
+    suc_next_title:        '次のステップ',
+    btn_go_tenant_dashboard: 'テナントダッシュボードへ',
+    btn_return_home:       'ホームに戻る',
+    tenant_payment_hist:   '支払い履歴',
+    tenant_viewall:        'すべて見る',
+    tenant_col_month:      '月',
+    tenant_col_amount:     '支払額',
+    tenant_col_equity_mo:  '今月のエクイティ',
+    tenant_col_status:     'ステータス',
+    tenant_status_paid:    '✓ 支払済',
+    tenant_next_payment:   '次回支払日',
+    tenant_pay_now:        '今すぐ支払う',
+    dev_add_listing_btn:   '+ 物件を追加',
+    dev_stat1:             '掲載中の物件',
+    dev_stat2:             '今月の閲覧数',
+    dev_stat3:             '獲得リード数',
+    dev_stat4:             '成約件数',
+    dev_active_title:      '掲載中の物件',
+    apply_privacy:         '🔒 お客様のデータは安全です — 第三者に共有されることはありません',
+    // — PDPA / Cookie / Privacy —
+    cookie_title:          '🍪 Cookieを使用しています',
+    cookie_text:           'より良い体験のためCookieと分析ツールを使用しています。すべて受け入れるか、必要なものだけ選択できます。',
+    cookie_accept:         'すべて受け入れる',
+    cookie_essential:      '必須のみ',
+    apply_consent_pre:     '私は',
+    apply_consent_link:    'プライバシーポリシー',
+    apply_consent_post:    'を読んで同意し、StayVerseによる個人データの収集・利用に同意します。',
+    priv_title:            'プライバシーポリシー',
+    priv_effective:        '施行日：2026年3月24日',
+    priv_intro:            'StayVerse合同会社はお客様のプライバシーを尊重し、タイ個人データ保護法(PDPA)に従い個人データを保護することをお約束します。',
+    priv_s1_title:         '1. 収集するデータ',
+    priv_s1_body:          '氏名・電話番号・メール・国籍・収入・頭金準備状況 — お申込み時に収集。閲覧行動とデバイスデータ — ご同意いただいた場合のみ分析Cookieで収集。',
+    priv_s2_title:         '2. 処理の目的',
+    priv_s2_body:          '申込みの処理と適切な物件のマッチング。申込み状況のご連絡。プラットフォームの改善（同意がある場合のみ分析）。法的義務の遵守。',
+    priv_s3_title:         '3. お客様の権利（PDPA）',
+    priv_s3_body:          'アクセス権 · 訂正権 · 削除権 · 処理の異議申し立て · 処理の制限 · データポータビリティ · いつでも同意の撤回可能。お問合せ: privacy@stayverse.io — 30日以内に回答。',
+    priv_s4_title:         '4. データ保持期間',
+    priv_s4_body:          '会員期間中および契約終了後1年間、または法律が要求する期間、データを保持します。',
+    priv_s5_title:         '5. データセキュリティ',
+    priv_s5_body:          '業界標準の暗号化とアクセス制御を使用しています。お客様のデータを第三者に販売することは一切ありません。',
+    priv_s6_title:         '6. データ保護担当者へのお問合せ',
+    priv_s6_body:          'メール: privacy@stayverse.io · 30日以内に回答。',
+    priv_back:             '← 戻る'
       }
       };
 
@@ -2656,6 +3556,73 @@ document.addEventListener('click', function(e){
   };
 })();
 
+// ═══════════════════════════════════════════════════════════════
+// COOKIE CONSENT & GA4 CONDITIONAL INIT (PDPA Compliant)
+// ═══════════════════════════════════════════════════════════════
+function initGA4() {
+  if (typeof gtag === 'function') {
+    gtag('config', 'G-BS63SGDWSC');
+  }
+}
+
+function cookieAccept() {
+  localStorage.setItem('sv_cookie_consent', '1');
+  document.getElementById('cookie-banner').style.display = 'none';
+  initGA4();
+}
+
+function cookieDecline() {
+  localStorage.setItem('sv_cookie_consent', '0');
+  document.getElementById('cookie-banner').style.display = 'none';
+  // GA4 config NOT called — analytics disabled
+}
+
+function initCookieBanner() {
+  const consent = localStorage.getItem('sv_cookie_consent');
+  if (consent === null) {
+    setTimeout(function() {
+      document.getElementById('cookie-banner').style.display = 'block';
+    }, 1500);
+  } else if (consent === '1') {
+    initGA4();
+  }
+}
+
+// Extend setLang to update cookie banner text
+const _origSetLang = setLang;
+window.setLang = function(lang) {
+  _origSetLang(lang);
+  const t = T[lang];
+  if (!t) return;
+  const titleEl   = document.getElementById('cookie-title-el');
+  const textEl    = document.getElementById('cookie-text-el');
+  const acceptBtn = document.getElementById('cookie-accept-btn');
+  const essBtn    = document.getElementById('cookie-essential-btn');
+  if (titleEl  && t.cookie_title)    titleEl.textContent    = t.cookie_title;
+  if (textEl   && t.cookie_text)     textEl.textContent     = t.cookie_text;
+  if (acceptBtn && t.cookie_accept)  acceptBtn.textContent  = t.cookie_accept;
+  if (essBtn   && t.cookie_essential) essBtn.textContent    = t.cookie_essential;
+};
+
+window.addEventListener('DOMContentLoaded', function() {
+  initCookieBanner();
+});
+
 </script>
+
+<!-- ═══════════════════════════════════════════════════════ COOKIE CONSENT BANNER -->
+<div id="cookie-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;background:var(--navy,#0D2137);color:#fff;padding:16px 20px;box-shadow:0 -4px 20px rgba(0,0,0,.25)">
+  <div style="max-width:900px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px">
+    <div style="flex:1;min-width:220px">
+      <div style="font-size:14px;font-weight:700;margin-bottom:4px" id="cookie-title-el">🍪 เราใช้คุกกี้</div>
+      <div style="font-size:12px;color:rgba(255,255,255,.7);line-height:1.6" id="cookie-text-el">เราใช้คุกกี้และเครื่องมือวิเคราะห์เพื่อปรับปรุงประสบการณ์ของคุณ คุณสามารถยอมรับทั้งหมดหรือเลือกเฉพาะที่จำเป็นเท่านั้น</div>
+    </div>
+    <div style="display:flex;gap:10px;flex-shrink:0;flex-wrap:wrap">
+      <button onclick="cookieDecline()" id="cookie-essential-btn" style="background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.3);padding:9px 18px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer">เฉพาะที่จำเป็น</button>
+      <button onclick="cookieAccept()" id="cookie-accept-btn" style="background:var(--teal,#0E7C7B);color:#fff;border:none;padding:9px 20px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer">ยอมรับทั้งหมด</button>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
